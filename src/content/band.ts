@@ -6,6 +6,19 @@ type TimelineItem = {
   body: string;
 };
 
+export type BandMember = {
+  name: string;
+  role: Record<Locale, string>;
+  imageId?: string;
+};
+
+export const bandMembers: BandMember[] = [
+  { name: "Member 01", role: { en: "Vocals / instrument", sr: "Vokal / instrument" } },
+  { name: "Member 02", role: { en: "Vocals / instrument", sr: "Vokal / instrument" } },
+  { name: "Member 03", role: { en: "Instrument", sr: "Instrument" } },
+  { name: "Member 04", role: { en: "Instrument", sr: "Instrument" } },
+];
+
 type BandCopy = {
   intro: string;
   secondary: string;
@@ -15,6 +28,9 @@ type BandCopy = {
   timeline: TimelineItem[];
   nowTitle: string;
   nowBody: string;
+  membersTitle: string;
+  membersBody: string;
+  membersPending: string;
 };
 
 export const bandCopy: Record<Locale, BandCopy> = {
@@ -59,6 +75,9 @@ export const bandCopy: Record<Locale, BandCopy> = {
           "More regional shows, new live material and a heavier focus on what comes after the debut. Belgrade, Skopje and bigger festival stages become part of the same story that started in a rehearsal room.",
       },
     ],
+    membersTitle: "The band",
+    membersBody: "Sky Hook currently operates as a four-piece. The member layer is deliberately data-driven so final names, roles and portraits can be added without touching the page layout.",
+    membersPending: "Final profile",
     nowTitle: "Now",
     nowBody:
       "Sky Hook is still treated as a project in motion. New songs, different arrangements, live recordings and future releases can all bend the visual and musical language without resetting the band back to zero.",
@@ -104,6 +123,9 @@ export const bandCopy: Record<Locale, BandCopy> = {
           "Više regionalnih nastupa, novi materijal uživo i fokus na ono što dolazi posle prvog albuma. Beograd, Skoplje i veće festivalske bine postaju deo iste priče koja je krenula iz prostorije za probu.",
       },
     ],
+    membersTitle: "Bend",
+    membersBody: "Sky Hook danas funkcioniše kao četvoročlani bend. Sloj za članove je namerno data-driven, tako da finalna imena, uloge i portreti mogu da se dodaju bez diranja layouta.",
+    membersPending: "Finalni profil",
     nowTitle: "Sada",
     nowBody:
       "Sky Hook i dalje posmatramo kao projekat u pokretu. Nove pesme, drugačiji aranžmani, live snimci i buduća izdanja mogu da menjaju vizuelni i muzički jezik bez potrebe da svaki put krećemo od nule.",
