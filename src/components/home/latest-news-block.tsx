@@ -36,25 +36,28 @@ export function LatestNewsBlock({ locale, limit }: { locale: Locale; limit: numb
 
             return (
               <a key={item.id} href={item.url} target="_blank" rel="noreferrer" className="group border-b border-r border-line bg-surface">
-                {item.imageUrl ? (
+                {item.imageUrl || image ? (
                   <div className="relative aspect-[4/3] overflow-hidden">
-                    <img
-                      src={item.imageUrl}
-                      alt=""
-                      loading="lazy"
-                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.015]"
-                    />
-                  </div>
-                ) : image ? (
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      sizes="(max-width: 1024px) 100vw, 33vw"
-                      className="media-cover transition-transform duration-300 group-hover:scale-[1.015]"
-                      style={{ objectPosition: image.focalPoint }}
-                    />
+                    {image ? (
+                      <Image
+                        src={image.src}
+                        alt={item.imageUrl ? "" : image.alt}
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 33vw"
+                        className="media-cover transition-transform duration-300 group-hover:scale-[1.015]"
+                        style={{ objectPosition: image.focalPoint }}
+                      />
+                    ) : null}
+                    {item.imageUrl ? (
+                      <img
+                        src={item.imageUrl}
+                        alt=""
+                        loading="lazy"
+                        decoding="async"
+                        referrerPolicy="no-referrer"
+                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.015]"
+                      />
+                    ) : null}
                   </div>
                 ) : null}
                 <div className="p-5">
