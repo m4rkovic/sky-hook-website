@@ -1,10 +1,11 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/page-shell";
 import { SocialIcon } from "@/components/social/social-icon";
 import { siteConfig } from "@/content/site";
 import { getDictionary } from "@/i18n/get-dictionary";
-import { hasLocale, type Locale } from "@/i18n/config";
+import { hasLocale, localizedHref, type Locale } from "@/i18n/config";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale: rawLocale } = await params;
@@ -62,11 +63,16 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                 <span className="kicker mt-4 block text-muted">{dict.contact.missingEmail}</span>
               )}
               <p className="mt-4 max-w-lg text-sm leading-6 text-muted">{dict.contact.bookingNote}</p>
-              {bookingEmail ? (
-                <a className="brutal-button mt-7" href={`mailto:${bookingEmail}`}>
-                  {dict.contact.emailBooking}
-                </a>
-              ) : null}
+              <div className="mt-7 flex flex-wrap gap-3">
+                {bookingEmail ? (
+                  <a className="brutal-button" href={`mailto:${bookingEmail}`}>
+                    {dict.contact.emailBooking}
+                  </a>
+                ) : null}
+                <Link className="brutal-button" href={localizedHref(locale, "/epk")}>
+                  EPK →
+                </Link>
+              </div>
             </div>
           </div>
         </div>
