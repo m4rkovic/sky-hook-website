@@ -78,7 +78,17 @@ export const sr: Dictionary = {
     membersConfigured: "Podešeni članovi",
   },
   media: { eyebrow: "Media", title: "Fotografije i video" },
-  news: { eyebrow: "Vesti", title: "Arhiva je spremna", body: "Vesti ostaju van glavne navigacije dok ne bude dovoljno stvarnog sadržaja. Ruta i data sloj su već rezervisani." },
+  news: {
+    eyebrow: "Vesti / Press",
+    title: "Priče, press i buka",
+    body: "Kurirana arhiva intervjua, tekstova, najava i live coverage-a o Sky Hooku. Tekstovi ostaju na originalnim portalima, a ovde čuvamo koristan trag svega na jednom mestu.",
+    all: "Sve",
+    interviews: "Intervjui",
+    press: "Press",
+    live: "Live",
+    readExternal: "Otvori tekst",
+    featured: "Izdvojeni press",
+  },
   contact: {
     eyebrow: "Kontakt",
     title: "Booking i kontakt",
