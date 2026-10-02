@@ -75,7 +75,7 @@ export const newsItems: NewsItem[] = [
     publishedAt: "2025-02-22",
     category: "press",
     url: "https://www.zelenikacket.rs/projects/projekti-4/225187/sky-hook-predstavlja-singl-gde-ptice-lete.html",
-    imageId: "live-01",
+    imageUrl: "https://www.zelenikacket.rs/itsinbox/thumbnail/sky_hook_promo_photo_single_motion_2_%281%29.png?contentType=image%2Fpng&fileSize=0&thumbId=998445",
     summary: {
       en: "Zeleni Kačket introduces the title-track single ahead of the debut album and traces how the song changed from its early 2022 form.",
       sr: "Zeleni Kačket predstavlja naslovni singl pred album i beleži kako se pesma menjala od prve verzije nastale 2022.",
@@ -92,6 +92,32 @@ export const newsItems: NewsItem[] = [
     summary: {
       en: "An early Balkanrock concert announcement featuring Sky Hook and Lufter at AKC Fuzz in Niš.",
       sr: "Rana Balkanrock najava nastupa Sky Hooka i Luftera u niškom AKC Fuzz-u.",
+    },
+  },
+  {
+    id: "highwaystar-livnica-2026",
+    title: "Sky Hook i Pliš 27. marta u niškoj Livnici",
+    source: "Highwaystar Magazine",
+    publishedAt: "2026-03-27",
+    category: "live",
+    url: "https://highwaystarmagazine.org/sky-hook-i-plis-27-marta-u-niskoj-livnici/",
+    imageUrl: "https://highwaystarmagazine.org/wp-content/uploads/2026/03/plis_Damjan-Jovanovic-1024x682.jpg",
+    summary: {
+      en: "A concert preview for the March 2026 Livnica show, pairing Sky Hook with Pliš in Niš.",
+      sr: "Najava martovskog koncerta u Livnici, gde Sky Hook ponovo deli binu sa bendom Pliš u Nišu.",
+    },
+  },
+  {
+    id: "highwaystar-istina-masina-2026",
+    title: "Nemi Pesnik i Sky Hook nastupaju 15. maja u Istina Mašina",
+    source: "Highwaystar Magazine",
+    publishedAt: "2026-05-15",
+    category: "live",
+    url: "https://highwaystarmagazine.org/nemi-pesnik-i-sky-hook-nastupaju-15-maja-u-istina-masina/",
+    imageUrl: "https://highwaystarmagazine.org/wp-content/uploads/2026/05/ZA-PLAKAT-1024x1024.jpg",
+    summary: {
+      en: "A Highwaystar preview of the May 2026 Istina Mašina show with Nemi Pesnik and Sky Hook.",
+      sr: "Highwaystar najava majskog nastupa u Istina Mašini, gde uz Nemi Pesnik nastupa i Sky Hook.",
     },
   },
   {
