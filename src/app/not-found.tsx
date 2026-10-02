@@ -9,12 +9,11 @@ export default function NotFound() {
         <p className="kicker mt-10 text-ice">404 / Not found</p>
         <h1 className="display-title mt-4 max-w-4xl">Wrong turn.</h1>
         <p className="mt-6 max-w-xl text-base leading-8 text-muted">
-          Ova stranica ne postoji, pomerena je ili je URL odlučio da improvizuje.
+          Stranica ne postoji ili je pomerena. This page does not exist or has moved.
         </p>
         <div className="mt-8 flex flex-wrap gap-3">
-          <Link href="/sr" className="brutal-button brutal-button-primary">Početna</Link>
-          <Link href="/sr/music" className="brutal-button">Muzika</Link>
-          <Link href="/sr/live" className="brutal-button">Live</Link>
+          <Link href="/sr" className="brutal-button brutal-button-primary">SR / Početna</Link>
+          <Link href="/en" className="brutal-button">EN / Home</Link>
         </div>
       </div>
     </main>
