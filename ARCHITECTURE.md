@@ -53,7 +53,7 @@ All user-facing shared UI strings belong in `src/i18n/dictionaries`, not inside 
 - `/{locale}/listen/[slug]` — standalone smart-link page for social sharing
 - `/{locale}/band`
 - `/{locale}/media`
-- `/{locale}/news` — reserved, hidden from main navigation until useful
+- `/{locale}/news` — curated press, interviews and live coverage
 - `/{locale}/contact`
 - `/{locale}/epk`
 
@@ -89,7 +89,7 @@ The browser calls `/api/shows/upcoming`; the Bandsintown key stays server-side. 
 
 `setlist.fm -> server adapter -> ArchiveShow[] + LiveStats -> SetlistArchive`
 
-The setlist.fm key is never shipped to the browser. Data is normalized immediately and short-cached. Every rendered setlist links back to the source and the archive contains the required attribution.
+The setlist.fm key is never shipped to the browser. Data is normalized immediately and cached on a long-lived 14-day refresh cycle with stale fallback and a protected manual refresh route. Every rendered setlist links back to the source and the archive contains the required attribution.
 
 Derived statistics are based only on setlist.fm-documented data: total shows, unique cities, countries, unique performed songs and top documented songs.
 
