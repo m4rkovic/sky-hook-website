@@ -121,6 +121,7 @@ export const newsItems: NewsItem[] = [
     publishedAt: "2026-04-02",
     category: "interview",
     url: "https://www.pressing-magazine.rs/koktel-od-prasine-dva-lica-umetnika/",
+    imageUrl: "https://www.pressing-magazine.rs/v2/wp-content/uploads/2026/04/viber_slika_2026-04-02_14-04-27-344.jpg",
     imageId: "live-01",
     summary: {
       en: "A profile connecting poetry and music through drummer Mihajlo Stojanović, with a wider look at Sky Hook’s sound and plans for the year.",
@@ -160,6 +161,7 @@ export const newsItems: NewsItem[] = [
     publishedAt: "2023-11-26",
     category: "live",
     url: "https://citymagazine.danas.rs/vodic/plis-ubili-su-batlera-sky-hook-klub-fest-26-11/",
+    imageUrl: "https://citymagazine.danas.rs/wp-content/uploads/2023/11/403783526_740155014811062_5211954492423131056_n-1.jpg.webp",
     imageId: "live-02",
     summary: {
       en: "An early Belgrade concert listing that also captures one of the first published descriptions of the band’s mix of britpop, surf rock, new wave and heavier guitar music.",
