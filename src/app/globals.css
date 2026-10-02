@@ -101,7 +101,7 @@ a {
 
 .font-display {
   font-weight: 700 !important;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.012em !important;
 }
 
 .kicker {
