@@ -53,12 +53,6 @@ export const releaseSchema = z.object({
   featured: z.boolean().default(false),
 });
 
-export const memberSchema = z.object({
-  name: z.string().min(1),
-  role: z.string().min(1),
-  image: z.string().optional(),
-});
-
 export const mediaItemSchema = z.object({
   id: z.string().min(1),
   type: z.enum(["photo", "video"]),
@@ -118,7 +112,6 @@ export const liveStatsSchema = z.object({
 
 export type NavItem = z.infer<typeof navItemSchema>;
 export type Release = z.infer<typeof releaseSchema>;
-export type Member = z.infer<typeof memberSchema>;
 export type MediaItem = z.infer<typeof mediaItemSchema>;
 export type Show = z.infer<typeof showSchema>;
 export type ArchiveShow = z.infer<typeof archiveShowSchema>;
