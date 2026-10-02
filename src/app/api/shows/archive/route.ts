@@ -5,7 +5,7 @@ export async function GET() {
   try {
     const data = await fetchSetlistArchive();
     return NextResponse.json({ ...data, source: "setlistfm" }, {
-      headers: { "Cache-Control": "public, s-maxage=21600, stale-while-revalidate=86400" },
+      headers: { "Cache-Control": "public, s-maxage=1209600, stale-while-revalidate=604800" },
     });
   } catch (error) {
     const message = error instanceof Error && error.message.includes("not configured") ? "not-configured" : "unavailable";
