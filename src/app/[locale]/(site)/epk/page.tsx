@@ -92,7 +92,7 @@ export default async function EpkPage({ params }: { params: Promise<{ locale: st
             ].map(([year, show]) => (
               <div key={show} className="min-h-44 border-b border-r border-line p-5">
                 <span className="kicker text-muted">{year}</span>
-                <p className="mt-10 font-display text-2xl font-black uppercase tracking-[-0.03em]">{show}</p>
+                <p className="mt-10 font-display text-2xl uppercase">{show}</p>
               </div>
             ))}
           </div>
@@ -110,7 +110,7 @@ export default async function EpkPage({ params }: { params: Promise<{ locale: st
                 <span className="absolute bottom-5 right-5 flex h-16 w-16 items-center justify-center rounded-full border border-white/60 bg-black/35 text-xl">▶</span>
               </div>
               <div className="flex items-end justify-between gap-5 p-5">
-                <p className="font-display text-3xl font-black uppercase">{featuredLive.title[locale]}</p>
+                <p className="font-display text-3xl uppercase">{featuredLive.title[locale]}</p>
                 <span className="kicker text-muted">YouTube ↗</span>
               </div>
             </a>
@@ -154,11 +154,11 @@ export default async function EpkPage({ params }: { params: Promise<{ locale: st
         <div className="site-container section-grid py-[var(--sh-section-y)]">
           <div className="col-span-12 lg:col-span-5">
             <p className="kicker text-background/50">04 / {t.contact}</p>
-            <h2 className="mt-4 font-display text-5xl font-black uppercase tracking-[-0.045em] md:text-7xl">{t.contact}</h2>
+            <h2 className="mt-4 font-display text-4xl uppercase md:text-7xl">{t.contact}</h2>
             <p className="mt-5 max-w-lg text-background/65">{t.contactBody}</p>
           </div>
           <div className="col-span-12 flex flex-col justify-end lg:col-span-6 lg:col-start-7">
-            <a href={`mailto:${bookingEmail}`} className="break-all border-y border-background/20 py-6 font-display text-2xl font-black uppercase transition-colors hover:text-[#151c47] md:text-4xl">
+            <a href={`mailto:${bookingEmail}`} className="break-all border-y border-background/20 py-6 font-display text-xl uppercase transition-colors hover:text-[#151c47] sm:text-2xl md:text-4xl">
               {bookingEmail}
             </a>
             <div className="mt-6 flex flex-wrap gap-3">
