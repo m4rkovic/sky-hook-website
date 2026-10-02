@@ -48,7 +48,7 @@ export async function fetchBandsintownShows(): Promise<Show[]> {
 
   const response = await fetch(endpoint, {
     headers: { Accept: "application/json" },
-    next: { revalidate: 600 },
+    next: { revalidate: 3600 },
   });
 
   if (response.status === 404) return [];
