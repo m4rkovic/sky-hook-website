@@ -28,6 +28,7 @@ const trackSchema = z.object({
   duration: z.string().optional(),
   audioUrl: z.string().url().optional(),
   videoUrl: z.string().url().optional(),
+  lyrics: localizedTextSchema.optional(),
 });
 
 const creditSchema = z.object({
@@ -43,6 +44,9 @@ export const releaseSchema = z.object({
   releaseDate: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).optional(),
   artwork: z.string().optional(),
   description: localizedTextSchema.optional(),
+  label: z.string().optional(),
+  catalogNumber: z.string().optional(),
+  rights: z.string().optional(),
   streaming: streamingLinksSchema.default({}),
   tracks: z.array(trackSchema).default([]),
   credits: z.array(creditSchema).default([]),
