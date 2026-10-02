@@ -57,6 +57,8 @@ export const sr: Dictionary = {
     upcoming: "Predstojeći nastupi",
     archive: "Prethodni nastupi",
     noUpcoming: "Trenutno nema najavljenih nastupa.",
+    noUpcomingHint: "Novi datumi se obično prvo pojave na našim mrežama.",
+    followInstagram: "Prati nas na Instagramu",
     archiveLoading: "Učitavanje arhive nastupa…",
     archiveUnavailable: "Arhiva nastupa još nije povezana.",
     documentedStats: "Dokumentovana live statistika",
