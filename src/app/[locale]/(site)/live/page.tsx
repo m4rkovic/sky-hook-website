@@ -6,7 +6,22 @@ import { UpcomingShows } from "@/features/shows/components/upcoming-shows";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { hasLocale, type Locale } from "@/i18n/config";
 
-export const metadata: Metadata = { title: "Live" };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  if (!hasLocale(rawLocale)) return { title: "Live" };
+  const locale = rawLocale as Locale;
+  const description = locale === "sr"
+    ? "Predstojeći i prethodni Sky Hook nastupi, setliste i live arhiva."
+    : "Upcoming and past Sky Hook shows, setlists and live archive.";
+  return {
+    title: "Live",
+    description,
+    alternates: {
+      canonical: `/${locale}/live`,
+      languages: { en: "/en/live", sr: "/sr/live", "x-default": "/en/live" },
+    },
+  };
+}
 
 export default async function LivePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
