@@ -101,12 +101,12 @@ export default async function LiveShowPage({ params }: { params: Promise<{ local
           <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_20rem] lg:items-end">
             <div>
               <p className="kicker text-ice">{labels.live} / {date}</p>
-              <h1 className="mt-4 max-w-[12ch] font-display text-6xl font-black uppercase leading-[0.86] tracking-[-0.055em] md:text-8xl lg:text-9xl">{editorialTitle || show.venue}</h1>
+              <h1 className="mt-4 max-w-[12ch] font-display text-5xl uppercase leading-[0.94] md:text-7xl lg:text-8xl">{editorialTitle || show.venue}</h1>
               <p className="mt-6 text-xl text-muted md:text-2xl">{show.venue} / {locationName}</p>
             </div>
             <div className="grid grid-cols-2 border-l border-t border-line">
-              <div className="border-b border-r border-line p-4"><span className="kicker text-muted">{labels.setlist}</span><p className="mt-2 font-display text-4xl font-black text-ice">{songCount || "—"}</p></div>
-              <div className="border-b border-r border-line p-4"><span className="kicker text-muted">Year</span><p className="mt-2 font-display text-4xl font-black">{show.date.slice(0,4)}</p></div>
+              <div className="border-b border-r border-line p-4"><span className="kicker text-muted">{labels.setlist}</span><p className="mt-2 font-display text-4xl text-ice">{songCount || "—"}</p></div>
+              <div className="border-b border-r border-line p-4"><span className="kicker text-muted">Year</span><p className="mt-2 font-display text-4xl">{show.date.slice(0,4)}</p></div>
             </div>
           </div>
         </div>
@@ -149,7 +149,7 @@ export default async function LiveShowPage({ params }: { params: Promise<{ local
       ) : null}
 
       <section className="section-frame">
-        <div className="site-container grid gap-12 lg:grid-cols-[1fr_20rem]">
+        <div className="site-container grid gap-10 lg:grid-cols-[1fr_20rem]">
           <div>
             <p className="kicker mb-5 text-ice">01 / {labels.setlist}</p>
             {songCount ? show.sets.map((set, setIndex) => (
@@ -157,10 +157,10 @@ export default async function LiveShowPage({ params }: { params: Promise<{ local
                 {(set.name || set.encore) ? <p className="kicker mb-3 text-muted">{set.name || `${labels.encore} ${set.encore}`}</p> : null}
                 <ol className="border-t border-line">
                   {set.songs.map((song, songIndex) => (
-                    <li key={`${song.name}-${songIndex}`} className="grid grid-cols-[3rem_1fr] gap-4 border-b border-line py-4">
+                    <li key={`${song.name}-${songIndex}`} className="grid grid-cols-[2.5rem_1fr] gap-3 border-b border-line py-4 sm:grid-cols-[3rem_1fr] sm:gap-4">
                       <span className="kicker text-muted">{String(songIndex + 1).padStart(2, "0")}</span>
                       <div>
-                        <span className={`font-display text-xl font-black uppercase ${song.tape ? "text-muted" : ""}`}>{song.name}</span>
+                        <span className={`font-display text-xl uppercase ${song.tape ? "text-muted" : ""}`}>{song.name}</span>
                         {song.coverArtist ? <span className="ml-2 text-xs text-muted">({song.coverArtist})</span> : null}
                         {song.info ? <p className="mt-1 text-xs leading-5 text-muted">{song.info}</p> : null}
                       </div>
