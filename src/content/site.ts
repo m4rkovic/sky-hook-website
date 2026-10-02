@@ -14,11 +14,13 @@ export const siteConfig = {
     { key: "contact", href: "/contact" },
   ]),
   contact: {
-    bookingEmail: "",
+    bookingEmail: "skyhooknis@hotmail.com",
   },
   socials: {
-    instagram: "",
-    youtube: "",
+    instagram: "https://www.instagram.com/skyhookofficial/",
+    youtube: "https://www.youtube.com/@skyhook1717",
+    bandcamp: "https://skyhooknis.bandcamp.com/",
+    facebook: "https://www.facebook.com/skyhooknis",
     spotify: "",
     bandsintown: "",
   },
