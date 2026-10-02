@@ -109,6 +109,8 @@ export function MediaExplorer({ locale }: { locale: Locale }) {
                     src={youtubeThumbnailUrl(video.youtubeId)}
                     alt=""
                     loading="lazy"
+                    decoding="async"
+                    referrerPolicy="no-referrer"
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                   <div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/5" />
