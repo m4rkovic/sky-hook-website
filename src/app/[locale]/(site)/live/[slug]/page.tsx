@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { fetchSetlistArchive } from "@/features/shows/providers/setlistfm.server";
 import { showFromSlug } from "@/content/show-utils";
+import { getShowOverride, localizedOverride } from "@/content/show-overrides";
+import { mediaItems } from "@/content/media";
 import { hasLocale, intlLocale, localizedHref, type Locale } from "@/i18n/config";
 
 async function getShow(slug: string) {
@@ -83,6 +86,10 @@ export default async function LiveShowPage({ params }: { params: Promise<{ local
     : { live: "Live", back: "All shows", setlist: "Setlist", details: "Details", venue: "Venue", location: "Location", source: "Source", noSongs: "No setlist has been documented for this show yet.", encore: "Encore" };
 
   const songCount = show.sets.reduce((sum, set) => sum + set.songs.filter((song) => !song.tape).length, 0);
+  const editorial = getShowOverride(show);
+  const editorialTitle = localizedOverride(editorial?.title, locale);
+  const editorialDescription = localizedOverride(editorial?.description, locale);
+  const editorialImage = editorial?.imageId ? mediaItems.find((item) => item.id === editorial.imageId) : undefined;
 
   return (
     <main className="pt-[var(--sh-header-h)]">
@@ -94,8 +101,8 @@ export default async function LiveShowPage({ params }: { params: Promise<{ local
           <div className="mt-10 grid gap-10 lg:grid-cols-[1fr_20rem] lg:items-end">
             <div>
               <p className="kicker text-ice">{labels.live} / {date}</p>
-              <h1 className="mt-4 max-w-[12ch] font-display text-6xl font-black uppercase leading-[0.86] tracking-[-0.055em] md:text-8xl lg:text-9xl">{show.venue}</h1>
-              <p className="mt-6 text-xl text-muted md:text-2xl">{locationName}</p>
+              <h1 className="mt-4 max-w-[12ch] font-display text-6xl font-black uppercase leading-[0.86] tracking-[-0.055em] md:text-8xl lg:text-9xl">{editorialTitle || show.venue}</h1>
+              <p className="mt-6 text-xl text-muted md:text-2xl">{show.venue} / {locationName}</p>
             </div>
             <div className="grid grid-cols-2 border-l border-t border-line">
               <div className="border-b border-r border-line p-4"><span className="kicker text-muted">{labels.setlist}</span><p className="mt-2 font-display text-4xl font-black text-ice">{songCount || "—"}</p></div>
@@ -104,6 +111,42 @@ export default async function LiveShowPage({ params }: { params: Promise<{ local
           </div>
         </div>
       </section>
+
+      {editorialImage || editorialDescription ? (
+        <section className="border-b border-line">
+          <div className="site-container grid gap-0 lg:grid-cols-2">
+            {editorialImage ? (
+              <div className="relative min-h-[22rem] border-x border-line lg:min-h-[34rem]">
+                <Image
+                  src={editorialImage.src}
+                  alt={editorialImage.alt}
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  className="media-cover"
+                  style={{ objectPosition: editorialImage.focalPoint }}
+                />
+              </div>
+            ) : null}
+            {editorialDescription ? (
+              <div className="flex items-end border-x border-t border-line p-6 lg:border-l-0 lg:p-10">
+                <div>
+                  <p className="kicker text-ice">Show archive / Sky Hook</p>
+                  <p className="mt-6 max-w-xl text-xl leading-9 text-paper/80">{editorialDescription}</p>
+                  {editorial?.links.length ? (
+                    <div className="mt-8 flex flex-wrap gap-3">
+                      {editorial.links.map((link) => (
+                        <a key={link.url} href={link.url} target="_blank" rel="noreferrer" className="brutal-button">
+                          {link.label[locale]} ↗
+                        </a>
+                      ))}
+                    </div>
+                  ) : null}
+                </div>
+              </div>
+            ) : null}
+          </div>
+        </section>
+      ) : null}
 
       <section className="section-frame">
         <div className="site-container grid gap-12 lg:grid-cols-[1fr_20rem]">
