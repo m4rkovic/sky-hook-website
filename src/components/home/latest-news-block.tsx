@@ -17,7 +17,7 @@ export function LatestNewsBlock({ locale, limit }: { locale: Locale; limit: numb
   return (
     <section className="section-frame relative bg-background">
       <SectionTransition tone="background" direction="right" />
-      <div className="site-container">
+      <div className="site-container relative z-10">
         <div className="mb-8 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <p className="kicker text-ice">04 / {labels.eyebrow}</p>
