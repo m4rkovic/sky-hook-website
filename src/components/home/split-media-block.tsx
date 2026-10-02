@@ -16,7 +16,7 @@ export function SplitMediaBlock({ imageId, href, locale, dict }: { imageId: stri
         </div>
         <div className="flex items-end p-[var(--sh-gutter)] py-[var(--sh-section-y)]">
           <div className="max-w-xl">
-            <p className="kicker text-ice">04 / {dict.home.bandEyebrow}</p>
+            <p className="kicker text-ice">05 / {dict.home.bandEyebrow}</p>
             <h2 className="display-title mt-5">{dict.home.bandHeading}</h2>
             <p className="mt-8 max-w-lg text-base leading-7 text-ice-light/75">{dict.home.bandBody}</p>
             <Link className="brutal-button mt-9" href={localizedHref(locale, href)}>{dict.home.bandCta}</Link>
