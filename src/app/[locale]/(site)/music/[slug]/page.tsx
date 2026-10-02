@@ -13,9 +13,37 @@ export function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
+  const { locale: rawLocale, slug } = await params;
   const release = getRelease(slug);
-  return { title: release?.title ?? "Music" };
+  if (!release || !hasLocale(rawLocale)) return { title: "Music" };
+
+  const locale = rawLocale as Locale;
+  const dict = getDictionary(locale);
+  const description = release.description?.[locale] ?? `${release.title} by Sky Hook.`;
+
+  return {
+    title: release.title,
+    description,
+    alternates: {
+      canonical: `/${locale}/music/${release.slug}`,
+      languages: {
+        en: `/en/music/${release.slug}`,
+        sr: `/sr/music/${release.slug}`,
+        "x-default": `/en/music/${release.slug}`,
+      },
+    },
+    openGraph: {
+      title: `${release.title} | Sky Hook`,
+      description,
+      ...(release.artwork ? { images: [{ url: release.artwork, alt: `${release.title} artwork` }] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${release.title} | Sky Hook`,
+      description,
+      ...(release.artwork ? { images: [release.artwork] } : {}),
+    },
+  };
 }
 
 function formatReleaseDate(releaseDate: string | undefined, year: number, locale: Locale) {
@@ -82,8 +110,37 @@ export default async function ReleasePage({ params }: { params: Promise<{ locale
     [dict.music.rightsLabel, release.rights ?? "TBD"],
   ];
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  const releaseUrl = siteUrl ? `${siteUrl}/${locale}/music/${release.slug}` : undefined;
+  const jsonLd = release.type === "album"
+    ? {
+        "@context": "https://schema.org",
+        "@type": "MusicAlbum",
+        name: release.title,
+        byArtist: { "@type": "MusicGroup", name: "Sky Hook" },
+        datePublished: release.releaseDate ?? String(release.year),
+        ...(releaseUrl ? { url: releaseUrl } : {}),
+        ...(release.artwork && siteUrl ? { image: new URL(release.artwork, siteUrl).toString() } : {}),
+        numTracks: release.tracks.length || undefined,
+        track: release.tracks.map((track) => ({
+          "@type": "MusicRecording",
+          position: track.number,
+          name: track.title,
+        })),
+      }
+    : {
+        "@context": "https://schema.org",
+        "@type": "MusicRecording",
+        name: release.title,
+        byArtist: { "@type": "MusicGroup", name: "Sky Hook" },
+        datePublished: release.releaseDate ?? String(release.year),
+        ...(releaseUrl ? { url: releaseUrl } : {}),
+        ...(release.artwork && siteUrl ? { image: new URL(release.artwork, siteUrl).toString() } : {}),
+      };
+
   return (
     <main className="pt-[calc(var(--sh-header-h)+3rem)]">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="relative overflow-hidden border-b border-background/15 bg-paper text-background">
         <div className="site-container section-grid py-[var(--sh-section-y)]">
           <div className="col-span-12 flex flex-col md:col-span-6 md:pr-8">
