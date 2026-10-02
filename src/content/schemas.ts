@@ -62,6 +62,7 @@ export const memberSchema = z.object({
 export const mediaItemSchema = z.object({
   id: z.string().min(1),
   type: z.enum(["photo", "video"]),
+  category: z.enum(["live", "artwork", "press"]).optional(),
   src: z.string().min(1),
   alt: z.string().min(1),
   credit: z.string().optional(),
