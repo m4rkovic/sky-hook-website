@@ -10,18 +10,18 @@ export const siteConfig = {
     { key: "music", href: "/music" },
     { key: "band", href: "/band" },
     { key: "media", href: "/media" },
-    { key: "news", href: "/news", showInNavigation: false },
+    { key: "news", href: "/news" },
     { key: "contact", href: "/contact" },
   ]),
   contact: {
     bookingEmail: "skyhooknis@hotmail.com",
   },
   socials: {
-    instagram: "https://www.instagram.com/skyhookofficial/",
+    instagram: "https://www.instagram.com/skyhookofficial/?hl=en",
+    facebook: "https://www.facebook.com/skyhooknis/",
     youtube: "https://www.youtube.com/@skyhook1717",
-    bandcamp: "https://skyhooknis.bandcamp.com/",
-    facebook: "https://www.facebook.com/skyhooknis",
-    spotify: "",
+    spotify: "https://open.spotify.com/artist/6ttwWEG6a5k6T8OulWGKKJ",
+    bandcamp: "",
     bandsintown: "",
   },
   externalIds: {
