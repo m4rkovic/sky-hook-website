@@ -75,17 +75,17 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
               </p>
             </div>
 
-            <div className="mt-16 grid grid-cols-3 border-y border-line">
+            <div className="mt-12 grid grid-cols-3 border-y border-line md:mt-16">
               <div className="py-5 pr-4">
-                <div className="font-display text-4xl font-black text-ice">2023</div>
+                <div className="font-display text-4xl text-ice">2023</div>
                 <div className="kicker mt-1 text-muted">formed</div>
               </div>
               <div className="border-x border-line px-4 py-5">
-                <div className="font-display text-4xl font-black text-ice">13</div>
+                <div className="font-display text-4xl text-ice">13</div>
                 <div className="kicker mt-1 text-muted">album tracks</div>
               </div>
               <div className="py-5 pl-4">
-                <div className="font-display text-4xl font-black text-ice">2025</div>
+                <div className="font-display text-4xl text-ice">2025</div>
                 <div className="kicker mt-1 text-muted">debut LP</div>
               </div>
             </div>
@@ -97,7 +97,7 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
         <div className="site-container section-grid items-start">
           <div className="col-span-12 md:col-span-4">
             <p className="kicker text-ice">01 / SOUND</p>
-            <h2 className="mt-4 font-display text-5xl font-black uppercase tracking-[-0.04em] md:text-7xl">
+            <h2 className="mt-4 font-display text-4xl uppercase md:text-7xl">
               {copy.soundTitle}
             </h2>
           </div>
@@ -109,10 +109,10 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
 
       <section className="section-frame overflow-hidden">
         <div className="site-container">
-          <div className="mb-14 grid gap-4 md:grid-cols-[1fr_auto] md:items-end">
+          <div className="mb-10 grid gap-4 md:mb-14 md:grid-cols-[1fr_auto] md:items-end">
             <div>
               <p className="kicker text-ice">02 / TIMELINE</p>
-              <h2 className="mt-4 font-display text-5xl font-black uppercase tracking-[-0.04em] md:text-7xl">
+              <h2 className="mt-4 font-display text-4xl uppercase md:text-7xl">
                 {copy.timelineTitle}
               </h2>
             </div>
@@ -122,7 +122,7 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
           <div className="relative">
             <div className="absolute bottom-0 left-[1.55rem] top-0 w-px bg-line md:left-1/2" aria-hidden="true" />
 
-            <div className="space-y-12 md:space-y-0">
+            <div className="space-y-10 md:space-y-0">
               {copy.timeline.map((item, index) => {
                 const left = index % 2 === 0;
                 return (
@@ -133,8 +133,8 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
                     <div className="absolute left-[1.15rem] top-2 h-3 w-3 rounded-full border border-ice bg-background md:left-1/2 md:-translate-x-1/2 md:top-[3.4rem]" />
 
                     <div className={left ? "md:pr-12 md:text-right" : "md:col-start-2 md:pl-12"}>
-                      <div className="font-display text-5xl font-black tracking-[-0.04em] text-ice">{item.year}</div>
-                      <h3 className="mt-2 font-display text-3xl font-black uppercase tracking-[-0.03em]">{item.title}</h3>
+                      <div className="font-display text-4xl text-ice md:text-5xl">{item.year}</div>
+                      <h3 className="mt-2 font-display text-2xl uppercase md:text-3xl">{item.title}</h3>
                       <p className="mt-4 max-w-xl text-base leading-8 text-muted md:ml-auto">{item.body}</p>
                     </div>
 
@@ -151,7 +151,7 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
         <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
           <div className="p-[var(--sh-gutter)] py-[var(--sh-section-y)]">
             <p className="kicker text-ice">03 / NOW</p>
-            <h2 className="mt-4 font-display text-5xl font-black uppercase tracking-[-0.04em] md:text-7xl">
+            <h2 className="mt-4 font-display text-4xl uppercase md:text-7xl">
               {copy.nowTitle}
             </h2>
             <p className="mt-8 max-w-xl text-lg leading-9 text-ice-light/80">{copy.nowBody}</p>
