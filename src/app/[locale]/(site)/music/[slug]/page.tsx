@@ -19,7 +19,6 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   if (!release || !hasLocale(rawLocale)) return { title: "Music" };
 
   const locale = rawLocale as Locale;
-  const dict = getDictionary(locale);
   const description = release.description?.[locale] ?? `${release.title} by Sky Hook.`;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
   const fallbackImage = siteUrl ? `${siteUrl}${siteConfig.logo}` : undefined;
