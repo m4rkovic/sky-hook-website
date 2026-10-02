@@ -80,7 +80,7 @@ async function fetchPage(apiKey: string, mbid: string, page: number): Promise<Se
       Accept: "application/json",
       "x-api-key": apiKey,
     },
-    next: { revalidate: 21600 },
+    next: { revalidate: 1209600 },
   });
   if (!response.ok) throw new Error(`setlist.fm request failed: ${response.status}`);
   return pageSchema.parse(await response.json());
