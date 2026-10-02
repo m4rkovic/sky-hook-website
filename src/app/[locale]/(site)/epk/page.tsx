@@ -22,6 +22,8 @@ const copy = {
     logos: "Logos",
     rider: "Tech rider / stage plot",
     coming: "Download pack coming soon",
+    download: "Download",
+    openMedia: "Open media archive",
     contact: "Booking / press",
     contactBody: "Shows, festivals, support slots, interviews and press enquiries.",
     music: "Listen",
@@ -39,6 +41,8 @@ const copy = {
     logos: "Logotipi",
     rider: "Tech rider / stage plot",
     coming: "Download paket uskoro",
+    download: "Preuzmi",
+    openMedia: "Otvori media arhivu",
     contact: "Booking / press",
     contactBody: "Nastupi, festivali, support slotovi, intervjui i press upiti.",
     music: "Slušaj",
@@ -118,15 +122,30 @@ export default async function EpkPage({ params }: { params: Promise<{ locale: st
         <div className="site-container py-[var(--sh-section-y)]">
           <p className="kicker text-ice">03 / {t.assets}</p>
           <div className="mt-6 grid border-l border-t border-line md:grid-cols-3">
-            {[t.photos, t.logos, t.rider].map((label, index) => (
-              <div key={label} className="flex min-h-56 flex-col justify-between border-b border-r border-line p-5">
-                <span className="kicker text-muted">0{index + 1}</span>
-                <div>
-                  <p className="font-display text-3xl font-black uppercase">{label}</p>
-                  <p className="kicker mt-3 text-muted">{t.coming}</p>
+            <div className="flex min-h-56 flex-col justify-between border-b border-r border-line p-5">
+              <span className="kicker text-muted">01</span>
+              <div>
+                <p className="font-display text-3xl uppercase">{t.photos}</p>
+                <div className="mt-4 flex flex-wrap gap-3">
+                  <a href="/media/photos/skyhook-live-01.jpg" download className="kicker text-ice hover:text-paper">{t.download} 01 ↓</a>
+                  <a href="/media/photos/skyhook-live-02.jpg" download className="kicker text-ice hover:text-paper">{t.download} 02 ↓</a>
                 </div>
               </div>
-            ))}
+            </div>
+            <div className="flex min-h-56 flex-col justify-between border-b border-r border-line p-5">
+              <span className="kicker text-muted">02</span>
+              <div>
+                <p className="font-display text-3xl uppercase">{t.logos}</p>
+                <a href="/brand/sky-hook-wordmark.png" download className="kicker mt-4 inline-block text-ice hover:text-paper">{t.download} PNG ↓</a>
+              </div>
+            </div>
+            <div className="flex min-h-56 flex-col justify-between border-b border-r border-line p-5">
+              <span className="kicker text-muted">03</span>
+              <div>
+                <p className="font-display text-3xl uppercase">{t.rider}</p>
+                <p className="kicker mt-3 text-muted">{t.coming}</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
