@@ -13,7 +13,8 @@ export type HomeBlock =
   | { type: "featured-release" }
   | { type: "upcoming-shows"; limit: number }
   | { type: "split-media"; imageId: string; href: string }
-  | { type: "selected-media"; videoIds: string[] };
+  | { type: "selected-media"; videoIds: string[] }
+  | { type: "latest-news"; limit: number };
 
 export const homeBlocks: HomeBlock[] = [
   {
@@ -33,5 +34,6 @@ export const homeBlocks: HomeBlock[] = [
   { type: "featured-release" },
   { type: "upcoming-shows", limit: 4 },
   { type: "selected-media", videoIds: ["live-cx2pbneaco4", "video-surf"] },
+  { type: "latest-news", limit: 3 },
   { type: "split-media", imageId: "live-01", href: "/band" },
 ];
