@@ -16,7 +16,7 @@ export function SelectedMediaBlock({ videoIds, locale }: { videoIds: string[]; l
         <div className="mb-8 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <p className="kicker text-ice">03 / {labels.eyebrow}</p>
-            <h2 className="mt-3 font-display text-5xl font-black uppercase tracking-[-0.04em] md:text-7xl">{labels.title}</h2>
+            <h2 className="mt-3 font-display text-4xl uppercase md:text-7xl">{labels.title}</h2>
           </div>
           <Link href={localizedHref(locale, "/media")} className="kicker text-muted hover:text-ice">{labels.all} →</Link>
         </div>
@@ -30,7 +30,7 @@ export function SelectedMediaBlock({ videoIds, locale }: { videoIds: string[]; l
                 <span className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full border border-white/60 bg-black/35">▶</span>
               </div>
               <div className="flex items-end justify-between gap-4 p-4">
-                <h3 className="font-display text-2xl font-black uppercase tracking-[-0.03em]">{video.title[locale]}</h3>
+                <h3 className="font-display text-2xl uppercase">{video.title[locale]}</h3>
                 <span className="kicker text-muted">{labels.watch} ↗</span>
               </div>
             </a>
