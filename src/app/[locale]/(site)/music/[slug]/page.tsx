@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArtworkFrame } from "@/components/music/artwork-frame";
 import { getRelease, releases } from "@/content/releases";
+import { siteConfig } from "@/content/site";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { hasLocale, intlLocale, localizedHref, locales, type Locale } from "@/i18n/config";
 
@@ -35,13 +36,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: `${release.title} | Sky Hook`,
       description,
-      ...(release.artwork ? { images: [{ url: release.artwork, alt: `${release.title} artwork` }] } : {}),
+      ...(release.artwork ? { images: [{ url: release.artwork, alt: `${release.title} artwork` }] } : fallbackImage ? { images: [{ url: fallbackImage, alt: "Sky Hook" }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: `${release.title} | Sky Hook`,
       description,
-      ...(release.artwork ? { images: [release.artwork] } : {}),
+      ...(release.artwork ? { images: [release.artwork] } : fallbackImage ? { images: [fallbackImage] } : {}),
     },
   };
 }
