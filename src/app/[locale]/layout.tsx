@@ -37,13 +37,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       type: "website",
       siteName: "Sky Hook",
       locale: locale === "sr" ? "sr_RS" : "en_GB",
-      ...(siteUrl ? { images: [{ url: `${siteUrl}${siteConfig.logo}`, alt: "Sky Hook" }] } : {}),
+      ...(siteUrl ? { images: [{ url: `${siteUrl}${siteConfig.socialImage}`, alt: "Sky Hook" }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: "Sky Hook",
       description: dict.footer.body,
-      ...(siteUrl ? { images: [`${siteUrl}${siteConfig.logo}`] } : {}),
+      ...(siteUrl ? { images: [`${siteUrl}${siteConfig.socialImage}`] } : {}),
     },
   };
 }
