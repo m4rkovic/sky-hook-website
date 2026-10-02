@@ -172,13 +172,40 @@ a {
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.13;
+  opacity: 0.16;
   background-image:
-    radial-gradient(circle at 18% 22%, rgba(5, 6, 11, 0.6) 0 0.65px, transparent 1px),
-    radial-gradient(circle at 72% 64%, rgba(5, 6, 11, 0.45) 0 0.55px, transparent 0.9px),
-    radial-gradient(circle at 42% 78%, rgba(5, 6, 11, 0.32) 0 0.8px, transparent 1.15px),
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.72' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.62'/%3E%3C/svg%3E");
-  background-size: 120px 120px, 190px 190px, 270px 270px, 150px 150px;
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.58' numOctaves='4' seed='7' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.8'/%3E%3C/svg%3E");
+  background-size: 145px 145px;
+  mix-blend-mode: multiply;
+  filter: contrast(1.35);
+}
+
+.paper-grit::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.22;
+  background-image:
+    radial-gradient(circle at 14% 26%, rgba(5, 6, 11, 0.38) 0 0.8px, transparent 1.6px),
+    radial-gradient(circle at 73% 19%, rgba(5, 6, 11, 0.28) 0 1px, transparent 1.9px),
+    radial-gradient(circle at 42% 72%, rgba(5, 6, 11, 0.22) 0 1.2px, transparent 2.2px),
+    radial-gradient(ellipse at 84% 62%, rgba(5, 6, 11, 0.08) 0 6px, transparent 18px),
+    radial-gradient(ellipse at 24% 84%, rgba(5, 6, 11, 0.06) 0 8px, transparent 24px);
+  background-size:
+    72px 67px,
+    119px 103px,
+    173px 151px,
+    430px 310px,
+    520px 390px;
+  background-position:
+    0 0,
+    31px 17px,
+    73px 41px,
+    0 0,
+    120px 70px;
+  background-repeat: repeat;
   mix-blend-mode: multiply;
 }
 
