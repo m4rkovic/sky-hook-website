@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/page-shell";
+import { SocialIcon } from "@/components/social/social-icon";
 import { siteConfig } from "@/content/site";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { hasLocale, type Locale } from "@/i18n/config";
 
 export const metadata: Metadata = { title: "Contact" };
 
-const socialLabels: Record<keyof typeof siteConfig.socials, string> = {
+const socialOrder = ["instagram", "facebook", "youtube", "spotify"] as const;
+
+const socialLabels: Record<(typeof socialOrder)[number], string> = {
   instagram: "Instagram",
-  youtube: "YouTube",
-  bandcamp: "Bandcamp",
   facebook: "Facebook",
+  youtube: "YouTube",
   spotify: "Spotify",
-  bandsintown: "Bandsintown",
 };
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
@@ -22,9 +23,6 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
   const dict = getDictionary(rawLocale as Locale);
   const bookingEmail = siteConfig.contact.bookingEmail;
-  const socials = Object.entries(siteConfig.socials).filter(([, url]) => Boolean(url)) as Array<
-    [keyof typeof siteConfig.socials, string]
-  >;
 
   return (
     <PageShell eyebrow={dict.contact.eyebrow} title={dict.contact.title}>
@@ -71,23 +69,37 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           </div>
 
           <div className="grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-4">
-            {socials.map(([key, url], index) => (
-              <a
-                key={key}
-                href={url}
-                target="_blank"
-                rel="noreferrer"
-                className="group min-h-40 border-b border-r border-line p-5 transition-colors hover:bg-surface-strong"
-              >
-                <div className="flex items-start justify-between gap-4">
-                  <span className="kicker text-muted">0{index + 1}</span>
-                  <span className="text-xl text-ice transition-transform group-hover:translate-x-1">↗</span>
-                </div>
-                <div className="mt-12 font-display text-3xl font-black uppercase tracking-[-0.03em]">
-                  {socialLabels[key]}
-                </div>
-              </a>
-            ))}
+            {socialOrder.map((key, index) => {
+              const url = siteConfig.socials[key];
+              return (
+                <a
+                  key={key}
+                  href={url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="group relative min-h-[18rem] overflow-hidden border-b border-r border-line p-5 transition-colors duration-200 hover:bg-surface-strong"
+                >
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="kicker text-muted">0{index + 1}</span>
+                    <span className="text-xl text-ice transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
+                  </div>
+
+                  <div className="mt-8 flex min-h-[7.5rem] items-center">
+                    <SocialIcon
+                      name={key}
+                      className="h-20 w-20 text-ice transition-[transform,color] duration-300 group-hover:scale-110 group-hover:text-paper md:h-24 md:w-24"
+                    />
+                  </div>
+
+                  <div className="absolute inset-x-5 bottom-5">
+                    <div className="font-display text-3xl font-black uppercase tracking-[-0.03em]">
+                      {socialLabels[key]}
+                    </div>
+                    <div className="mt-2 h-px w-0 bg-ice transition-[width] duration-300 group-hover:w-full" />
+                  </div>
+                </a>
+              );
+            })}
           </div>
         </div>
       </section>
