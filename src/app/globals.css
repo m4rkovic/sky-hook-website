@@ -163,7 +163,7 @@ a {
   position: relative;
   isolation: isolate;
   overflow: hidden;
-  background-color: #f0eee8;
+  background-color: var(--sh-paper);
 }
 
 .paper-grit::before {
@@ -172,7 +172,7 @@ a {
   position: absolute;
   inset: 0;
   z-index: 0;
-  opacity: 0.72;
+  opacity: 0.18;
   background-image: url("/media/textures/paper-grit.svg");
   background-size: 320px 320px;
   background-repeat: repeat;
