@@ -2,10 +2,19 @@
 
 import { useMemo } from "react";
 import type { Show } from "@/content/schemas";
+import { siteConfig } from "@/content/site";
 import { intlLocale, type Locale } from "@/i18n/config";
 import { useShows } from "../use-shows";
 
-type Labels = { tickets: string; details: string; tba: string; loading: string; empty: string };
+type Labels = {
+  tickets: string;
+  details: string;
+  tba: string;
+  loading: string;
+  empty: string;
+  emptyHint: string;
+  followInstagram: string;
+};
 
 function formatDate(datetime: string, locale: Locale) {
   const date = new Date(datetime);
@@ -43,6 +52,23 @@ export function UpcomingShows({ limit, locale, labels }: { limit?: number; local
   const { shows, loading } = useShows();
   const visibleShows = useMemo(() => (limit ? shows.slice(0, limit) : shows), [limit, shows]);
   if (loading) return <div className="border-t border-line py-8 text-sm uppercase tracking-[0.14em] text-muted">{labels.loading}</div>;
-  if (visibleShows.length === 0) return <div className="border-t border-line py-8 text-sm uppercase tracking-[0.14em] text-muted">{labels.empty}</div>;
+  if (visibleShows.length === 0) {
+    return (
+      <div className="border-y border-line py-8">
+        <p className="font-display text-2xl font-black uppercase">{labels.empty}</p>
+        <p className="mt-3 max-w-xl text-sm leading-6 text-muted">{labels.emptyHint}</p>
+        {siteConfig.socials.instagram ? (
+          <a
+            href={siteConfig.socials.instagram}
+            target="_blank"
+            rel="noreferrer"
+            className="brutal-button mt-6"
+          >
+            {labels.followInstagram} ↗
+          </a>
+        ) : null}
+      </div>
+    );
+  }
   return <div>{visibleShows.map((show) => <ShowRow key={show.id} show={show} locale={locale} labels={labels} />)}</div>;
 }
