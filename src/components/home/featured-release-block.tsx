@@ -11,7 +11,7 @@ export function FeaturedReleaseBlock({ locale, dict }: { locale: Locale; dict: D
   return (
     <section className="section-frame relative bg-paper text-background">
       <SectionTransition tone="paper" direction="left" />
-      <div className="site-container section-grid">
+      <div className="site-container section-grid relative z-10">
         <div className="col-span-12 md:col-span-4">
           <p className="kicker">01 / {dict.nav.music}</p>
         </div>
