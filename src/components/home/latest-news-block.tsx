@@ -36,7 +36,16 @@ export function LatestNewsBlock({ locale, limit }: { locale: Locale; limit: numb
 
             return (
               <a key={item.id} href={item.url} target="_blank" rel="noreferrer" className="group border-b border-r border-line bg-surface">
-                {image ? (
+                {item.imageUrl ? (
+                  <div className="relative aspect-[4/3] overflow-hidden">
+                    <img
+                      src={item.imageUrl}
+                      alt=""
+                      loading="lazy"
+                      className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.015]"
+                    />
+                  </div>
+                ) : image ? (
                   <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
                       src={image.src}
