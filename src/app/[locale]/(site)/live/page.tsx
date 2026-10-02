@@ -4,6 +4,8 @@ import { PageShell } from "@/components/layout/page-shell";
 import { SetlistArchive } from "@/features/shows/components/setlist-archive";
 import { UpcomingShows } from "@/features/shows/components/upcoming-shows";
 import { fetchBandsintownShows } from "@/features/shows/providers/bandsintown.server";
+import { showSchema } from "@/content/schemas";
+import { localShows } from "@/content/shows.local";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { hasLocale, type Locale } from "@/i18n/config";
 
@@ -32,9 +34,13 @@ export default async function LivePage({ params }: { params: Promise<{ locale: s
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
   let upcoming: Awaited<ReturnType<typeof fetchBandsintownShows>> = [];
   try {
-    upcoming = await fetchBandsintownShows();
+    const remoteShows = await fetchBandsintownShows();
+    upcoming = [...localShows, ...remoteShows]
+      .map((show) => showSchema.parse(show))
+      .filter((show, index, shows) => shows.findIndex((candidate) => candidate.id === show.id) === index)
+      .sort((a, b) => a.datetime.localeCompare(b.datetime));
   } catch {
-    upcoming = [];
+    upcoming = localShows.map((show) => showSchema.parse(show));
   }
 
   const eventJsonLd = upcoming.map((show) => ({
