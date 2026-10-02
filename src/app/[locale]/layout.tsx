@@ -54,17 +54,16 @@ export default async function LocaleRootLayout({
     "@type": "MusicGroup",
     name: siteConfig.name,
     url: process.env.NEXT_PUBLIC_SITE_URL || undefined,
+    inLanguage: locale === "sr" ? "sr-Latn" : "en",
   };
 
   return (
-    <html lang={locale === "sr" ? "sr-Latn" : "en"}>
-      <body>
-        {children}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(musicGroupJsonLd) }}
-        />
-      </body>
-    </html>
+    <>
+      <div lang={locale === "sr" ? "sr-Latn" : "en"}>{children}</div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(musicGroupJsonLd) }}
+      />
+    </>
   );
 }
