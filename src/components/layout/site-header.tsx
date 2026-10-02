@@ -101,7 +101,7 @@ export function SiteHeader({ locale, labels }: { locale: Locale; labels: HeaderL
 
         <div className="col-span-3 row-start-1 flex items-center justify-between lg:hidden">
           <button
-            className="kicker text-paper"
+            className="kicker flex min-h-11 min-w-11 items-center text-paper"
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
@@ -111,7 +111,7 @@ export function SiteHeader({ locale, labels }: { locale: Locale; labels: HeaderL
             {open ? labels.close : labels.menu}
           </button>
           <Link
-            className="text-[0.63rem] font-bold uppercase tracking-[0.14em] text-muted/70"
+            className="flex min-h-11 min-w-11 items-center justify-end text-[0.63rem] font-bold uppercase tracking-[0.14em] text-muted/70"
             href={localePath(pathname, otherLocale)}
             aria-label={`Switch language to ${otherLocale.toUpperCase()}`}
           >
@@ -127,7 +127,7 @@ export function SiteHeader({ locale, labels }: { locale: Locale; labels: HeaderL
               <Link
                 key={item.href}
                 href={localizedHref(locale, item.href)}
-                className="border-b border-line py-5 font-display text-3xl font-black uppercase tracking-[-0.03em]"
+                className="border-b border-line py-5 font-display text-3xl uppercase"
                 onClick={() => setOpen(false)}
               >
                 {labels[item.key]}
