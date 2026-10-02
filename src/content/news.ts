@@ -11,10 +11,63 @@ export type NewsItem = {
   url: string;
   featured?: boolean;
   imageId?: string;
+  imageUrl?: string;
   summary: Record<Locale, string>;
 };
 
 export const newsItems: NewsItem[] = [
+  {
+    id: "highwaystar-melburn",
+    title: "Niški bend Sky Hook i Aleksa Paskaš predstavljaju „Melburn”",
+    source: "Highwaystar Magazine",
+    publishedAt: "2025-04-04",
+    category: "press",
+    url: "https://highwaystarmagazine.org/niski-bend-sky-hook-i-aleksa-paskas-predstavljaju-melburn/",
+    imageUrl: "https://highwaystarmagazine.org/wp-content/uploads/2025/04/Sky-Hook-10-1024x683.png",
+    summary: {
+      en: "Highwaystar presents Melburn, its origins with Aleksa Paskaš and the video filmed near Niš at Gradac.",
+      sr: "Highwaystar predstavlja Melburn, nastanak pesme sa Aleksom Paskašem i spot snimljen kod Gradca u okolini Niša.",
+    },
+  },
+  {
+    id: "highwaystar-debi-album",
+    title: "Niška petorka Sky Hook objavila debi album „Gde Ptice Lete”",
+    source: "Highwaystar Magazine",
+    publishedAt: "2025-04-05",
+    category: "press",
+    url: "https://highwaystarmagazine.org/niska-petorka-sky-hook-objavila-debi-album-gde-ptice-lete/",
+    imageUrl: "https://highwaystarmagazine.org/wp-content/uploads/2025/04/%D0%BF%D1%80%D0%B5%D1%83%D0%B7%D0%B8%D0%BC%D0%B0%D1%9A%D0%B5-95-1024x697.png",
+    summary: {
+      en: "A release feature on the 13-track debut album, its visual language and the record's path from early songs to finished arrangements.",
+      sr: "Tekst o debitantskom albumu sa 13 pesama, njegovom vizuelnom jeziku i putu od ranih pesama do finalnih aranžmana.",
+    },
+  },
+  {
+    id: "zeleni-kacket-gde-ptice-lete",
+    title: "Sky Hook predstavlja singl „Gde ptice lete”",
+    source: "Zeleni Kačket",
+    publishedAt: "2025-02-22",
+    category: "press",
+    url: "https://www.zelenikacket.rs/projects/projekti-4/225187/sky-hook-predstavlja-singl-gde-ptice-lete.html",
+    imageId: "live-01",
+    summary: {
+      en: "Zeleni Kačket introduces the title-track single ahead of the debut album and traces how the song changed from its early 2022 form.",
+      sr: "Zeleni Kačket predstavlja naslovni singl pred album i beleži kako se pesma menjala od prve verzije nastale 2022.",
+    },
+  },
+  {
+    id: "balkanrock-svasta-ima-po-grad",
+    title: "Podkast „Svašta ima po grad“ slavi prvi rođendan u klubu AKC Fuzz",
+    source: "Balkanrock",
+    publishedAt: "2023-08-31",
+    category: "live",
+    url: "https://balkanrock.com/vesti/najave/podkast-svasta-ima-po-grad-slavi-prvi-rodjendan-u-klubu-akc-fuzz/",
+    imageId: "live-02",
+    summary: {
+      en: "An early Balkanrock concert announcement featuring Sky Hook and Lufter at AKC Fuzz in Niš.",
+      sr: "Rana Balkanrock najava nastupa Sky Hooka i Luftera u niškom AKC Fuzz-u.",
+    },
+  },
   {
     id: "bold-prvi-beogradski-udar-2026",
     title: "Sky Hook pred prvi beogradski udar 2026.",
@@ -23,7 +76,7 @@ export const newsItems: NewsItem[] = [
     category: "interview",
     url: "https://boldmagazine.rs/sky-hook-pred-prvi-beogradski-udar-2026/",
     featured: true,
-    imageId: "live-02",
+    imageUrl: "https://boldmagazine.rs/wp-content/uploads/2026/01/1-8.png",
     summary: {
       en: "A long-form conversation about the debut album, live dynamics, the Niš scene, two vocal perspectives and what Sky Hook wanted to carry into 2026.",
       sr: "Veliki razgovor o debitantskom albumu, dinamici nastupa, niškoj sceni, dva vokalna ugla i onome što Sky Hook želi da ponese u 2026.",
