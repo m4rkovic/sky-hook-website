@@ -25,7 +25,7 @@ export function SelectedMediaBlock({ videoIds, locale }: { videoIds: string[]; l
           {videos.map((video) => video ? (
             <a key={video.id} href={youtubeWatchUrl(video.youtubeId)} target="_blank" rel="noreferrer" className="group border border-line bg-background">
               <div className="relative aspect-video overflow-hidden">
-                <img src={youtubeThumbnailUrl(video.youtubeId)} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
+                <img src={youtubeThumbnailUrl(video.youtubeId)} alt="" loading="lazy" decoding="async" referrerPolicy="no-referrer" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
                 <div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/5" />
                 <span className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full border border-white/60 bg-black/35">▶</span>
               </div>
