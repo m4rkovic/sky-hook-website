@@ -6,7 +6,22 @@ import { siteConfig } from "@/content/site";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { hasLocale, type Locale } from "@/i18n/config";
 
-export const metadata: Metadata = { title: "Contact" };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  if (!hasLocale(rawLocale)) return { title: "Contact" };
+  const locale = rawLocale as Locale;
+  const description = locale === "sr"
+    ? "Sky Hook booking, press kontakt i zvanični profili."
+    : "Sky Hook booking, press contact and official profiles.";
+  return {
+    title: "Contact",
+    description,
+    alternates: {
+      canonical: `/${locale}/contact`,
+      languages: { en: "/en/contact", sr: "/sr/contact", "x-default": "/en/contact" },
+    },
+  };
+}
 
 const socialOrder = ["instagram", "facebook", "youtube", "spotify"] as const;
 
@@ -21,7 +36,8 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
   const { locale: rawLocale } = await params;
   if (!hasLocale(rawLocale)) notFound();
 
-  const dict = getDictionary(rawLocale as Locale);
+  const locale = rawLocale as Locale;
+  const dict = getDictionary(locale);
   const bookingEmail = siteConfig.contact.bookingEmail;
 
   return (
