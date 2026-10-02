@@ -69,7 +69,17 @@ export const en: Dictionary = {
   },
   media: { eyebrow: "Media", title: "Photos & video" },
   news: { eyebrow: "News", title: "Archive ready", body: "News stays outside the main navigation until there is enough real content. The route and data boundary are already reserved." },
-  contact: { eyebrow: "Contact", title: "Booking & contact", body: "Booking and press contacts live in site configuration so they can change without touching page components.", emailBooking: "Email booking", missingEmail: "Booking email to be configured" },
+  contact: {
+    eyebrow: "Contact",
+    title: "Booking & contact",
+    body: "For shows, festivals, support slots, press, collaborations or anything that needs an actual human reply, use the booking address below.",
+    emailBooking: "Send email",
+    missingEmail: "Booking email to be configured",
+    bookingLabel: "Booking / press",
+    bookingNote: "Direct contact for concerts, press and collaboration enquiries.",
+    socialsTitle: "Elsewhere",
+    socialsBody: "Music, clips, announcements and the usual internet evidence that the band exists.",
+  },
   epk: { eyebrow: "Press", title: "Electronic press kit", body: "Reserved for promoter-ready biography, tech rider links, downloadable photos, contact information and selected live media." },
   footer: { body: "Official Sky Hook website." },
 };
