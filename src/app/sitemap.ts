@@ -17,6 +17,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
         languages: {
           en: `${siteUrl}/en${route}`,
           sr: `${siteUrl}/sr${route}`,
+          "x-default": `${siteUrl}/en${route}`,
         },
       },
     })),
@@ -32,6 +33,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
           languages: {
             en: `${siteUrl}/en/music/${release.slug}`,
             sr: `${siteUrl}/sr/music/${release.slug}`,
+            "x-default": `${siteUrl}/en/music/${release.slug}`,
           },
         },
       },
@@ -43,6 +45,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
           languages: {
             en: `${siteUrl}/en/listen/${release.slug}`,
             sr: `${siteUrl}/sr/listen/${release.slug}`,
+            "x-default": `${siteUrl}/en/listen/${release.slug}`,
           },
         },
       },
