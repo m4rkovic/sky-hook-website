@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
-import { defaultLocale, hasLocale, locales, type Locale } from "./i18n/config";
+import { defaultLocale, hasLocale, type Locale } from "./i18n/config";
 
 const LOCALE_COOKIE = "skyhook_locale";
 const ONE_YEAR = 60 * 60 * 24 * 365;
