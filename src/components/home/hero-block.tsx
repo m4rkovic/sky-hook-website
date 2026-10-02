@@ -35,14 +35,14 @@ export function HeroBlock({
         <div className="w-full">
           <div className="max-w-4xl">
             <p className="kicker text-ice">{campaign.eyebrow[locale]}</p>
-            <h1 className="mt-4 max-w-[12ch] font-display text-[clamp(4rem,10vw,9.5rem)] font-black uppercase leading-[0.78] tracking-[-0.065em] text-paper">
+            <h1 className="mt-4 max-w-[13ch] font-display text-[clamp(3.8rem,9vw,8.75rem)] uppercase leading-[0.9] tracking-[-0.018em] text-paper">
               {campaign.title[locale]}
             </h1>
             <p className="mt-7 max-w-xl text-base leading-7 text-paper/72 md:text-lg md:leading-8">
               {campaign.body[locale]}
             </p>
             <div className="mt-8 flex flex-wrap gap-3">
-              <Link className="brutal-button border-paper bg-paper text-background hover:bg-ice" href={localizedHref(locale, campaign.primary.href)}>
+              <Link className="brutal-button brutal-button-primary" href={localizedHref(locale, campaign.primary.href)}>
                 {campaign.primary.label[locale]}
               </Link>
               {campaign.secondary ? (
