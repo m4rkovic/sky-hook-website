@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { SkyHookLogo } from "@/components/brand/sky-hook-logo";
 import { siteConfig } from "@/content/site";
 import { localizedHref, type Locale } from "@/i18n/config";
 
@@ -10,7 +10,7 @@ export function SiteFooter({ locale, labels, body }: { locale: Locale; labels: N
     <footer className="border-t border-line bg-background py-12">
       <div className="site-container grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
         <div>
-          <Image src={siteConfig.logo} width={2172} height={724} alt="Sky Hook" className="h-auto w-56" />
+          <SkyHookLogo variant="full" className="h-auto w-56" />
           <p className="mt-5 max-w-md text-sm text-muted">{body}</p>
         </div>
         <nav className="flex flex-wrap gap-x-5 gap-y-3" aria-label="Footer navigation">
