@@ -14,7 +14,7 @@ export function SelectedMediaBlock({ videoIds, locale }: { videoIds: string[]; l
   return (
     <section className="section-frame relative bg-surface">
       <SectionTransition tone="surface" direction="left" />
-      <div className="site-container">
+      <div className="site-container relative z-10">
         <div className="mb-8 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <p className="kicker text-ice">03 / {labels.eyebrow}</p>
