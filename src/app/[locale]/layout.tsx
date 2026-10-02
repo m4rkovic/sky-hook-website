@@ -36,6 +36,14 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
       description: dict.footer.body,
       type: "website",
       siteName: "Sky Hook",
+      locale: locale === "sr" ? "sr_RS" : "en_GB",
+      ...(siteUrl ? { images: [{ url: `${siteUrl}${siteConfig.logo}`, alt: "Sky Hook" }] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Sky Hook",
+      description: dict.footer.body,
+      ...(siteUrl ? { images: [`${siteUrl}${siteConfig.logo}`] } : {}),
     },
   };
 }
