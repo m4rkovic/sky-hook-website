@@ -61,9 +61,9 @@ export function NewsExplorer({
           href={featured.url}
           target="_blank"
           rel="noreferrer"
-          className="group grid overflow-hidden border border-line bg-surface lg:grid-cols-[1.1fr_0.9fr]"
+          className="group grid overflow-hidden bg-surface/70 lg:grid-cols-[1.1fr_0.9fr]"
         >
-          <div className="relative min-h-[22rem] border-b border-line lg:min-h-[34rem] lg:border-b-0 lg:border-r">
+          <div className="relative min-h-[22rem] lg:min-h-[34rem]">
             {featured.imageId ? (() => {
               const image = mediaItems.find((item) => item.id === featured.imageId);
               return image ? (
@@ -105,7 +105,7 @@ export function NewsExplorer({
               <p className="mt-7 max-w-xl text-base leading-8 text-muted">{featured.summary[locale]}</p>
             </div>
 
-            <div className="mt-12 flex items-center justify-between border-t border-line pt-5">
+            <div className="mt-12 flex items-center justify-between pt-2">
               <span className="kicker text-paper">{labels.readExternal}</span>
               <span className="text-2xl text-ice transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
             </div>
@@ -113,7 +113,7 @@ export function NewsExplorer({
         </a>
       ) : null}
 
-      <div className="mt-12 flex gap-7 overflow-x-auto border-y border-line py-5">
+      <div className="mt-12 flex gap-7 overflow-x-auto py-3">
         {filters.map((item) => (
           <button
             key={item.key}
@@ -126,10 +126,10 @@ export function NewsExplorer({
         ))}
       </div>
 
-      <div className="grid border-l border-t border-line md:grid-cols-2 xl:grid-cols-3">
+      <div className="mt-8 grid gap-x-6 gap-y-12 md:grid-cols-2 xl:grid-cols-3">
         {visible
           .filter((item) => !(filter === "all" && item.featured))
-          .map((item, index) => {
+          .map((item) => {
             const image = item.imageId ? mediaItems.find((media) => media.id === item.imageId) : undefined;
             return (
               <a
@@ -137,9 +137,9 @@ export function NewsExplorer({
                 href={item.url}
                 target="_blank"
                 rel="noreferrer"
-                className="group flex min-h-[28rem] flex-col border-b border-r border-line"
+                className="group flex min-h-[28rem] flex-col overflow-hidden bg-surface/45 transition-colors duration-200 hover:bg-surface"
               >
-                <div className="relative aspect-[16/9] overflow-hidden border-b border-line bg-surface-strong">
+                <div className="relative aspect-[16/10] overflow-hidden bg-surface-strong">
                   {image ? (
                     <Image
                       src={image.src}
@@ -159,7 +159,6 @@ export function NewsExplorer({
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.025]"
                     />
                   ) : null}
-                  <span className="absolute left-4 top-4 kicker text-paper/80">0{index + 1}</span>
                 </div>
 
                 <div className="flex flex-1 flex-col p-5">
@@ -174,7 +173,7 @@ export function NewsExplorer({
                   </h3>
                   <p className="mt-5 text-sm leading-7 text-muted">{item.summary[locale]}</p>
 
-                  <div className="mt-auto flex items-center justify-between border-t border-line pt-5">
+                  <div className="mt-auto flex items-center justify-between pt-7">
                     <span className="kicker text-paper">{labels.readExternal}</span>
                     <span className="text-xl text-ice transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
                   </div>

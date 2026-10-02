@@ -1,0 +1,72 @@
+import { archiveShowSchema, liveStatsSchema } from "./schemas";
+
+export const localArchiveShows = archiveShowSchema.array().parse([
+  { id: "local-001", date: "2023-04-21", venue: "kSme", city: "Niš", country: "Serbia", info: "Sky Hook Acoustic.", sets: [] },
+  { id: "local-002", date: "2023-05-20", venue: "AKC Fuzz", city: "Niš", country: "Serbia", sets: [] },
+  { id: "local-003", date: "2023-06-03", venue: "Oxygen", city: "Niš", country: "Serbia", info: "Predgrupa za Artan Lili.", sets: [] },
+  { id: "local-004", date: "2023-06-10", venue: "New Pressing", city: "Aleksinac", country: "Serbia", sets: [] },
+  { id: "local-005", date: "2023-06-28", venue: "Evergreen Fest, Banovina", city: "Niš", country: "Serbia", sets: [] },
+  { id: "local-006", date: "2023-07-21", venue: "Demofest", city: "Banja Luka", country: "Bosnia and Herzegovina", sets: [] },
+  { id: "local-007", date: "2023-08-05", venue: "Velikogradištanska gitarijada", city: "Veliko Gradište", country: "Serbia", sets: [] },
+  { id: "local-008", date: "2023-08-12", venue: "Dan mladih", city: "Vranje", country: "Serbia", info: "Predgrupa za Koi Koi.", sets: [] },
+  { id: "local-009", date: "2023-08-24", venue: "Story Fest, Rovovi tvrđave", city: "Niš", country: "Serbia", sets: [] },
+  { id: "local-010", date: "2023-09-02", venue: "AKC Fuzz", city: "Niš", country: "Serbia", info: "Sa bendom Lufter.", sets: [] },
+  { id: "local-011", date: "2023-10-07", venue: "Underground Fest, NKC Tribina", city: "Niš", country: "Serbia", info: "Paskaš na basu.", sets: [] },
+  { id: "local-012", date: "2023-11-07", venue: "AKC Fuzz", city: "Niš", country: "Serbia", info: "Predgrupa za Stoned Jesus.", sets: [] },
+  { id: "local-013", date: "2023-11-26", venue: "Klub Fest", city: "Beograd", country: "Serbia", info: "Sa Ubili su Batlera i Plis.", sets: [] },
+
+  { id: "local-014", date: "2024-02-16", venue: "Feedback", city: "Niš", country: "Serbia", info: "Predgrupa za Plastic Sunday.", sets: [] },
+  { id: "local-015", date: "2024-02-18", venue: "Klub Kuglaš", city: "Beograd", country: "Serbia", info: "Sa Plis i Bunker.", sets: [] },
+  { id: "local-016", date: "2024-03-15", venue: "Oxygen", city: "Niš", country: "Serbia", info: "Sa Monah i STD.", sets: [] },
+  { id: "local-017", date: "2024-03-29", venue: "Labeerint", city: "Niš", country: "Serbia", info: "Sa Paskaš & 70%.", sets: [] },
+  { id: "local-018", date: "2024-04-06", venue: "AKC Fuzz", city: "Niš", country: "Serbia", info: "Sa Plis i 557.", sets: [] },
+  { id: "local-019", date: "2024-06-01", venue: "AKC Fuzz", city: "Beograd", country: "Serbia", info: "Sa Opposite Way.", sets: [] },
+  { id: "local-020", date: "2024-06-08", venue: "AKC Gnezdno", city: "Kruševac", country: "Serbia", sets: [] },
+  { id: "local-021", date: "2024-06-14", venue: "Bendomanija, Klub Fest", city: "Beograd", country: "Serbia", sets: [] },
+  { id: "local-022", date: "2024-07-05", venue: "Birtija", country: "Serbia", info: "Sky Hook Acoustic. Grad nije naveden u dostavljenoj arhivi.", sets: [] },
+  { id: "local-023", date: "2024-07-26", venue: "Story Caffe", country: "Serbia", info: "Sky Hook Acoustic. Grad nije naveden u dostavljenoj arhivi.", sets: [] },
+  { id: "local-024", date: "2024-09-24", venue: "Balkanrok Fest, Banovina", city: "Niš", country: "Serbia", sets: [] },
+  { id: "local-025", date: "2024-10-06", venue: "Underground Fest, NKC Tribina", city: "Niš", country: "Serbia", sets: [] },
+  { id: "local-026", date: "2024-10-25", venue: "Feedback", city: "Niš", country: "Serbia", info: "Sa Nemir.", sets: [] },
+  { id: "local-027", date: "2024-11-01", venue: "AKC Svitac", city: "Jagodina", country: "Serbia", info: "Sa Logička Greška.", sets: [] },
+
+  { id: "local-028", date: "2025-03-08", venue: "Istina Mašina", city: "Niš", country: "Serbia", info: "Prva svirka sa Bokijem.", sets: [] },
+  { id: "local-029", date: "2025-04-05", venue: "SKC", city: "Kragujevac", country: "Serbia", info: "Sa Phoney Job.", sets: [] },
+  { id: "local-030", date: "2025-04-12", venue: "SKC", city: "Beograd", country: "Serbia", sets: [] },
+  { id: "local-031", date: "2025-06-03", venue: "FDU Piknik", city: "Beograd", country: "Serbia", sets: [] },
+  { id: "local-032", date: "2025-06-12", venue: "Klub Fest", city: "Beograd", country: "Serbia", info: "Sa Plis.", sets: [] },
+  { id: "local-033", date: "2025-07-31", venue: "Istina Mašina", city: "Niš", country: "Serbia", info: "Sa Daze i Toxiro; Paskaš menja gitaru.", sets: [] },
+  { id: "local-034", date: "2025-08-09", venue: "Nišville, Museum Stage", city: "Niš", country: "Serbia", sets: [] },
+  { id: "local-035", date: "2025-09-12", venue: "Saloon 1995", city: "Niš", country: "Serbia", sets: [] },
+  { id: "local-036", date: "2025-09-26", venue: "Riff Caffe", city: "Vranje", country: "Serbia", info: "Sky Hook Acoustic.", sets: [] },
+  { id: "local-037", date: "2025-10-02", venue: "Underground Fest, NKC Tribina", city: "Niš", country: "Serbia", sets: [] },
+  { id: "local-038", date: "2025-10-10", venue: "Feedback", city: "Niš", country: "Serbia", info: "Sa Prototip.", sets: [] },
+  { id: "local-039", date: "2025-10-17", venue: "White Rabbit", city: "Kragujevac", country: "Serbia", info: "Sa Plis.", sets: [] },
+  { id: "local-040", date: "2025-11-15", venue: "Studio Fuzz", city: "Pirot", country: "Serbia", info: "Sa Qyzil.", sets: [] },
+  { id: "local-041", date: "2025-11-22", venue: "Baš Čelik", city: "Pirot", country: "Serbia", info: "Sky Hook Acoustic.", sets: [] },
+  { id: "local-042", date: "2025-11-23", venue: "Livnica", city: "Niš", country: "Serbia", info: "Benefit za Solidarnu kuhinju.", sets: [] },
+
+  { id: "local-043", date: "2026-01-02", venue: "Riff Caffe", city: "Vranje", country: "Serbia", info: "Sky Hook Acoustic.", sets: [] },
+  { id: "local-044", date: "2026-01-17", venue: "Sprat", city: "Beograd", country: "Serbia", info: "Sa Meklur.", sets: [] },
+  { id: "local-045", date: "2026-01-30", venue: "Baš Čelik", city: "Pirot", country: "Serbia", info: "Sky Hook Acoustic.", sets: [] },
+  { id: "local-046", date: "2026-02-14", venue: "Riff Caffe", city: "Vranje", country: "Serbia", info: "Sky Hook Acoustic.", sets: [] },
+  { id: "local-047", date: "2026-02-20", venue: "Baš Čelik", city: "Pirot", country: "Serbia", info: "Sky Hook Acoustic.", sets: [] },
+  { id: "local-048", date: "2026-03-27", venue: "Livnica", city: "Niš", country: "Serbia", info: "Sa Plis.", sets: [] },
+  { id: "local-049", date: "2026-04-25", venue: "Pub Dze", city: "Skoplje", country: "North Macedonia", sets: [] },
+  { id: "local-050", date: "2026-05-15", venue: "Istina Mašina", city: "Niš", country: "Serbia", info: "Sa Nemi Pesnik.", sets: [] },
+  { id: "local-051", date: "2026-06-21", venue: "Čupin Rock Memorijal — Rovče", city: "Niš", country: "Serbia", info: "Niška tvrđava.", sets: [] },
+  { id: "local-052", date: "2026-06-24", venue: "Evergreen Fest", city: "Niš", country: "Serbia", sets: [] },
+  { id: "local-053", date: "2026-08-09", venue: "Nišville, Museum Stage", city: "Niš", country: "Serbia", sets: [] },
+  { id: "local-054", date: "2026-08-13", venue: "Nišville, Open Stage", city: "Niš", country: "Serbia", sets: [] },
+]).sort((a, b) => b.date.localeCompare(a.date));
+
+const documentedCities = new Set(localArchiveShows.map((show) => show.city).filter((city): city is string => Boolean(city)));
+const documentedCountries = new Set(localArchiveShows.map((show) => show.country).filter((country): country is string => Boolean(country)));
+
+export const localArchiveStats = liveStatsSchema.parse({
+  totalShows: localArchiveShows.length,
+  cities: documentedCities.size,
+  countries: documentedCountries.size,
+  uniqueSongs: 0,
+  topSongs: [],
+});

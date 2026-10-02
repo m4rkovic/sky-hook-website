@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { fetchSetlistArchive } from "@/features/shows/providers/setlistfm.server";
+import { fetchShowArchive } from "@/features/shows/providers/archive.server";
 import { showFromSlug } from "@/content/show-utils";
 import { getShowOverride, localizedOverride } from "@/content/show-overrides";
 import { mediaItems } from "@/content/media";
@@ -10,7 +10,7 @@ import { hasLocale, intlLocale, localizedHref, type Locale } from "@/i18n/config
 
 async function getShow(slug: string) {
   try {
-    const { shows } = await fetchSetlistArchive();
+    const { shows } = await fetchShowArchive();
     return showFromSlug(shows, slug);
   } catch {
     return undefined;
@@ -179,7 +179,7 @@ export default async function LiveShowPage({ params }: { params: Promise<{ local
               {show.tour ? <div className="border-b border-line py-4"><dt className="kicker text-muted">Tour</dt><dd className="mt-2 text-paper">{show.tour}</dd></div> : null}
               {show.info ? <div className="border-b border-line py-4"><dd className="leading-6 text-muted">{show.info}</dd></div> : null}
             </dl>
-            <a href={show.sourceUrl} target="_blank" rel="noreferrer" className="brutal-button mt-6 w-full justify-between">{labels.source}: setlist.fm <span>↗</span></a>
+            {show.sourceUrl ? <a href={show.sourceUrl} target="_blank" rel="noreferrer" className="brutal-button mt-6 w-full justify-between">{labels.source}: setlist.fm <span>↗</span></a> : null}
           </aside>
         </div>
       </section>

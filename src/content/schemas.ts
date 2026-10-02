@@ -93,12 +93,12 @@ export const archiveShowSchema = z.object({
   id: z.string().min(1),
   date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
   venue: z.string().min(1),
-  city: z.string().min(1),
+  city: z.string().min(1).optional(),
   region: z.string().optional(),
   country: z.string().optional(),
   tour: z.string().optional(),
   info: z.string().optional(),
-  sourceUrl: z.string().url(),
+  sourceUrl: z.string().url().optional(),
   sets: z.array(archiveSetSchema),
 });
 

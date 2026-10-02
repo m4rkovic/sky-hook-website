@@ -2,10 +2,12 @@ import Link from "next/link";
 import { UpcomingShows } from "@/features/shows/components/upcoming-shows";
 import { localizedHref, type Locale } from "@/i18n/config";
 import type { Dictionary } from "@/i18n/types";
+import { SectionTransition } from "@/components/layout/section-transition";
 
 export function UpcomingShowsBlock({ limit, locale, dict }: { limit: number; locale: Locale; dict: Dictionary }) {
   return (
-    <section className="section-frame bg-background">
+    <section className="section-frame relative bg-background">
+      <SectionTransition tone="background" direction="right" />
       <div className="site-container">
         <div className="mb-10 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
           <div>
@@ -14,7 +16,7 @@ export function UpcomingShowsBlock({ limit, locale, dict }: { limit: number; loc
           </div>
           <Link className="kicker text-muted hover:text-ice" href={localizedHref(locale, "/live")}>{dict.home.allDates} →</Link>
         </div>
-        <UpcomingShows limit={limit} locale={locale} labels={{ tickets: dict.common.tickets, details: dict.common.details, tba: dict.common.tba, loading: dict.common.loading, empty: dict.live.noUpcoming }} />
+        <UpcomingShows limit={limit} locale={locale} labels={{ tickets: dict.common.tickets, details: dict.common.details, tba: dict.common.tba, loading: dict.common.loading, empty: dict.live.noUpcoming, emptyHint: dict.live.noUpcomingHint, followInstagram: dict.live.followInstagram }} />
       </div>
     </section>
   );

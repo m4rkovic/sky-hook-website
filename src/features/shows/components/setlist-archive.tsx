@@ -166,14 +166,14 @@ export function SetlistArchive({ locale, labels }: { locale: Locale; labels: Lab
                 <div className="text-sm text-muted">
                   {show.tour ? <p className="mb-4"><span className="kicker block mb-1">Tour</span>{show.tour}</p> : null}
                   {show.info ? <p className="mb-4 leading-6">{show.info}</p> : null}
-                  <a href={show.sourceUrl} target="_blank" rel="noreferrer" className="kicker text-ice hover:text-paper">setlist.fm ↗</a>
+                  {show.sourceUrl ? <a href={show.sourceUrl} target="_blank" rel="noreferrer" className="kicker text-ice hover:text-paper">setlist.fm ↗</a> : null}
                 </div>
               </div>
             </details>
           );
         })}
       </div>
-      <a href="https://www.setlist.fm/" target="_blank" rel="noreferrer" className="mt-6 inline-block text-xs text-muted hover:text-ice">{labels.attribution} ↗</a>
+      {state.shows.some((show) => show.sourceUrl) ? <a href="https://www.setlist.fm/" target="_blank" rel="noreferrer" className="mt-6 inline-block text-xs text-muted hover:text-ice">{labels.attribution} ↗</a> : null}
     </div>
   );
 }

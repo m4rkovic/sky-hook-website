@@ -8,7 +8,7 @@
   --sh-ice-light: #d8e4ff;
   --sh-paper: #f2f1ed;
   --sh-muted: #8a91a3;
-  --sh-border: #242938;
+  --sh-border: #171c2a;
   --sh-electric: #6287ff;
 
   --sh-header-h: 4.75rem;
@@ -80,7 +80,6 @@ a {
 }
 
 .section-frame {
-  border-top: 1px solid var(--sh-border);
   padding-block: var(--sh-section-y);
 }
 

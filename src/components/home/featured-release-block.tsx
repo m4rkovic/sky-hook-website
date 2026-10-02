@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { featuredRelease } from "@/content/releases";
 import { localizedHref, type Locale } from "@/i18n/config";
+import { SectionTransition } from "@/components/layout/section-transition";
 import type { Dictionary } from "@/i18n/types";
 
 export function FeaturedReleaseBlock({ locale, dict }: { locale: Locale; dict: Dictionary }) {
@@ -8,7 +9,8 @@ export function FeaturedReleaseBlock({ locale, dict }: { locale: Locale; dict: D
   const typeLabel = dict.music[featuredRelease.type];
 
   return (
-    <section className="section-frame bg-paper text-background">
+    <section className="section-frame relative bg-paper text-background">
+      <SectionTransition tone="paper" direction="left" />
       <div className="site-container section-grid">
         <div className="col-span-12 md:col-span-4">
           <p className="kicker">01 / {dict.nav.music}</p>

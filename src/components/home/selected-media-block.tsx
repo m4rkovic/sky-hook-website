@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { mediaVideos, youtubeThumbnailUrl, youtubeWatchUrl } from "@/content/media-videos";
 import { localizedHref, type Locale } from "@/i18n/config";
+import { SectionTransition } from "@/components/layout/section-transition";
 
 export function SelectedMediaBlock({ videoIds, locale }: { videoIds: string[]; locale: Locale }) {
   const videos = videoIds.map((id) => mediaVideos.find((video) => video.id === id)).filter(Boolean);
@@ -11,7 +12,8 @@ export function SelectedMediaBlock({ videoIds, locale }: { videoIds: string[]; l
     : { eyebrow: "Selected media", title: "Watch Sky Hook", all: "All media", watch: "Watch" };
 
   return (
-    <section className="section-frame bg-surface">
+    <section className="section-frame relative bg-surface">
+      <SectionTransition tone="surface" direction="left" />
       <div className="site-container">
         <div className="mb-8 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
           <div>

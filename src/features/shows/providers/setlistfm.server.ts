@@ -92,7 +92,7 @@ function calculateStats(shows: ArchiveShow[], totalShows: number): LiveStats {
   const songCounts = new Map<string, number>();
 
   for (const show of shows) {
-    cities.add(show.city.trim().toLowerCase());
+    if (show.city) cities.add(show.city.trim().toLowerCase());
     if (show.country) countries.add(show.country.trim().toLowerCase());
     const playedThisShow = new Set<string>();
     for (const set of show.sets) {

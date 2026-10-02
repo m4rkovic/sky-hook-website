@@ -34,7 +34,7 @@ export const showOverrides = showOverrideSchema.array().parse([
     imageId: "live-02",
   },
   {
-    match: { date: "2026-07-18", venueIncludes: "Čupin" },
+    match: { date: "2026-06-21", venueIncludes: "Čupin" },
     title: { en: "Čupin Rock Memorial", sr: "Čupin Rock Memorijal" },
     description: {
       en: "A Sky Hook show at Čupin Rock Memorial in Rovče, later used as the live setting for material around the band's Dobri Isak cover.",
@@ -47,7 +47,7 @@ export const showOverrides = showOverrideSchema.array().parse([
 export function getShowOverride(show: ArchiveShow): ShowOverride | undefined {
   return showOverrides.find((override) => {
     if (override.match.date !== show.date) return false;
-    if (override.match.city && override.match.city.toLowerCase() !== show.city.toLowerCase()) return false;
+    if (override.match.city && (!show.city || override.match.city.toLowerCase() !== show.city.toLowerCase())) return false;
     if (override.match.venueIncludes && !show.venue.toLowerCase().includes(override.match.venueIncludes.toLowerCase())) return false;
     return true;
   });

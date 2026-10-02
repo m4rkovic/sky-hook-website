@@ -4,8 +4,12 @@ import { fetchBandsintownShows } from "@/features/shows/providers/bandsintown.se
 
 export async function GET() {
   try {
-    const shows = await fetchBandsintownShows();
-    return NextResponse.json({ shows, source: "bandsintown" }, {
+    const remoteShows = await fetchBandsintownShows();
+    const shows = [...localShows, ...remoteShows]
+      .filter((show, index, all) => all.findIndex((candidate) => candidate.id === show.id) === index)
+      .sort((a, b) => a.datetime.localeCompare(b.datetime));
+
+    return NextResponse.json({ shows, source: remoteShows.length ? "bandsintown" : "local" }, {
       headers: { "Cache-Control": "public, s-maxage=1209600, stale-while-revalidate=604800" },
     });
   } catch {

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { newsItems, newsCategoryLabel } from "@/content/news";
 import { mediaItems } from "@/content/media";
 import { localizedHref, intlLocale, type Locale } from "@/i18n/config";
+import { SectionTransition } from "@/components/layout/section-transition";
 
 export function LatestNewsBlock({ locale, limit }: { locale: Locale; limit: number }) {
   const labels = locale === "sr"
@@ -14,7 +15,8 @@ export function LatestNewsBlock({ locale, limit }: { locale: Locale; limit: numb
     .slice(0, limit);
 
   return (
-    <section className="section-frame bg-background">
+    <section className="section-frame relative bg-background">
+      <SectionTransition tone="background" direction="right" />
       <div className="site-container">
         <div className="mb-8 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
           <div>
@@ -24,7 +26,7 @@ export function LatestNewsBlock({ locale, limit }: { locale: Locale; limit: numb
           <Link href={localizedHref(locale, "/news")} className="kicker text-muted hover:text-ice">{labels.all} →</Link>
         </div>
 
-        <div className="grid border-l border-t border-line lg:grid-cols-3">
+        <div className="grid gap-6 lg:grid-cols-3">
           {items.map((item) => {
             const image = item.imageId ? mediaItems.find((media) => media.id === item.imageId) : undefined;
             const date = new Intl.DateTimeFormat(intlLocale(locale), {
@@ -35,7 +37,7 @@ export function LatestNewsBlock({ locale, limit }: { locale: Locale; limit: numb
             }).format(new Date(`${item.publishedAt}T00:00:00Z`));
 
             return (
-              <a key={item.id} href={item.url} target="_blank" rel="noreferrer" className="group border-b border-r border-line bg-surface">
+              <a key={item.id} href={item.url} target="_blank" rel="noreferrer" className="group overflow-hidden bg-surface/55 transition-colors duration-200 hover:bg-surface">
                 {item.imageUrl || image ? (
                   <div className="relative aspect-[4/3] overflow-hidden">
                     {image ? (
