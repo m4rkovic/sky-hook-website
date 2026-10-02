@@ -9,13 +9,7 @@ export const releases = releaseSchema.array().parse([
     featured: true,
   },
   { slug: "melburn", title: "Melburn", type: "single", year: 2025 },
-  {
-    slug: "surf",
-    title: "Surf",
-    type: "single",
-    year: 2025,
-    streaming: { youtube: "https://www.youtube.com/watch?v=QvRKPd4Gk-k" },
-  },
+  { slug: "surf", title: "Surf", type: "single", year: 2025 },
   { slug: "ostajem", title: "Ostajem", type: "single", year: 2025 },
   { slug: "astra", title: "Astra", type: "single", year: 2025 },
 ]);
