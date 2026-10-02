@@ -69,7 +69,17 @@ export const sr: Dictionary = {
   },
   media: { eyebrow: "Media", title: "Fotografije i video" },
   news: { eyebrow: "Vesti", title: "Arhiva je spremna", body: "Vesti ostaju van glavne navigacije dok ne bude dovoljno stvarnog sadržaja. Ruta i data sloj su već rezervisani." },
-  contact: { eyebrow: "Kontakt", title: "Booking i kontakt", body: "Booking i press kontakti žive u centralnoj konfiguraciji, pa mogu da se menjaju bez diranja komponenti stranice.", emailBooking: "Pošalji booking mejl", missingEmail: "Booking mejl još nije podešen" },
+  contact: {
+    eyebrow: "Kontakt",
+    title: "Booking i kontakt",
+    body: "Za svirke, festivale, support slotove, press, saradnje i sve ostalo što zahteva odgovor stvarne osobe, koristi booking adresu ispod.",
+    emailBooking: "Pošalji mejl",
+    missingEmail: "Booking mejl još nije podešen",
+    bookingLabel: "Booking / press",
+    bookingNote: "Direktan kontakt za nastupe, press i predloge za saradnju.",
+    socialsTitle: "Na drugim mestima",
+    socialsBody: "Muzika, klipovi, najave i ostali internet dokazi da bend zaista postoji.",
+  },
   epk: { eyebrow: "Press", title: "Electronic press kit", body: "Rezervisano za promoter-ready biografiju, tech rider, fotografije za preuzimanje, kontakt i odabrane live snimke." },
   footer: { body: "Zvanični Sky Hook sajt." },
 };
