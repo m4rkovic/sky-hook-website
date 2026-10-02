@@ -64,25 +64,28 @@ export function NewsExplorer({
           className="group grid overflow-hidden border border-line bg-surface lg:grid-cols-[1.1fr_0.9fr]"
         >
           <div className="relative min-h-[22rem] border-b border-line lg:min-h-[34rem] lg:border-b-0 lg:border-r">
-            {featured.imageUrl ? (
-              <img
-                src={featured.imageUrl}
-                alt=""
-                loading="eager"
-                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
-              />
-            ) : featured.imageId ? (() => {
+            {featured.imageId ? (() => {
               const image = mediaItems.find((item) => item.id === featured.imageId);
               return image ? (
                 <Image
                   src={image.src}
-                  alt={image.alt}
+                  alt={featured.imageUrl ? "" : image.alt}
                   fill
                   className="media-cover transition-transform duration-500 group-hover:scale-[1.02]"
                   style={{ objectPosition: image.focalPoint }}
                 />
               ) : null;
             })() : null}
+            {featured.imageUrl ? (
+              <img
+                src={featured.imageUrl}
+                alt=""
+                loading="eager"
+                decoding="async"
+                referrerPolicy="no-referrer"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+            ) : null}
             <div className="absolute inset-0 bg-gradient-to-t from-background/60 via-transparent to-transparent" />
             <span className="absolute bottom-5 left-5 kicker text-paper/75">{labels.featured}</span>
           </div>
@@ -96,7 +99,7 @@ export function NewsExplorer({
                 <span>·</span>
                 <span>{newsCategoryLabel(featured.category, locale)}</span>
               </div>
-              <h2 className="mt-6 font-display text-4xl font-black uppercase leading-[0.95] tracking-[-0.045em] md:text-6xl">
+              <h2 className="mt-6 font-display text-4xl uppercase leading-[1.02] md:text-6xl">
                 {featured.title}
               </h2>
               <p className="mt-7 max-w-xl text-base leading-8 text-muted">{featured.summary[locale]}</p>
@@ -137,20 +140,23 @@ export function NewsExplorer({
                 className="group flex min-h-[28rem] flex-col border-b border-r border-line"
               >
                 <div className="relative aspect-[16/9] overflow-hidden border-b border-line bg-surface-strong">
+                  {image ? (
+                    <Image
+                      src={image.src}
+                      alt={item.imageUrl ? "" : image.alt}
+                      fill
+                      className="media-cover transition-transform duration-500 group-hover:scale-[1.025]"
+                      style={{ objectPosition: image.focalPoint }}
+                    />
+                  ) : null}
                   {item.imageUrl ? (
                     <img
                       src={item.imageUrl}
                       alt=""
                       loading="lazy"
+                      decoding="async"
+                      referrerPolicy="no-referrer"
                       className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.025]"
-                    />
-                  ) : image ? (
-                    <Image
-                      src={image.src}
-                      alt={image.alt}
-                      fill
-                      className="media-cover transition-transform duration-500 group-hover:scale-[1.025]"
-                      style={{ objectPosition: image.focalPoint }}
                     />
                   ) : null}
                   <span className="absolute left-4 top-4 kicker text-paper/80">0{index + 1}</span>
@@ -163,7 +169,7 @@ export function NewsExplorer({
                     <span>{newsCategoryLabel(item.category, locale)}</span>
                   </div>
 
-                  <h3 className="mt-5 font-display text-3xl font-black uppercase leading-[1.02] tracking-[-0.035em]">
+                  <h3 className="mt-5 font-display text-3xl uppercase leading-[1.05]">
                     {item.title}
                   </h3>
                   <p className="mt-5 text-sm leading-7 text-muted">{item.summary[locale]}</p>
