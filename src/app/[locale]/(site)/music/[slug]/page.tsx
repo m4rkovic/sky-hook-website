@@ -86,7 +86,7 @@ export default async function ReleasePage({ params }: { params: Promise<{ locale
     <main className="pt-[calc(var(--sh-header-h)+3rem)]">
       <section className="relative overflow-hidden border-b border-background/15 bg-paper text-background">
         <div className="site-container section-grid py-[var(--sh-section-y)]">
-          <div className="col-span-12 flex min-h-[34rem] flex-col justify-between md:col-span-6">
+          <div className="col-span-12 flex flex-col md:col-span-6 md:pr-8">
             <div>
               <p className="kicker text-background/55">
                 {dict.music[release.type]} / {releaseDate}
@@ -94,7 +94,7 @@ export default async function ReleasePage({ params }: { params: Promise<{ locale
               <h1 className="display-title mt-6 max-w-4xl">{release.title}</h1>
             </div>
 
-            <div className="mt-12 max-w-xl">
+            <div className="mt-10 max-w-xl md:mt-12">
               <p className="text-base leading-8 text-background/65">{description}</p>
               <Link
                 className="brutal-button mt-9 border-background"
