@@ -73,7 +73,7 @@ export function ReleaseExplorer({ releases, locale, labels }: { releases: Releas
     <section className="section-frame bg-paper text-background">
       <div className="site-container">
         <div className="grid gap-7 border-b border-background/20 pb-5 lg:grid-cols-[1fr_22rem] lg:items-end">
-          <h2 className="font-display text-3xl font-black uppercase tracking-[-0.03em] md:text-4xl">{labels.explore}</h2>
+          <h2 className="font-display text-3xl uppercase md:text-4xl">{labels.explore}</h2>
 
           <div ref={sortRef} className="relative">
             <button
@@ -138,17 +138,26 @@ export function ReleaseExplorer({ releases, locale, labels }: { releases: Releas
           ))}
         </div>
 
-        <div className="grid gap-x-3 gap-y-10 py-10 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {visible.map((release) => (
-            <Link key={release.slug} href={localizedHref(locale, `/music/${release.slug}`)} className="group block">
-              <ArtworkFrame artwork={release.artwork} title={release.title} placeholderLabel={labels.artworkTbd} />
-              <div className="pt-3">
-                <p className="kicker text-background/50">{labels.released} {release.releaseDate ?? release.year}</p>
-                <h3 className="mt-1 font-display text-xl font-black uppercase leading-[1.05] tracking-[-0.02em] transition-colors group-hover:text-electric md:text-2xl">{release.title}</h3>
-                <p className="mt-1 text-xs font-bold uppercase tracking-[0.1em] text-background/55">{labels[release.type]}</p>
-              </div>
-            </Link>
-          ))}
+        <div className="grid gap-x-4 gap-y-10 py-10 sm:grid-cols-2 lg:grid-cols-4">
+          {visible.map((release) => {
+            const featured = release.featured && filter === "all";
+            return (
+              <Link
+                key={release.slug}
+                href={localizedHref(locale, `/music/${release.slug}`)}
+                className={`group block ${featured ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""}`}
+              >
+                <ArtworkFrame artwork={release.artwork} title={release.title} placeholderLabel={labels.artworkTbd} />
+                <div className="flex items-start justify-between gap-4 pt-3">
+                  <div>
+                    <p className="kicker text-background/50">{labels.released} {release.releaseDate ?? release.year}</p>
+                    <h3 className={`mt-1 font-display uppercase leading-[1.05] transition-colors group-hover:text-electric ${featured ? "text-3xl md:text-5xl" : "text-xl md:text-2xl"}`}>{release.title}</h3>
+                  </div>
+                  <span className="kicker mt-1 shrink-0 text-background/45">{labels[release.type]}</span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </section>
