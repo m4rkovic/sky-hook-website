@@ -16,13 +16,13 @@ export function SectionTransition({
   direction?: Direction;
 }) {
   const path = direction === "left"
-    ? "M0 10 L300 22 L560 31 L760 36 L650 52 L860 47 L1120 62 L1440 88 L1440 104 L0 104 Z"
-    : "M0 88 L320 61 L580 48 L790 53 L690 36 L900 31 L1160 22 L1440 10 L1440 104 L0 104 Z";
+    ? "M0 20 L1440 72 L1440 104 L0 104 Z"
+    : "M0 72 L1440 20 L1440 104 L0 104 Z";
 
   return (
     <div
       aria-hidden="true"
-      className={`pointer-events-none absolute inset-x-0 -top-[3rem] z-20 h-12 md:-top-[5rem] md:h-20 ${toneClass[tone]}`}
+      className={`pointer-events-none absolute inset-x-0 -top-6 z-0 h-6 md:-top-10 md:h-10 ${toneClass[tone]}`}
     >
       <svg
         viewBox="0 0 1440 104"
