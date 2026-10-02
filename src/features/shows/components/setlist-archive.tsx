@@ -20,7 +20,7 @@ type Labels = {
   attribution: string;
 };
 
-type State = { loading: boolean; shows: ArchiveShow[]; stats: LiveStats | null; error: boolean };
+type State = { loading: boolean; shows: ArchiveShow[]; stats: LiveStats | null; error: boolean; errorCode?: string };
 
 function formatDate(dateValue: string, locale: Locale) {
   const date = new Date(`${dateValue}T00:00:00Z`);
@@ -40,14 +40,17 @@ export function SetlistArchive({ locale, labels }: { locale: Locale; labels: Lab
     async function load() {
       try {
         const response = await fetch("/api/shows/archive", { signal: controller.signal });
-        if (!response.ok) throw new Error("Archive unavailable");
-        const payload = await response.json() as { shows?: unknown; stats?: unknown };
+        const payload = await response.json() as { shows?: unknown; stats?: unknown; error?: string };
+        if (!response.ok) {
+          setState({ loading: false, shows: [], stats: null, error: true, errorCode: payload.error });
+          return;
+        }
         const shows = archiveShowSchema.array().parse(payload.shows ?? []);
         const stats = liveStatsSchema.parse(payload.stats);
         setState({ loading: false, shows, stats, error: false });
       } catch (error) {
         if (error instanceof DOMException && error.name === "AbortError") return;
-        setState({ loading: false, shows: [], stats: null, error: true });
+        setState({ loading: false, shows: [], stats: null, error: true, errorCode: "unavailable" });
       }
     }
     void load();
@@ -58,7 +61,18 @@ export function SetlistArchive({ locale, labels }: { locale: Locale; labels: Lab
   const visible = useMemo(() => year === "all" ? state.shows : state.shows.filter((show) => show.date.startsWith(year)), [state.shows, year]);
 
   if (state.loading) return <div className="border-t border-line py-8 text-sm uppercase tracking-[0.14em] text-muted">{labels.loading}</div>;
-  if (state.error) return <div className="border-t border-line py-8 text-sm uppercase tracking-[0.14em] text-muted">{labels.unavailable}</div>;
+  if (state.error) {
+    return (
+      <div className="border-t border-line py-8">
+        <p className="text-sm uppercase tracking-[0.14em] text-muted">{labels.unavailable}</p>
+        {state.errorCode === "not-configured" ? (
+          <p className="mt-3 max-w-2xl text-xs leading-6 text-muted/70">
+            setlist.fm API key is missing. Add SETLISTFM_API_KEY to .env.local and restart the dev server.
+          </p>
+        ) : null}
+      </div>
+    );
+  }
 
   return (
     <div>
