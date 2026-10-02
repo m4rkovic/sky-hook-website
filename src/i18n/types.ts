@@ -99,6 +99,10 @@ export type Dictionary = {
     body: string;
     emailBooking: string;
     missingEmail: string;
+    bookingLabel: string;
+    bookingNote: string;
+    socialsTitle: string;
+    socialsBody: string;
   };
   epk: {
     eyebrow: string;
