@@ -20,7 +20,18 @@ export default async function LivePage({ params }: { params: Promise<{ locale: s
         <div className="site-container">
           <p className="kicker mb-4 text-ice">01 / {dict.live.upcoming}</p>
           <h2 className="font-display mb-9 text-4xl font-black uppercase md:text-6xl">{dict.live.upcoming}</h2>
-          <UpcomingShows locale={locale} labels={{ tickets: dict.common.tickets, details: dict.common.details, tba: dict.common.tba, loading: dict.common.loading, empty: dict.live.noUpcoming }} />
+          <UpcomingShows
+            locale={locale}
+            labels={{
+              tickets: dict.common.tickets,
+              details: dict.common.details,
+              tba: dict.common.tba,
+              loading: dict.common.loading,
+              empty: dict.live.noUpcoming,
+              emptyHint: dict.live.noUpcomingHint,
+              followInstagram: dict.live.followInstagram,
+            }}
+          />
         </div>
       </section>
 
