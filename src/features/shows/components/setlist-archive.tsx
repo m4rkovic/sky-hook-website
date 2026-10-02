@@ -1,8 +1,10 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { archiveShowSchema, liveStatsSchema, type ArchiveShow, type LiveStats } from "@/content/schemas";
-import { intlLocale, type Locale } from "@/i18n/config";
+import { localizedHref, intlLocale, type Locale } from "@/i18n/config";
+import { showSlug } from "@/content/show-utils";
 
 type Labels = {
   loading: string;
@@ -130,7 +132,16 @@ export function SetlistArchive({ locale, labels }: { locale: Locale; labels: Lab
                 <span className="kicker text-ice">{formatDate(show.date, locale)}</span>
                 <span className="font-display text-xl font-black uppercase md:text-2xl">{show.venue}</span>
                 <span className="text-sm text-muted">{[show.city, show.region, show.country].filter(Boolean).join(", ")}</span>
-                <span className="kicker text-muted">{count ? `${labels.setlist} · ${count}` : labels.setlist} +</span>
+                <span className="flex items-center gap-4">
+                  <Link
+                    href={localizedHref(locale, `/live/${showSlug(show)}`)}
+                    onClick={(event) => event.stopPropagation()}
+                    className="kicker text-ice hover:text-paper"
+                  >
+                    {labels.setlist} ↗
+                  </Link>
+                  <span className="kicker text-muted">{count ? count : "+"}</span>
+                </span>
               </summary>
               <div className="grid gap-8 border-t border-line bg-surface px-4 py-7 md:grid-cols-[1fr_14rem] md:px-6">
                 <div>
