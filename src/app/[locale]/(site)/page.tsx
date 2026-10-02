@@ -13,7 +13,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     ? "Zvanični sajt benda Sky Hook iz Niša. Muzika, nastupi, video i vesti."
     : "Official website of Sky Hook from Niš, Serbia. Music, live shows, video and news.";
   return {
-    title: "Sky Hook",
+    title: { absolute: "Sky Hook" },
     description,
     alternates: {
       canonical: `/${locale}`,
