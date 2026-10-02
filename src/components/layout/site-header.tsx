@@ -76,7 +76,7 @@ export function SiteHeader({ locale, labels }: { locale: Locale; labels: HeaderL
           <div className="relative h-12 w-full">
             <SkyHookLogo
               variant="full"
-              className={`absolute inset-0 h-full w-full drop-shadow-[0_2px_8px_rgba(0,0,0,0.28)] transition-all duration-300 ${compactLogo ? "scale-95 opacity-0" : "scale-100 opacity-100"}`}
+              className={`absolute inset-0 h-full w-full translate-x-[clamp(0.75rem,1.15vw,1.15rem)] drop-shadow-[0_2px_8px_rgba(0,0,0,0.28)] transition-all duration-300 ${compactLogo ? "scale-95 opacity-0" : "scale-100 opacity-100"}`}
             />
             <SkyHookLogo
               variant="monogram"
