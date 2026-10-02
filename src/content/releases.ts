@@ -6,7 +6,15 @@ export const releases = releaseSchema.array().parse([
     title: "Gde ptice lete",
     type: "album",
     year: 2025,
+    artwork: "/media/releases/gde-ptice-lete-album.webp",
     featured: true,
+  },
+  {
+    slug: "gde-ptice-lete-single",
+    title: "Gde ptice lete",
+    type: "single",
+    year: 2025,
+    artwork: "/media/releases/gde-ptice-lete-single.webp",
   },
   {
     slug: "melburn",
