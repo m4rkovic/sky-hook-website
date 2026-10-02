@@ -13,6 +13,7 @@ export const releases = releaseSchema.array().parse([
     title: "Melburn",
     type: "single",
     year: 2025,
+    artwork: "/media/releases/melburn.webp",
     streaming: { youtube: "https://www.youtube.com/watch?v=_UFk_n6rBOE" },
   },
   {
@@ -20,10 +21,11 @@ export const releases = releaseSchema.array().parse([
     title: "Surf",
     type: "single",
     year: 2025,
+    artwork: "/media/releases/surf.webp",
     streaming: { youtube: "https://www.youtube.com/watch?v=QvRKPd4Gk-k" },
   },
-  { slug: "ostajem", title: "Ostajem", type: "single", year: 2025 },
-  { slug: "astra", title: "Astra", type: "single", year: 2025 },
+  { slug: "ostajem", title: "Ostajem", type: "single", year: 2025, artwork: "/media/releases/ostajem.webp" },
+  { slug: "astra", title: "Astra", type: "single", year: 2025, artwork: "/media/releases/astra.webp" },
 ]);
 
 export const featuredRelease = releases.find((release) => release.featured) ?? releases[0];
