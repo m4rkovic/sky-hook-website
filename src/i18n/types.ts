@@ -102,6 +102,12 @@ export type Dictionary = {
     eyebrow: string;
     title: string;
     body: string;
+    all: string;
+    interviews: string;
+    press: string;
+    live: string;
+    readExternal: string;
+    featured: string;
   };
   contact: {
     eyebrow: string;
