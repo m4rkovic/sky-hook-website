@@ -12,7 +12,7 @@ export function SplitMediaBlock({ imageId, href, locale, dict }: { imageId: stri
   return (
     <section className="relative bg-surface-strong">
       <SectionTransition tone="surface-strong" direction="left" />
-      <div className="grid min-h-[34rem] lg:grid-cols-2">
+      <div className="relative z-10 grid min-h-[34rem] lg:grid-cols-2">
         <div className="relative min-h-[24rem] overflow-hidden border-b border-line lg:min-h-full lg:border-b-0 lg:border-r">
           <Image src={image.src} alt={image.alt} fill sizes="(min-width:1024px) 50vw, 100vw" className="media-cover" style={{ objectPosition: image.focalPoint }} />
         </div>
