@@ -10,7 +10,7 @@ const services = [
   { key: "bandcamp", label: "Bandcamp", action: "open" },
 ] as const;
 
-type Labels = { play: string; watch: string; open: string; soon: string; noLinks: string };
+type Labels = { play: string; watch: string; open: string; noLinks: string };
 
 export function ListenLinks({ release, labels }: { release: Release; labels: Labels }) {
   const configured = services.filter((service) => Boolean(release.streaming[service.key]));
