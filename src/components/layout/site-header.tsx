@@ -105,12 +105,15 @@ export function SiteHeader({ locale, labels }: { locale: Locale; labels: HeaderL
             type="button"
             onClick={() => setOpen((value) => !value)}
             aria-expanded={open}
+            aria-controls="mobile-site-navigation"
+            aria-label={open ? labels.close : labels.menu}
           >
             {open ? labels.close : labels.menu}
           </button>
           <Link
             className="text-[0.63rem] font-bold uppercase tracking-[0.14em] text-muted/70"
             href={localePath(pathname, otherLocale)}
+            aria-label={`Switch language to ${otherLocale.toUpperCase()}`}
           >
             {otherLocale.toUpperCase()}
           </Link>
@@ -118,7 +121,7 @@ export function SiteHeader({ locale, labels }: { locale: Locale; labels: HeaderL
       </div>
 
       {open ? (
-        <div className="border-t border-line bg-background lg:hidden">
+        <div id="mobile-site-navigation" className="border-t border-line bg-background lg:hidden">
           <nav className="site-container grid py-4" aria-label="Mobile navigation">
             {navItems.map((item) => (
               <Link
