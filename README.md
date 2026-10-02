@@ -63,7 +63,7 @@ Each release automatically participates in:
 - `/{locale}/music/[slug]`
 - `/{locale}/listen/[slug]`
 
-Add streaming URLs to the release's `streaming` object when they are ready. The smart-link page will expose them without a component change.
+Add streaming URLs to the release's `streaming` object when they are ready. The smart-link page only renders configured services, so missing providers never appear as fake "coming soon" rows.
 
 ## Languages
 
@@ -80,6 +80,6 @@ Do not duplicate page components for each language.
 - `public/media/photos/skyhook-live-01.jpg`
 - `public/media/photos/skyhook-live-02.jpg`
 
-Photo credits remain `TBD` until confirmed.
+Photo credits are omitted until confirmed rather than shown as placeholders.
 
 See `ARCHITECTURE.md` before adding major features.
