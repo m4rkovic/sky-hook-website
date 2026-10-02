@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const description = copy.intro;
 
   return {
-    title: "Sky Hook",
+    title: "Band",
     description,
     alternates: {
       canonical: `/${locale}/band`,
