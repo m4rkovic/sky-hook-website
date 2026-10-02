@@ -6,7 +6,7 @@ import { mediaItems } from "@/content/media";
 import { mediaVideos, youtubeEmbedUrl, youtubeThumbnailUrl } from "@/content/media-videos";
 import type { Locale } from "@/i18n/config";
 
-type Filter = "all" | "live" | "video" | "photo";
+type Filter = "all" | "live" | "video" | "artwork" | "press";
 
 export function MediaExplorer({ locale }: { locale: Locale }) {
   const [filter, setFilter] = useState<Filter>("all");
@@ -14,12 +14,18 @@ export function MediaExplorer({ locale }: { locale: Locale }) {
   const [activePhoto, setActivePhoto] = useState<string | null>(null);
 
   const labels = locale === "sr"
-    ? { all: "Sve", live: "Live", video: "Spotovi", photo: "Fotografije", close: "Zatvori", play: "Pusti video" }
-    : { all: "All", live: "Live", video: "Videos", photo: "Photos", close: "Close", play: "Play video" };
+    ? { all: "Sve", live: "Live", video: "Video", artwork: "Omoti", press: "Press", close: "Zatvori", play: "Pusti video" }
+    : { all: "All", live: "Live", video: "Video", artwork: "Artwork", press: "Press", close: "Close", play: "Play video" };
 
   const photoItems = useMemo(() => mediaItems.filter((item) => item.type === "photo"), []);
   const visibleVideos = filter === "all" ? mediaVideos : mediaVideos.filter((item) => item.category === filter);
-  const visiblePhotos = filter === "all" || filter === "photo" || filter === "live" ? photoItems : [];
+  const visiblePhotos = filter === "all" ? photoItems : photoItems.filter((item) => item.category === filter);
+  const availableFilters = (["all", "live", "video", "artwork", "press"] as Filter[]).filter((item) => {
+    if (item === "all") return true;
+    if (item === "video") return mediaVideos.some((video) => video.category === "video");
+    if (item === "live") return mediaVideos.some((video) => video.category === "live") || photoItems.some((photo) => photo.category === "live");
+    return photoItems.some((photo) => photo.category === item);
+  });
 
   const activePhotoItem = activePhoto ? photoItems.find((item) => item.id === activePhoto) : undefined;
   const activeVideoItem = activeVideo ? mediaVideos.find((item) => item.id === activeVideo) : undefined;
@@ -29,7 +35,7 @@ export function MediaExplorer({ locale }: { locale: Locale }) {
       <section className="section-frame">
         <div className="site-container">
           <div className="mb-8 flex flex-wrap gap-2">
-            {(["all", "live", "video", "photo"] as Filter[]).map((item) => (
+            {availableFilters.map((item) => (
               <button
                 key={item}
                 type="button"
