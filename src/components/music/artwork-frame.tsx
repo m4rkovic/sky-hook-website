@@ -8,9 +8,9 @@ export function ArtworkFrame({ artwork, title, placeholderLabel, priority = fals
       ) : (
         <>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(175,199,255,.18),transparent_34%),linear-gradient(145deg,#111a3d,#05060b_70%)]" />
-          <div className="absolute -right-[12%] top-[8%] font-display text-[clamp(5rem,13vw,11rem)] uppercase leading-none text-ice/7">SH</div>
+          <div className="absolute -right-[12%] top-[8%] font-display text-[clamp(5rem,13vw,11rem)] uppercase leading-none text-ice/[0.07]">SH</div>
           <div className="absolute inset-x-4 top-4 flex items-center justify-between border-b border-white/10 pb-3">
-            <span className="kicker text-ice/70">Sky Hook</span>
+            <span className="kicker text-ice/[0.07]0">Sky Hook</span>
             <span className="kicker text-paper/30">Archive</span>
           </div>
           <div className="absolute inset-x-4 bottom-4">
