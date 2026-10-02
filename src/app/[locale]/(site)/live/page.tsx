@@ -30,7 +30,7 @@ export default async function LivePage({ params }: { params: Promise<{ locale: s
   const locale = rawLocale as Locale;
   const dict = getDictionary(locale);
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
-  let upcoming = [];
+  let upcoming: Awaited<ReturnType<typeof fetchBandsintownShows>> = [];
   try {
     upcoming = await fetchBandsintownShows();
   } catch {
