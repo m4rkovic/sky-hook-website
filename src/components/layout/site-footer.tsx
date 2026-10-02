@@ -28,11 +28,13 @@ export function SiteFooter({ locale, labels, body }: { locale: Locale; labels: N
         <div className="mt-10 flex flex-col gap-4 border-t border-line pt-5 text-[0.68rem] font-bold uppercase tracking-[0.12em] text-muted sm:flex-row sm:items-center sm:justify-between">
           <span>© {year} Sky Hook</span>
           <div className="flex flex-wrap gap-x-5 gap-y-3">
-            {Object.entries(siteConfig.socials).map(([name, url]) => (
-              <a key={name} href={url} target="_blank" rel="noreferrer" className="flex min-h-11 items-center hover:text-ice">
-                {name}
-              </a>
-            ))}
+            {Object.entries(siteConfig.socials)
+              .filter(([, url]) => Boolean(url))
+              .map(([name, url]) => (
+                <a key={name} href={url} target="_blank" rel="noreferrer" className="flex min-h-11 items-center hover:text-ice">
+                  {name}
+                </a>
+              ))}
           </div>
         </div>
       </div>
