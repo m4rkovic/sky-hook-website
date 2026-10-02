@@ -14,31 +14,31 @@ export const mediaVideos: MediaVideo[] = [
     id: "live-cx2pbneaco4",
     youtubeId: "CX2PBNEAco4",
     category: "live",
-    title: { en: "Sky Hook / Live 01", sr: "Sky Hook / Uživo 01" },
+    title: { en: "Dolazim Ponovo / Live", sr: "Dolazim Ponovo / Uživo" },
   },
   {
     id: "live-bxniviaxdcm",
     youtubeId: "bxnIviAxDcM",
     category: "live",
-    title: { en: "Sky Hook / Live 02", sr: "Sky Hook / Uživo 02" },
+    title: { en: "Surf / Live", sr: "Surf / Uživo" },
   },
   {
     id: "live-3t8q2vaxip0",
     youtubeId: "3T8Q2vaXiP0",
     category: "live",
-    title: { en: "Sky Hook / Live 03", sr: "Sky Hook / Uživo 03" },
+    title: { en: "Astra / Live", sr: "Astra / Uživo" },
   },
   {
     id: "video-ufkn6rboe",
     youtubeId: "_UFk_n6rBOE",
     category: "video",
-    title: { en: "Sky Hook / Official video", sr: "Sky Hook / Spot" },
+    title: { en: "Melburn / Official video", sr: "Melburn / Spot" },
   },
   {
     id: "video-qvrkpd4gkk",
     youtubeId: "QvRKPd4Gk-k",
     category: "video",
-    title: { en: "Sky Hook / Official video 02", sr: "Sky Hook / Spot 02" },
+    title: { en: "Surf / Official video", sr: "Surf / Spot" },
   },
 ];
 
