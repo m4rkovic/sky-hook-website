@@ -57,6 +57,8 @@ export const en: Dictionary = {
     upcoming: "Upcoming shows",
     archive: "Past shows",
     noUpcoming: "No upcoming shows announced.",
+    noUpcomingHint: "New dates usually appear on our socials first.",
+    followInstagram: "Follow on Instagram",
     archiveLoading: "Loading show archive…",
     archiveUnavailable: "The live archive is not configured yet.",
     documentedStats: "Documented live statistics",
