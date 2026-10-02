@@ -76,7 +76,7 @@ export default async function ListenPage({ params }: { params: Promise<{ locale:
         </div>
         <div className="py-6 text-center">
           <p className="kicker text-ice">Sky Hook</p>
-          <h1 className="mt-2 font-display text-3xl font-black uppercase tracking-[-0.03em]">{release.title}</h1>
+          <h1 className="mt-2 font-display text-3xl uppercase tracking-[-0.01em]">{release.title}</h1>
           <p className="mt-2 text-sm text-muted">{dict.music.chooseService}</p>
         </div>
         <ListenLinks release={release} labels={{ play: dict.music.play, watch: dict.music.watch, open: dict.music.open, soon: dict.common.soon, noLinks: dict.music.noLinks }} />
