@@ -4,10 +4,26 @@ import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/page-shell";
 import { bandCopy, bandMembers } from "@/content/band";
 import { mediaItems } from "@/content/media";
+import { siteConfig } from "@/content/site";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { hasLocale, type Locale } from "@/i18n/config";
 
-export const metadata: Metadata = { title: "Band" };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  if (!hasLocale(rawLocale)) return { title: "Band" };
+  const locale = rawLocale as Locale;
+  const copy = bandCopy[locale];
+  const description = copy.intro;
+
+  return {
+    title: "Sky Hook",
+    description,
+    alternates: {
+      canonical: `/${locale}/band`,
+      languages: { en: "/en/band", sr: "/sr/band", "x-default": "/en/band" },
+    },
+  };
+}
 
 export default async function BandPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
@@ -19,8 +35,21 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
   const primaryImage = mediaItems.find((item) => item.id === "live-01") ?? mediaItems[0];
   const secondaryImage = mediaItems.find((item) => item.id === "live-02") ?? mediaItems[1] ?? mediaItems[0];
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "MusicGroup",
+    name: "Sky Hook",
+    foundingLocation: { "@type": "Place", name: "Niš, Serbia" },
+    foundingDate: "2023",
+    genre: ["Alternative rock", "Post-punk"],
+    ...(siteUrl ? { url: `${siteUrl}/${locale}/band` } : {}),
+    sameAs: Object.values(siteConfig.socials).filter(Boolean),
+  };
+
   return (
     <PageShell eyebrow={dict.band.eyebrow} title={dict.band.title}>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
       <section className="border-t border-line">
         <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
           <div className="relative min-h-[34rem] border-b border-line lg:min-h-[44rem] lg:border-b-0 lg:border-r">
