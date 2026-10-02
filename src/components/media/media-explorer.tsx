@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { mediaItems } from "@/content/media";
 import { mediaVideos, youtubeEmbedUrl, youtubeThumbnailUrl } from "@/content/media-videos";
 import type { Locale } from "@/i18n/config";
@@ -29,6 +29,24 @@ export function MediaExplorer({ locale }: { locale: Locale }) {
 
   const activePhotoItem = activePhoto ? photoItems.find((item) => item.id === activePhoto) : undefined;
   const activeVideoItem = activeVideo ? mediaVideos.find((item) => item.id === activeVideo) : undefined;
+  const modalOpen = Boolean(activePhotoItem || activeVideoItem);
+
+  useEffect(() => {
+    if (!modalOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setActiveVideo(null);
+        setActivePhoto(null);
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKeyDown);
+    };
+  }, [modalOpen]);
 
   return (
     <>
@@ -101,11 +119,11 @@ export function MediaExplorer({ locale }: { locale: Locale }) {
       </section>
 
       {activeVideoItem ? (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-8" role="dialog" aria-modal="true" aria-label={activeVideoItem.title[locale]}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-8" role="dialog" aria-modal="true" aria-label={activeVideoItem.title[locale]} onClick={() => setActiveVideo(null)}>
           <button type="button" onClick={() => setActiveVideo(null)} className="absolute right-5 top-5 brutal-button bg-background">
             {labels.close} ×
           </button>
-          <div className="w-full max-w-6xl border border-line bg-black">
+          <div className="w-full max-w-6xl border border-line bg-black" onClick={(event) => event.stopPropagation()}>
             <div className="aspect-video">
               <iframe
                 src={youtubeEmbedUrl(activeVideoItem.youtubeId)}
@@ -120,11 +138,11 @@ export function MediaExplorer({ locale }: { locale: Locale }) {
       ) : null}
 
       {activePhotoItem ? (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-8" role="dialog" aria-modal="true" aria-label={activePhotoItem.alt}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 md:p-8" role="dialog" aria-modal="true" aria-label={activePhotoItem.alt} onClick={() => setActivePhoto(null)}>
           <button type="button" onClick={() => setActivePhoto(null)} className="absolute right-5 top-5 brutal-button bg-background">
             {labels.close} ×
           </button>
-          <div className="relative h-[80vh] w-full max-w-6xl">
+          <div className="relative h-[80vh] w-full max-w-6xl" onClick={(event) => event.stopPropagation()}>
             <Image src={activePhotoItem.src} alt={activePhotoItem.alt} fill sizes="100vw" className="object-contain" />
           </div>
         </div>
