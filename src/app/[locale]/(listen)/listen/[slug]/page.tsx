@@ -22,6 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
 
   const locale = rawLocale as Locale;
   const description = release.description?.[locale] ?? `Choose where to listen to ${release.title} by Sky Hook.`;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  const fallbackImage = siteUrl ? `${siteUrl}${siteConfig.logo}` : undefined;
 
   return {
     title: `Listen to ${release.title}`,
@@ -37,13 +39,13 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
     openGraph: {
       title: `${release.title} | Sky Hook`,
       description,
-      ...(release.artwork ? { images: [{ url: release.artwork, alt: `${release.title} artwork` }] } : {}),
+      ...(release.artwork ? { images: [{ url: release.artwork, alt: `${release.title} artwork` }] } : fallbackImage ? { images: [{ url: fallbackImage, alt: "Sky Hook" }] } : {}),
     },
     twitter: {
       card: "summary_large_image",
       title: `${release.title} | Sky Hook`,
       description,
-      ...(release.artwork ? { images: [release.artwork] } : {}),
+      ...(release.artwork ? { images: [release.artwork] } : fallbackImage ? { images: [fallbackImage] } : {}),
     },
   };
 }
