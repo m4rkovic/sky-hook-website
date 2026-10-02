@@ -59,6 +59,15 @@ export function MediaExplorer({ locale }: { locale: Locale }) {
     document.body.style.overflow = "hidden";
     window.requestAnimationFrame(() => closeRef.current?.focus());
 
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      previousFocusRef.current?.focus();
+    };
+  }, [modalOpen]);
+
+  useEffect(() => {
+    if (!modalOpen) return;
+
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === "Escape") closeModal();
       if (event.key === "ArrowLeft") activeVideoItem ? stepVideo(-1) : stepPhoto(-1);
@@ -66,12 +75,8 @@ export function MediaExplorer({ locale }: { locale: Locale }) {
     };
 
     window.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.body.style.overflow = previousOverflow;
-      window.removeEventListener("keydown", onKeyDown);
-      previousFocusRef.current?.focus();
-    };
-  }, [modalOpen, activeVideoItem, activePhotoItem]);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [modalOpen, activeVideo, activePhoto]);
 
   return (
     <>
