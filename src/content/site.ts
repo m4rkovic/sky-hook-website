@@ -5,6 +5,7 @@ export const siteConfig = {
   shortName: "SKY HOOK",
   description: "Official website of Sky Hook.",
   logo: "/brand/sky-hook-wordmark.png",
+  socialImage: "/media/photos/skyhook-live-02.jpg",
   navigation: navItemSchema.array().parse([
     { key: "live", href: "/live" },
     { key: "music", href: "/music" },
