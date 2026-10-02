@@ -113,7 +113,7 @@ export function ReleaseExplorer({ releases, locale, labels }: { releases: Releas
                         setSort(item.key);
                         setSortOpen(false);
                       }}
-                      className={`flex w-full items-center justify-between px-3 py-3 text-left text-sm font-black uppercase transition-colors ${active ? "bg-background text-paper" : "text-background hover:bg-background/7"}`}
+                      className={`flex w-full items-center justify-between px-3 py-3 text-left text-sm font-black uppercase transition-colors ${active ? "bg-background text-paper" : "text-background hover:bg-background/[0.07]"}`}
                     >
                       <span>{item.label}</span>
                       {active ? <span className="text-ice">●</span> : null}
