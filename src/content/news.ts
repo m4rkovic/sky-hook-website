@@ -95,32 +95,6 @@ export const newsItems: NewsItem[] = [
     },
   },
   {
-    id: "highwaystar-livnica-2026",
-    title: "Sky Hook i Pliš 27. marta u niškoj Livnici",
-    source: "Highwaystar Magazine",
-    publishedAt: "2026-03-27",
-    category: "live",
-    url: "https://highwaystarmagazine.org/sky-hook-i-plis-27-marta-u-niskoj-livnici/",
-    imageUrl: "https://highwaystarmagazine.org/wp-content/uploads/2026/03/plis_Damjan-Jovanovic-1024x682.jpg",
-    summary: {
-      en: "A concert preview for the March 2026 Livnica show, pairing Sky Hook with Pliš in Niš.",
-      sr: "Najava martovskog koncerta u Livnici, gde Sky Hook ponovo deli binu sa bendom Pliš u Nišu.",
-    },
-  },
-  {
-    id: "highwaystar-istina-masina-2026",
-    title: "Nemi Pesnik i Sky Hook nastupaju 15. maja u Istina Mašina",
-    source: "Highwaystar Magazine",
-    publishedAt: "2026-05-15",
-    category: "live",
-    url: "https://highwaystarmagazine.org/nemi-pesnik-i-sky-hook-nastupaju-15-maja-u-istina-masina/",
-    imageUrl: "https://highwaystarmagazine.org/wp-content/uploads/2026/05/ZA-PLAKAT-1024x1024.jpg",
-    summary: {
-      en: "A Highwaystar preview of the May 2026 Istina Mašina show with Nemi Pesnik and Sky Hook.",
-      sr: "Highwaystar najava majskog nastupa u Istina Mašini, gde uz Nemi Pesnik nastupa i Sky Hook.",
-    },
-  },
-  {
     id: "bold-prvi-beogradski-udar-2026",
     title: "Sky Hook pred prvi beogradski udar 2026.",
     source: "BOLD Magazine",
