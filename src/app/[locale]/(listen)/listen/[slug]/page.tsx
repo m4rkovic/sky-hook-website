@@ -15,12 +15,36 @@ export function generateStaticParams() {
   return locales.flatMap((locale) => releases.map((release) => ({ locale, slug: release.slug })));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
-  const { slug } = await params;
+export async function generateMetadata({ params }: { params: Promise<{ locale: string; slug: string }> }): Promise<Metadata> {
+  const { locale: rawLocale, slug } = await params;
   const release = getRelease(slug);
+  if (!release || !hasLocale(rawLocale)) return { title: "Listen" };
+
+  const locale = rawLocale as Locale;
+  const description = release.description?.[locale] ?? `Choose where to listen to ${release.title} by Sky Hook.`;
+
   return {
-    title: release ? `Listen to ${release.title}` : "Listen",
-    description: release ? `Choose where to listen to ${release.title} by Sky Hook.` : undefined,
+    title: `Listen to ${release.title}`,
+    description,
+    alternates: {
+      canonical: `/${locale}/listen/${release.slug}`,
+      languages: {
+        en: `/en/listen/${release.slug}`,
+        sr: `/sr/listen/${release.slug}`,
+        "x-default": `/en/listen/${release.slug}`,
+      },
+    },
+    openGraph: {
+      title: `${release.title} | Sky Hook`,
+      description,
+      ...(release.artwork ? { images: [{ url: release.artwork, alt: `${release.title} artwork` }] } : {}),
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${release.title} | Sky Hook`,
+      description,
+      ...(release.artwork ? { images: [release.artwork] } : {}),
+    },
   };
 }
 
