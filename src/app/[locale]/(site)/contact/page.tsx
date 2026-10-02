@@ -7,19 +7,87 @@ import { hasLocale, type Locale } from "@/i18n/config";
 
 export const metadata: Metadata = { title: "Contact" };
 
+const socialLabels: Record<keyof typeof siteConfig.socials, string> = {
+  instagram: "Instagram",
+  youtube: "YouTube",
+  bandcamp: "Bandcamp",
+  facebook: "Facebook",
+  spotify: "Spotify",
+  bandsintown: "Bandsintown",
+};
+
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
   if (!hasLocale(rawLocale)) notFound();
+
   const dict = getDictionary(rawLocale as Locale);
   const bookingEmail = siteConfig.contact.bookingEmail;
+  const socials = Object.entries(siteConfig.socials).filter(([, url]) => Boolean(url)) as Array<
+    [keyof typeof siteConfig.socials, string]
+  >;
 
   return (
     <PageShell eyebrow={dict.contact.eyebrow} title={dict.contact.title}>
       <section className="section-frame">
-        <div className="site-container section-grid">
-          <div className="col-span-12 md:col-span-5"><p className="text-muted">{dict.contact.body}</p></div>
+        <div className="site-container section-grid items-start">
+          <div className="col-span-12 md:col-span-5">
+            <p className="max-w-xl text-lg leading-8 text-ice-light/80">{dict.contact.body}</p>
+          </div>
+
           <div className="col-span-12 md:col-span-6 md:col-start-7">
-            {bookingEmail ? <a className="brutal-button" href={`mailto:${bookingEmail}`}>{dict.contact.emailBooking}</a> : <span className="kicker text-muted">{dict.contact.missingEmail}</span>}
+            <div className="border-y border-line py-6">
+              <p className="kicker text-ice">{dict.contact.bookingLabel}</p>
+              {bookingEmail ? (
+                <a
+                  href={`mailto:${bookingEmail}`}
+                  className="mt-4 block break-all font-display text-3xl font-black uppercase tracking-[-0.03em] transition-colors hover:text-ice md:text-5xl"
+                >
+                  {bookingEmail}
+                </a>
+              ) : (
+                <span className="kicker mt-4 block text-muted">{dict.contact.missingEmail}</span>
+              )}
+              <p className="mt-4 max-w-lg text-sm leading-6 text-muted">{dict.contact.bookingNote}</p>
+              {bookingEmail ? (
+                <a className="brutal-button mt-7" href={`mailto:${bookingEmail}`}>
+                  {dict.contact.emailBooking}
+                </a>
+              ) : null}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="border-t border-line bg-surface">
+        <div className="site-container py-[var(--sh-section-y)]">
+          <div className="mb-10 grid gap-6 md:grid-cols-[1fr_1fr] md:items-end">
+            <div>
+              <p className="kicker text-ice">SOCIAL / LINKS</p>
+              <h2 className="mt-4 font-display text-5xl font-black uppercase tracking-[-0.04em] md:text-7xl">
+                {dict.contact.socialsTitle}
+              </h2>
+            </div>
+            <p className="max-w-xl text-base leading-7 text-muted md:justify-self-end">{dict.contact.socialsBody}</p>
+          </div>
+
+          <div className="grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-4">
+            {socials.map(([key, url], index) => (
+              <a
+                key={key}
+                href={url}
+                target="_blank"
+                rel="noreferrer"
+                className="group min-h-40 border-b border-r border-line p-5 transition-colors hover:bg-surface-strong"
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <span className="kicker text-muted">0{index + 1}</span>
+                  <span className="text-xl text-ice transition-transform group-hover:translate-x-1">↗</span>
+                </div>
+                <div className="mt-12 font-display text-3xl font-black uppercase tracking-[-0.03em]">
+                  {socialLabels[key]}
+                </div>
+              </a>
+            ))}
           </div>
         </div>
       </section>
