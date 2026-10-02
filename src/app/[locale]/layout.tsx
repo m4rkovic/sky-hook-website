@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import { notFound } from "next/navigation";
 import { siteConfig } from "@/content/site";
+import { DocumentLanguage } from "@/components/i18n/document-language";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { hasLocale, locales, type Locale } from "@/i18n/config";
 import "../globals.css";
@@ -60,6 +61,7 @@ export default async function LocaleRootLayout({
 
   return (
     <>
+      <DocumentLanguage locale={locale} />
       <div lang={locale === "sr" ? "sr-Latn" : "en"}>{children}</div>
       <script
         type="application/ld+json"
