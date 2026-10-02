@@ -78,7 +78,17 @@ export const en: Dictionary = {
     membersConfigured: "Members configured",
   },
   media: { eyebrow: "Media", title: "Photos & video" },
-  news: { eyebrow: "News", title: "Archive ready", body: "News stays outside the main navigation until there is enough real content. The route and data boundary are already reserved." },
+  news: {
+    eyebrow: "News / Press",
+    title: "Stories, press & noise",
+    body: "A curated archive of interviews, features, reviews and live coverage about Sky Hook. External articles stay on their original publications; this page keeps the useful trail in one place.",
+    all: "All",
+    interviews: "Interviews",
+    press: "Press",
+    live: "Live",
+    readExternal: "Read article",
+    featured: "Featured press",
+  },
   contact: {
     eyebrow: "Contact",
     title: "Booking & contact",
