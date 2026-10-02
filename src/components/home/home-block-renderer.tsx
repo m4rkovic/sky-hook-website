@@ -9,7 +9,7 @@ import { SplitMediaBlock } from "./split-media-block";
 export function HomeBlockRenderer({ block, locale, dict }: { block: HomeBlock; locale: Locale; dict: Dictionary }) {
   switch (block.type) {
     case "hero":
-      return <HeroBlock imageId={block.imageId} label={dict.home.officialWebsite} />;
+      return <HeroBlock imageId={block.imageId} campaign={block.campaign} locale={locale} />;
     case "featured-release":
       return <FeaturedReleaseBlock locale={locale} dict={dict} />;
     case "upcoming-shows":
