@@ -15,3 +15,7 @@ export const releases = releaseSchema.array().parse([
 ]);
 
 export const featuredRelease = releases.find((release) => release.featured) ?? releases[0];
+
+export function getRelease(slug: string) {
+  return releases.find((release) => release.slug === slug);
+}

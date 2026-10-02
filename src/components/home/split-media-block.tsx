@@ -1,8 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { mediaItems } from "@/content/media";
+import { localizedHref, type Locale } from "@/i18n/config";
+import type { Dictionary } from "@/i18n/types";
 
-export function SplitMediaBlock({ imageId, heading, body, href, cta }: { imageId: string; heading: string; body: string; href: string; cta: string }) {
+export function SplitMediaBlock({ imageId, href, locale, dict }: { imageId: string; href: string; locale: Locale; dict: Dictionary }) {
   const image = mediaItems.find((item) => item.id === imageId);
   if (!image) return null;
 
@@ -14,10 +16,10 @@ export function SplitMediaBlock({ imageId, heading, body, href, cta }: { imageId
         </div>
         <div className="flex items-end p-[var(--sh-gutter)] py-[var(--sh-section-y)]">
           <div className="max-w-xl">
-            <p className="kicker text-ice">03 / Band</p>
-            <h2 className="display-title mt-5">{heading}</h2>
-            <p className="mt-8 max-w-lg text-base leading-7 text-ice-light/75">{body}</p>
-            <Link className="brutal-button mt-9" href={href}>{cta}</Link>
+            <p className="kicker text-ice">03 / {dict.home.bandEyebrow}</p>
+            <h2 className="display-title mt-5">{dict.home.bandHeading}</h2>
+            <p className="mt-8 max-w-lg text-base leading-7 text-ice-light/75">{dict.home.bandBody}</p>
+            <Link className="brutal-button mt-9" href={localizedHref(locale, href)}>{dict.home.bandCta}</Link>
           </div>
         </div>
       </div>

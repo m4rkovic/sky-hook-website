@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { mediaItems } from "@/content/media";
 
-export function HeroBlock({ imageId }: { imageId: string }) {
+export function HeroBlock({ imageId, label }: { imageId: string; label: string }) {
   const image = mediaItems.find((item) => item.id === imageId);
   if (!image) return null;
 
@@ -16,11 +16,11 @@ export function HeroBlock({ imageId }: { imageId: string }) {
         className="media-cover"
         style={{ objectPosition: image.focalPoint }}
       />
-      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,6,11,.22),rgba(5,6,11,.12)_40%,rgba(5,6,11,.86))]" />
+      <div className="absolute inset-0 bg-[linear-gradient(to_bottom,rgba(5,6,11,.18),rgba(5,6,11,.05)_45%,rgba(5,6,11,.8))]" />
       <div className="site-container absolute inset-x-0 bottom-0 z-10 pb-7 md:pb-10">
         <div className="flex items-end justify-between border-t border-white/25 pt-4">
           <span className="kicker">Sky Hook</span>
-          <span className="kicker text-white/65">Hero treatment intentionally open</span>
+          <span className="kicker text-white/65">{label}</span>
         </div>
       </div>
     </section>

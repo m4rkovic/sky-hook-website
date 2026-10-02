@@ -167,3 +167,18 @@ a {
     animation-iteration-count: 1 !important;
   }
 }
+
+select option {
+  background: var(--sh-paper);
+  color: var(--sh-bg);
+}
+
+.listen-page {
+  background-image:
+    radial-gradient(circle at 50% 20%, rgba(98, 135, 255, 0.22), transparent 34rem),
+    linear-gradient(180deg, var(--sh-surface-strong), var(--sh-bg) 60%);
+}
+
+summary::-webkit-details-marker {
+  display: none;
+}

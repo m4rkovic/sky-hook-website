@@ -1,17 +1,18 @@
-# Sky Hook website — foundation
+# Sky Hook website
 
-Long-term static website foundation for Sky Hook.
+Long-term official website foundation for Sky Hook.
 
 ## Stack
 
-- Next.js 16.3.8 (React framework)
+- Next.js 16.3.8
 - React 19.3
 - TypeScript
 - Tailwind CSS 4
-- Zod for runtime content/API validation
-- Static export: no custom backend
+- Zod
+- EN / SR locale routing
+- Thin serverless API adapters for Bandsintown and setlist.fm
 
-## Start locally
+## Local start
 
 ```bash
 cp .env.example .env.local
@@ -19,7 +20,7 @@ npm install
 npm run dev
 ```
 
-Then open `http://localhost:3000`.
+Open `http://localhost:3000`. The proxy redirects to `/en` or `/sr` based on browser language.
 
 Before a production commit:
 
@@ -27,45 +28,58 @@ Before a production commit:
 npm run check
 ```
 
-## Bandsintown
+## Upcoming shows — Bandsintown
 
-The event UI is custom. We are **not** embedding the stock Bandsintown widget.
-
-1. In Bandsintown for Artists, open the Sky Hook profile.
-2. Settings → General → get/copy the API key.
-3. Prefer the stable artist identifier (`id_123456...`) once known.
-4. Put values in `.env.local`:
+The website uses custom Sky Hook UI, not the stock Bandsintown widget. Configure:
 
 ```env
-NEXT_PUBLIC_BANDSINTOWN_APP_ID=your_app_id
-NEXT_PUBLIC_BANDSINTOWN_ARTIST=id_123456
+BANDSINTOWN_APP_ID=your_artist_api_key
+BANDSINTOWN_ARTIST=Sky Hook
 ```
 
-The browser fetches upcoming dates from Bandsintown and maps them into our internal `Show` model. A short local cache prevents repeated calls; invalid artist responses are cached longer. If Bandsintown is unavailable, the UI falls back to `src/content/shows.local.ts`.
+Prefer the stable Bandsintown artist ID when available. The browser never receives this credential directly; it calls `/api/shows/upcoming`.
 
-Why client-side? It keeps the deployment fully static while event changes appear without rebuilding the site. The `app_id` is therefore visible in network requests; this matches Bandsintown's public website API model. If we later decide to hide it or prerender event SEO, we can switch the provider implementation without changing the UI.
+## Past shows and statistics — setlist.fm
 
-## Content
+Configure:
 
-- Global site/navigation: `src/content/site.ts`
-- Releases: `src/content/releases.ts`
-- Members: `src/content/members.ts`
-- Media: `src/content/media.ts`
-- Local show fallback: `src/content/shows.local.ts`
-- Homepage composition: `src/content/home.ts`
+```env
+SETLISTFM_API_KEY=your_key
+SETLISTFM_ARTIST_MBID=3d1204e0-b00c-4b17-80fc-e55b7f4690b0
+```
 
-The content is validated. Bad data should fail early rather than quietly break the site.
+The server adapter loads Sky Hook setlists, normalizes them, derives documented live statistics and returns them to `/live`. The UI includes source links and setlist.fm attribution.
 
-## Assets included
+Important: setlist.fm states that free API use is for non-commercial projects. Before public production use on the official band site, confirm that your intended use is covered or obtain the appropriate permission from setlist.fm.
+
+## Releases
+
+Edit `src/content/releases.ts`. Artwork is optional and intentionally blank until supplied.
+
+Each release automatically participates in:
+
+- the release catalogue
+- filter/sort UI
+- `/{locale}/music/[slug]`
+- `/{locale}/listen/[slug]`
+
+Add streaming URLs to the release's `streaming` object when they are ready. The smart-link page will expose them without a component change.
+
+## Languages
+
+Translations live in:
+
+- `src/i18n/dictionaries/en.ts`
+- `src/i18n/dictionaries/sr.ts`
+
+Do not duplicate page components for each language.
+
+## Assets
 
 - `public/brand/sky-hook-wordmark.png`
 - `public/media/photos/skyhook-live-01.jpg`
 - `public/media/photos/skyhook-live-02.jpg`
 
-Photo credits are deliberately `TBD` until the correct photographer credit is confirmed.
+Photo credits remain `TBD` until confirmed.
 
-## Important
-
-The current hero is a structural placeholder, not the final hero design. It proves that the header, full-bleed media and page system can coexist while the final hero treatment remains open.
-
-Read `ARCHITECTURE.md` before adding major features.
+See `ARCHITECTURE.md` before adding major features.

@@ -2,19 +2,23 @@
 
 import { useMemo } from "react";
 import type { Show } from "@/content/schemas";
+import { intlLocale, type Locale } from "@/i18n/config";
 import { useShows } from "../use-shows";
 
-function formatDate(datetime: string) {
+type Labels = { tickets: string; details: string; tba: string; loading: string; empty: string };
+
+function formatDate(datetime: string, locale: Locale) {
   const date = new Date(datetime);
+  const formatterLocale = intlLocale(locale);
   return {
-    day: new Intl.DateTimeFormat("en", { day: "2-digit" }).format(date),
-    month: new Intl.DateTimeFormat("en", { month: "short" }).format(date).toUpperCase(),
-    year: new Intl.DateTimeFormat("en", { year: "numeric" }).format(date),
+    day: new Intl.DateTimeFormat(formatterLocale, { day: "2-digit" }).format(date),
+    month: new Intl.DateTimeFormat(formatterLocale, { month: "short" }).format(date).replace(".", "").toUpperCase(),
+    year: new Intl.DateTimeFormat(formatterLocale, { year: "numeric" }).format(date),
   };
 }
 
-function ShowRow({ show }: { show: Show }) {
-  const date = formatDate(show.datetime);
+function ShowRow({ show, locale, labels }: { show: Show; locale: Locale; labels: Labels }) {
+  const date = formatDate(show.datetime, locale);
   const detailsUrl = show.ticketUrl ?? show.eventUrl;
 
   return (
@@ -27,31 +31,18 @@ function ShowRow({ show }: { show: Show }) {
         <h3 className="font-display text-xl font-black uppercase md:text-2xl">{show.venue}</h3>
         <p className="mt-1 text-sm text-muted md:hidden">{show.city}</p>
       </div>
-      <div className="hidden text-sm text-muted md:block">
-        {[show.city, show.region, show.country].filter(Boolean).join(", ")}
-      </div>
+      <div className="hidden text-sm text-muted md:block">{[show.city, show.region, show.country].filter(Boolean).join(", ")}</div>
       {detailsUrl ? (
-        <a className="brutal-button" href={detailsUrl} target="_blank" rel="noreferrer">
-          {show.ticketUrl ? "Tickets" : "Details"}
-        </a>
-      ) : (
-        <span className="kicker text-muted">TBA</span>
-      )}
+        <a className="brutal-button" href={detailsUrl} target="_blank" rel="noreferrer">{show.ticketUrl ? labels.tickets : labels.details}</a>
+      ) : <span className="kicker text-muted">{labels.tba}</span>}
     </article>
   );
 }
 
-export function UpcomingShows({ limit }: { limit?: number }) {
+export function UpcomingShows({ limit, locale, labels }: { limit?: number; locale: Locale; labels: Labels }) {
   const { shows, loading } = useShows();
   const visibleShows = useMemo(() => (limit ? shows.slice(0, limit) : shows), [limit, shows]);
-
-  if (loading) {
-    return <div className="border-t border-line py-8 text-sm uppercase tracking-[0.14em] text-muted">Loading dates…</div>;
-  }
-
-  if (visibleShows.length === 0) {
-    return <div className="border-t border-line py-8 text-sm uppercase tracking-[0.14em] text-muted">No upcoming shows announced.</div>;
-  }
-
-  return <div>{visibleShows.map((show) => <ShowRow key={show.id} show={show} />)}</div>;
+  if (loading) return <div className="border-t border-line py-8 text-sm uppercase tracking-[0.14em] text-muted">{labels.loading}</div>;
+  if (visibleShows.length === 0) return <div className="border-t border-line py-8 text-sm uppercase tracking-[0.14em] text-muted">{labels.empty}</div>;
+  return <div>{visibleShows.map((show) => <ShowRow key={show.id} show={show} locale={locale} labels={labels} />)}</div>;
 }
