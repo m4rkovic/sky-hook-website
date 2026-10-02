@@ -82,15 +82,15 @@ export function SetlistArchive({ locale, labels }: { locale: Locale; labels: Lab
         <section className="mb-14">
           <p className="kicker mb-5 text-ice">{labels.statsTitle}</p>
           <div className="border-y border-line">
-          <div className="grid md:grid-cols-4">
+          <div className="grid grid-cols-2 md:grid-cols-4">
             {[
               [labels.shows, state.stats.totalShows],
               [labels.cities, state.stats.cities],
               [labels.countries, state.stats.countries],
               [labels.uniqueSongs, state.stats.uniqueSongs],
             ].map(([label, value], index) => (
-              <div key={String(label)} className={`px-4 py-6 ${index < 3 ? "border-b border-line md:border-b-0 md:border-r" : ""}`}>
-                <div className="font-display text-5xl font-black text-ice">{value}</div>
+              <div key={String(label)} className={`px-4 py-5 ${index % 2 === 0 ? "border-r border-line" : ""} ${index < 2 ? "border-b border-line" : ""} md:border-b-0 ${index < 3 ? "md:border-r" : ""}`}>
+                <div className="font-display text-4xl text-ice md:text-5xl">{value}</div>
                 <div className="kicker mt-2 text-muted">{label}</div>
               </div>
             ))}
@@ -102,7 +102,7 @@ export function SetlistArchive({ locale, labels }: { locale: Locale; labels: Lab
                 {state.stats.topSongs.map((song, index) => (
                   <div key={song.name} className="grid grid-cols-[3rem_1fr_auto] gap-4 border-b border-line px-5 py-3 last:border-b-0">
                     <span className="kicker text-muted">{String(index + 1).padStart(2, "0")}</span>
-                    <span className="font-display font-black uppercase">{song.name}</span>
+                    <span className="font-display uppercase">{song.name}</span>
                     <span className="text-xs text-muted">{song.performances} {labels.performances}</span>
                   </div>
                 ))}
@@ -128,11 +128,11 @@ export function SetlistArchive({ locale, labels }: { locale: Locale; labels: Lab
           const count = songCount(show);
           return (
             <details key={show.id} className="group border-b border-line">
-              <summary className="grid cursor-pointer list-none gap-3 py-5 md:grid-cols-[8rem_1fr_1fr_auto] md:items-center">
+              <summary className="grid cursor-pointer list-none gap-2 py-5 sm:grid-cols-[8rem_1fr_auto] sm:items-center md:grid-cols-[8rem_1fr_1fr_auto]">
                 <span className="kicker text-ice">{formatDate(show.date, locale)}</span>
-                <span className="font-display text-xl font-black uppercase md:text-2xl">{show.venue}</span>
-                <span className="text-sm text-muted">{[show.city, show.region, show.country].filter(Boolean).join(", ")}</span>
-                <span className="flex items-center gap-4">
+                <span className="font-display text-xl uppercase md:text-2xl">{show.venue}</span>
+                <span className="text-sm text-muted sm:col-start-2 md:col-start-auto">{[show.city, show.region, show.country].filter(Boolean).join(", ")}</span>
+                <span className="flex items-center gap-4 sm:col-start-3 sm:row-span-2 sm:row-start-1 md:col-start-auto md:row-span-1">
                   <Link
                     href={localizedHref(locale, `/live/${showSlug(show)}`)}
                     onClick={(event) => event.stopPropagation()}
@@ -153,7 +153,7 @@ export function SetlistArchive({ locale, labels }: { locale: Locale; labels: Lab
                           <li key={`${song.name}-${songIndex}`} className="grid grid-cols-[3rem_1fr] gap-3 border-b border-line py-3">
                             <span className="kicker text-muted">{String(songIndex + 1).padStart(2, "0")}</span>
                             <div>
-                              <span className={`font-display text-lg font-black uppercase ${song.tape ? "text-muted" : ""}`}>{song.name}</span>
+                              <span className={`font-display text-lg uppercase ${song.tape ? "text-muted" : ""}`}>{song.name}</span>
                               {song.coverArtist ? <span className="ml-2 text-xs text-muted">({song.coverArtist})</span> : null}
                               {song.info ? <p className="mt-1 text-xs text-muted">{song.info}</p> : null}
                             </div>
