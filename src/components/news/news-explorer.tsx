@@ -64,7 +64,14 @@ export function NewsExplorer({
           className="group grid overflow-hidden border border-line bg-surface lg:grid-cols-[1.1fr_0.9fr]"
         >
           <div className="relative min-h-[22rem] border-b border-line lg:min-h-[34rem] lg:border-b-0 lg:border-r">
-            {featured.imageId ? (() => {
+            {featured.imageUrl ? (
+              <img
+                src={featured.imageUrl}
+                alt=""
+                loading="eager"
+                className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+              />
+            ) : featured.imageId ? (() => {
               const image = mediaItems.find((item) => item.id === featured.imageId);
               return image ? (
                 <Image
@@ -130,7 +137,14 @@ export function NewsExplorer({
                 className="group flex min-h-[28rem] flex-col border-b border-r border-line"
               >
                 <div className="relative aspect-[16/9] overflow-hidden border-b border-line bg-surface-strong">
-                  {image ? (
+                  {item.imageUrl ? (
+                    <img
+                      src={item.imageUrl}
+                      alt=""
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.025]"
+                    />
+                  ) : image ? (
                     <Image
                       src={image.src}
                       alt={image.alt}
