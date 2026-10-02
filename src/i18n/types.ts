@@ -74,6 +74,8 @@ export type Dictionary = {
     upcoming: string;
     archive: string;
     noUpcoming: string;
+    noUpcomingHint: string;
+    followInstagram: string;
     archiveLoading: string;
     archiveUnavailable: string;
     documentedStats: string;
