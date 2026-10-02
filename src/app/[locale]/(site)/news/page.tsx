@@ -6,7 +6,22 @@ import { newsItems } from "@/content/news";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { hasLocale, type Locale } from "@/i18n/config";
 
-export const metadata: Metadata = { title: "News" };
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale: rawLocale } = await params;
+  if (!hasLocale(rawLocale)) return { title: "News" };
+  const locale = rawLocale as Locale;
+  const description = locale === "sr"
+    ? "Sky Hook vesti, intervjui, najave i press arhiva."
+    : "Sky Hook news, interviews, announcements and press archive.";
+  return {
+    title: "News",
+    description,
+    alternates: {
+      canonical: `/${locale}/news`,
+      languages: { en: "/en/news", sr: "/sr/news", "x-default": "/en/news" },
+    },
+  };
+}
 
 export default async function NewsPage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale: rawLocale } = await params;
