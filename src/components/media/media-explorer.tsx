@@ -152,7 +152,7 @@ export function MediaExplorer({ locale }: { locale: Locale }) {
       </section>
 
       {activeVideoItem ? (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/92 p-4 md:p-8" role="dialog" aria-modal="true" aria-label={activeVideoItem.title[locale]} onClick={closeModal}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/[0.92] p-4 md:p-8" role="dialog" aria-modal="true" aria-label={activeVideoItem.title[locale]} onClick={closeModal}>
           <button ref={closeRef} type="button" onClick={closeModal} className="absolute right-4 top-4 z-20 brutal-button bg-background md:right-6 md:top-6">
             {labels.close} ×
           </button>
@@ -176,7 +176,7 @@ export function MediaExplorer({ locale }: { locale: Locale }) {
       ) : null}
 
       {activePhotoItem ? (
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/92 p-4 md:p-8" role="dialog" aria-modal="true" aria-label={activePhotoItem.alt} onClick={closeModal}>
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/[0.92] p-4 md:p-8" role="dialog" aria-modal="true" aria-label={activePhotoItem.alt} onClick={closeModal}>
           <button ref={closeRef} type="button" onClick={closeModal} className="absolute right-4 top-4 z-20 brutal-button bg-background md:right-6 md:top-6">
             {labels.close} ×
           </button>
