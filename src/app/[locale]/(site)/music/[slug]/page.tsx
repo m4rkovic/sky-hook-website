@@ -21,6 +21,8 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const locale = rawLocale as Locale;
   const dict = getDictionary(locale);
   const description = release.description?.[locale] ?? `${release.title} by Sky Hook.`;
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
+  const fallbackImage = siteUrl ? `${siteUrl}${siteConfig.logo}` : undefined;
 
   return {
     title: release.title,
