@@ -191,7 +191,7 @@ export default async function ReleasePage({ params }: { params: Promise<{ locale
                     <span className="font-display text-2xl uppercase">
                       {track.title}
                     </span>
-                    {track.duration ? <span className="text-sm text-muted">{track.duration}</span> : <span className="kicker text-muted">TBD</span>}
+                    {track.duration ? <span className="text-sm text-muted">{track.duration}</span> : <span aria-hidden="true" />}
                   </div>
                 ))
               ) : (
