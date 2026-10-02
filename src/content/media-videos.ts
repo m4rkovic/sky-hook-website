@@ -35,10 +35,10 @@ export const mediaVideos: MediaVideo[] = [
     title: { en: "Sky Hook / Official video", sr: "Sky Hook / Spot" },
   },
   {
-    id: "video-surf",
+    id: "video-qvrkpd4gkk",
     youtubeId: "QvRKPd4Gk-k",
     category: "video",
-    title: { en: "Surf / Official video", sr: "Surf / Spot" },
+    title: { en: "Sky Hook / Official video 02", sr: "Sky Hook / Spot 02" },
   },
 ];
 
