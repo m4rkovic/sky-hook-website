@@ -6,7 +6,7 @@ export async function GET() {
   try {
     const shows = await fetchBandsintownShows();
     return NextResponse.json({ shows, source: "bandsintown" }, {
-      headers: { "Cache-Control": "public, s-maxage=3600, stale-while-revalidate=21600" },
+      headers: { "Cache-Control": "public, s-maxage=1209600, stale-while-revalidate=604800" },
     });
   } catch {
     return NextResponse.json({ shows: localShows, source: "local" }, {
