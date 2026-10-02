@@ -54,7 +54,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               {bookingEmail ? (
                 <a
                   href={`mailto:${bookingEmail}`}
-                  className="mt-4 block break-all font-display text-3xl font-black uppercase tracking-[-0.03em] transition-colors hover:text-ice md:text-5xl"
+                  className="mt-4 block break-all font-display text-2xl uppercase transition-colors md:text-4xl hover:text-ice "
                 >
                   {bookingEmail}
                 </a>
@@ -77,7 +77,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           <div className="mb-10 grid gap-6 md:grid-cols-[1fr_1fr] md:items-end">
             <div>
               <p className="kicker text-ice">SOCIAL / LINKS</p>
-              <h2 className="mt-4 font-display text-5xl font-black uppercase tracking-[-0.04em] md:text-7xl">
+              <h2 className="mt-4 font-display text-4xl uppercase md:text-7xl">
                 {dict.contact.socialsTitle}
               </h2>
             </div>
@@ -108,7 +108,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   </div>
 
                   <div className="absolute inset-x-5 bottom-5">
-                    <div className="font-display text-3xl font-black uppercase tracking-[-0.03em]">
+                    <div className="font-display text-3xl uppercase">
                       {socialLabels[key]}
                     </div>
                     <div className="mt-2 h-px w-0 bg-ice transition-[width] duration-300 group-hover:w-full" />
