@@ -8,8 +8,20 @@ export const releases = releaseSchema.array().parse([
     year: 2025,
     featured: true,
   },
-  { slug: "melburn", title: "Melburn", type: "single", year: 2025 },
-  { slug: "surf", title: "Surf", type: "single", year: 2025 },
+  {
+    slug: "melburn",
+    title: "Melburn",
+    type: "single",
+    year: 2025,
+    streaming: { youtube: "https://www.youtube.com/watch?v=_UFk_n6rBOE" },
+  },
+  {
+    slug: "surf",
+    title: "Surf",
+    type: "single",
+    year: 2025,
+    streaming: { youtube: "https://www.youtube.com/watch?v=QvRKPd4Gk-k" },
+  },
   { slug: "ostajem", title: "Ostajem", type: "single", year: 2025 },
   { slug: "astra", title: "Astra", type: "single", year: 2025 },
 ]);
