@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/page-shell";
-import { bandCopy } from "@/content/band";
+import { bandCopy, bandMembers } from "@/content/band";
 import { mediaItems } from "@/content/media";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { hasLocale, type Locale } from "@/i18n/config";
@@ -118,10 +118,55 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
         </div>
       </section>
 
+      <section className="section-frame bg-surface">
+        <div className="site-container">
+          <div className="grid gap-6 border-b border-line pb-10 md:grid-cols-[1fr_1fr] md:items-end">
+            <div>
+              <p className="kicker text-ice">03 / MEMBERS</p>
+              <h2 className="mt-4 font-display text-5xl font-black uppercase tracking-[-0.04em] md:text-7xl">
+                {copy.membersTitle}
+              </h2>
+            </div>
+            <p className="max-w-2xl text-base leading-8 text-muted md:justify-self-end">{copy.membersBody}</p>
+          </div>
+
+          <div className="grid border-l border-line sm:grid-cols-2 lg:grid-cols-4">
+            {bandMembers.map((member, index) => {
+              const memberImage = member.imageId ? mediaItems.find((item) => item.id === member.imageId) : undefined;
+              return (
+                <article key={member.name} className="border-b border-r border-line">
+                  <div className="relative aspect-[4/5] overflow-hidden bg-background">
+                    {memberImage ? (
+                      <Image
+                        src={memberImage.src}
+                        alt={memberImage.alt}
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                        className="media-cover"
+                        style={{ objectPosition: memberImage.focalPoint }}
+                      />
+                    ) : (
+                      <div className="absolute inset-0 flex items-center justify-center">
+                        <span className="font-display text-[7rem] font-black leading-none text-line/40">{String(index + 1).padStart(2, "0")}</span>
+                      </div>
+                    )}
+                  </div>
+                  <div className="p-5">
+                    <p className="kicker text-muted">{copy.membersPending}</p>
+                    <h3 className="mt-3 font-display text-2xl font-black uppercase">{member.name}</h3>
+                    <p className="mt-2 text-sm text-ice">{member.role[locale]}</p>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       <section className="border-t border-line">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
           <div className="p-[var(--sh-gutter)] py-[var(--sh-section-y)]">
-            <p className="kicker text-ice">03 / NOW</p>
+            <p className="kicker text-ice">04 / NOW</p>
             <h2 className="mt-4 font-display text-5xl font-black uppercase tracking-[-0.04em] md:text-7xl">
               {copy.nowTitle}
             </h2>
