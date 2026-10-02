@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="72" fill="#05060b"/>
+  <g transform="translate(42 70) skewX(-8)">
+    <text x="0" y="300" fill="#d8e4ff" stroke="#111a3d" stroke-width="10" paint-order="stroke fill" font-family="Arial Black,Arial,sans-serif" font-size="250" font-weight="900" font-style="italic" letter-spacing="-22">SH</text>
+  </g>
+</svg>
