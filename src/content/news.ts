@@ -17,6 +17,32 @@ export type NewsItem = {
 
 export const newsItems: NewsItem[] = [
   {
+    id: "zeleni-kacket-intervju-aleksa",
+    title: "„Ideja iza muzike koju stvaram je da bude što jednostavnija u odnosu na ono što se svira u okruženju”: Razgovor sa Aleksom (Sky Hook)",
+    source: "Zeleni Kačket",
+    publishedAt: "2025-12-09",
+    category: "interview",
+    url: "https://www.zelenikacket.rs/projects/projekti-4/225306/ideja-iza-muzike-koju-stvaram-je-da-bude-sto-jednostavnija-u-odnosu-na-ono-sto-se-svira-u-okruzenju-razgovor-sa-aleksom-sky-hook.html",
+    imageUrl: "https://www.zelenikacket.rs/itsinbox/thumbnail/Sky_Hook_10.png?contentType=image%2Fpng&fileSize=0&thumbId=999395",
+    summary: {
+      en: "A long conversation about making the debut album independently, the band’s influences, Niš, songwriting and the direction after Gde ptice lete.",
+      sr: "Veliki razgovor o samostalnom nastanku debitantskog albuma, uticajima, Nišu, pisanju pesama i smeru benda posle Gde ptice lete.",
+    },
+  },
+  {
+    id: "danas-nove-generacije-domaci-rok",
+    title: "Sky Hook: Nove generacije ponovo žele da slušaju domaći rok",
+    source: "Danas",
+    publishedAt: "2025-06-11",
+    category: "interview",
+    url: "https://www.danas.rs/kultura/scena/sky-hook-nove-generacije-ponovo-zele-da-slusaju-domaci-rok/",
+    imageUrl: "https://www.danas.rs/wp-content/uploads/2025/04/Sky-Hook-10-Mateja-Ilicfoto-e1749652999389-1000x560.jpg",
+    summary: {
+      en: "An interview about the debut album, the newer Serbian guitar scene, the band’s writing process, influences and the story behind the name Sky Hook.",
+      sr: "Intervju o debitantskom albumu, novijoj domaćoj gitarskoj sceni, procesu pisanja, uticajima i priči iza imena Sky Hook.",
+    },
+  },
+  {
     id: "highwaystar-melburn",
     title: "Niški bend Sky Hook i Aleksa Paskaš predstavljaju „Melburn”",
     source: "Highwaystar Magazine",
