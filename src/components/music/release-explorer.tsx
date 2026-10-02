@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import type { Release } from "@/content/schemas";
 import { localizedHref, type Locale } from "@/i18n/config";
 import { ArtworkFrame } from "./artwork-frame";
@@ -33,6 +33,17 @@ function releaseTimestamp(release: Release) {
 export function ReleaseExplorer({ releases, locale, labels }: { releases: Release[]; locale: Locale; labels: Labels }) {
   const [filter, setFilter] = useState<Filter>("all");
   const [sort, setSort] = useState<Sort>("newest");
+  const [sortOpen, setSortOpen] = useState(false);
+  const sortRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    function handlePointerDown(event: PointerEvent) {
+      if (!sortRef.current?.contains(event.target as Node)) setSortOpen(false);
+    }
+
+    document.addEventListener("pointerdown", handlePointerDown);
+    return () => document.removeEventListener("pointerdown", handlePointerDown);
+  }, []);
 
   const visible = useMemo(() => {
     const filtered = filter === "all" ? [...releases] : releases.filter((release) => release.type === filter);
@@ -50,19 +61,68 @@ export function ReleaseExplorer({ releases, locale, labels }: { releases: Releas
     { key: "single", label: labels.singles },
   ];
 
+  const sortOptions: Array<{ key: Sort; label: string }> = [
+    { key: "newest", label: labels.newest },
+    { key: "oldest", label: labels.oldest },
+    { key: "alphabetical", label: labels.alphabetical },
+  ];
+
+  const selectedSort = sortOptions.find((item) => item.key === sort) ?? sortOptions[0];
+
   return (
     <section className="section-frame bg-paper text-background">
       <div className="site-container">
         <div className="grid gap-7 border-b border-background/20 pb-5 lg:grid-cols-[1fr_22rem] lg:items-end">
           <h2 className="font-display text-3xl font-black uppercase tracking-[-0.03em] md:text-4xl">{labels.explore}</h2>
-          <label className="grid border border-background/30 bg-paper px-4 py-3">
-            <span className="kicker mb-1 text-background/55">{labels.sortBy}</span>
-            <select className="w-full appearance-none bg-transparent text-sm font-black uppercase outline-none" value={sort} onChange={(event) => setSort(event.target.value as Sort)}>
-              <option value="newest">{labels.newest}</option>
-              <option value="oldest">{labels.oldest}</option>
-              <option value="alphabetical">{labels.alphabetical}</option>
-            </select>
-          </label>
+
+          <div ref={sortRef} className="relative">
+            <button
+              type="button"
+              aria-haspopup="listbox"
+              aria-expanded={sortOpen}
+              onClick={() => setSortOpen((value) => !value)}
+              className="group grid w-full grid-cols-[1fr_auto] items-end border border-background/25 bg-paper px-4 py-3 text-left transition-colors hover:border-background/50"
+            >
+              <span>
+                <span className="kicker block text-background/45">{labels.sortBy}</span>
+                <span className="mt-1 block text-sm font-black uppercase tracking-[0.03em]">{selectedSort.label}</span>
+              </span>
+              <span
+                className={`mb-0.5 text-sm transition-transform duration-200 ${sortOpen ? "rotate-180" : ""}`}
+                aria-hidden="true"
+              >
+                ↓
+              </span>
+            </button>
+
+            {sortOpen ? (
+              <div
+                role="listbox"
+                aria-label={labels.sortBy}
+                className="absolute inset-x-0 top-[calc(100%+0.35rem)] z-20 border border-background/25 bg-paper p-1 shadow-[0_18px_45px_rgba(5,6,11,0.22)]"
+              >
+                {sortOptions.map((item) => {
+                  const active = item.key === sort;
+                  return (
+                    <button
+                      key={item.key}
+                      type="button"
+                      role="option"
+                      aria-selected={active}
+                      onClick={() => {
+                        setSort(item.key);
+                        setSortOpen(false);
+                      }}
+                      className={`flex w-full items-center justify-between px-3 py-3 text-left text-sm font-black uppercase transition-colors ${active ? "bg-background text-paper" : "text-background hover:bg-background/7"}`}
+                    >
+                      <span>{item.label}</span>
+                      {active ? <span className="text-ice">●</span> : null}
+                    </button>
+                  );
+                })}
+              </div>
+            ) : null}
+          </div>
         </div>
 
         <div className="flex gap-7 overflow-x-auto border-b border-background/20 py-5">
