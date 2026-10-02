@@ -51,6 +51,16 @@ export type Dictionary = {
     credits: string;
     noTracklist: string;
     noCredits: string;
+    aboutRelease: string;
+    releaseDetails: string;
+    releaseDateLabel: string;
+    formatLabel: string;
+    labelLabel: string;
+    catalogLabel: string;
+    rightsLabel: string;
+    lyrics: string;
+    lyricsPlaceholder: string;
+    descriptionPlaceholder: string;
     listenTitle: string;
     chooseService: string;
     noLinks: string;
