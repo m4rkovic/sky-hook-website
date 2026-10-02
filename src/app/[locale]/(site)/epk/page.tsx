@@ -3,6 +3,7 @@ import Image from "next/image";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/page-shell";
 import { mediaItems } from "@/content/media";
+import { mediaVideos, youtubeThumbnailUrl, youtubeWatchUrl } from "@/content/media-videos";
 import { siteConfig } from "@/content/site";
 import { hasLocale, type Locale } from "@/i18n/config";
 
@@ -52,6 +53,7 @@ export default async function EpkPage({ params }: { params: Promise<{ locale: st
   const t = copy[locale];
   const heroImage = mediaItems.find((item) => item.id === "live-02");
   const bookingEmail = siteConfig.contact.bookingEmail;
+  const featuredLive = mediaVideos.find((video) => video.category === "live");
 
   return (
     <PageShell eyebrow={t.eyebrow} title={t.title}>
@@ -93,9 +95,28 @@ export default async function EpkPage({ params }: { params: Promise<{ locale: st
         </div>
       </section>
 
+      {featuredLive ? (
+        <section className="border-b border-line">
+          <div className="site-container py-[var(--sh-section-y)]">
+            <p className="kicker text-ice">02 / Live video</p>
+            <a href={youtubeWatchUrl(featuredLive.youtubeId)} target="_blank" rel="noreferrer" className="group mt-6 block border border-line bg-surface">
+              <div className="relative aspect-video overflow-hidden">
+                <img src={youtubeThumbnailUrl(featuredLive.youtubeId)} alt="" loading="lazy" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.015]" />
+                <div className="absolute inset-0 bg-black/20" />
+                <span className="absolute bottom-5 right-5 flex h-16 w-16 items-center justify-center rounded-full border border-white/60 bg-black/35 text-xl">▶</span>
+              </div>
+              <div className="flex items-end justify-between gap-5 p-5">
+                <p className="font-display text-3xl font-black uppercase">{featuredLive.title[locale]}</p>
+                <span className="kicker text-muted">YouTube ↗</span>
+              </div>
+            </a>
+          </div>
+        </section>
+      ) : null}
+
       <section className="border-b border-line">
         <div className="site-container py-[var(--sh-section-y)]">
-          <p className="kicker text-ice">02 / {t.assets}</p>
+          <p className="kicker text-ice">03 / {t.assets}</p>
           <div className="mt-6 grid border-l border-t border-line md:grid-cols-3">
             {[t.photos, t.logos, t.rider].map((label, index) => (
               <div key={label} className="flex min-h-56 flex-col justify-between border-b border-r border-line p-5">
@@ -113,7 +134,7 @@ export default async function EpkPage({ params }: { params: Promise<{ locale: st
       <section className="bg-paper text-background">
         <div className="site-container section-grid py-[var(--sh-section-y)]">
           <div className="col-span-12 lg:col-span-5">
-            <p className="kicker text-background/50">03 / {t.contact}</p>
+            <p className="kicker text-background/50">04 / {t.contact}</p>
             <h2 className="mt-4 font-display text-5xl font-black uppercase tracking-[-0.045em] md:text-7xl">{t.contact}</h2>
             <p className="mt-5 max-w-lg text-background/65">{t.contactBody}</p>
           </div>
