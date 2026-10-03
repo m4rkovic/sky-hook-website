@@ -16,7 +16,7 @@ function NavLink({ href, label, pathname }: { href: string; label: string; pathn
   return (
     <Link
       href={href}
-      className={`kicker border-b pb-1 transition-colors ${active ? "border-ice text-ice" : "border-transparent text-paper hover:text-ice"}`}
+      className={`kicker border-b-2 px-1 py-1 transition-colors ${active ? "border-ice bg-ice text-background" : "border-transparent text-paper hover:border-ice hover:text-ice"}`}
     >
       {label}
     </Link>
@@ -60,7 +60,7 @@ export function SiteHeader({ locale, labels }: { locale: Locale; labels: HeaderL
   };
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/10 bg-background/84 backdrop-blur-md">
+    <header className="fixed inset-x-0 top-0 z-50 border-b-2 border-line bg-background/95">
       <div className="site-container relative grid h-[var(--sh-header-h)] grid-cols-[1fr_auto_1fr] items-center">
         <nav className="hidden items-center justify-end gap-7 pr-10 lg:flex" aria-label="Primary navigation left">
           {left.map(renderNavItem)}

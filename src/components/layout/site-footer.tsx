@@ -9,11 +9,11 @@ export function SiteFooter({ locale, labels, body }: { locale: Locale; labels: N
   const year = new Date().getFullYear();
 
   return (
-    <footer className="border-t border-line bg-background">
+    <footer className="border-t-2 border-paper/35 bg-background">
       <div className="site-container py-10 md:py-14">
         <div className="grid gap-10 md:grid-cols-[1fr_auto] md:items-end">
           <div>
-            <SkyHookLogo variant="full" className="h-auto w-48 md:w-56" />
+            <SkyHookLogo variant="full" className="h-auto w-64 max-w-full md:w-80" />
             <p className="mt-5 max-w-md text-sm leading-6 text-muted">{body}</p>
           </div>
           <nav className="flex flex-wrap gap-x-5 gap-y-4 md:max-w-xl md:justify-end" aria-label="Footer navigation">

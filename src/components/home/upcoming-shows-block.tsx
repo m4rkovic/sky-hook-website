@@ -12,7 +12,7 @@ export function UpcomingShowsBlock({ limit, locale, dict }: { limit: number; loc
         <div className="mb-10 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <p className="kicker text-ice">02 / {dict.nav.live}</p>
-            <h2 className="font-display mt-3 text-4xl uppercase md:text-7xl">{dict.home.upcomingShows}</h2>
+            <h2 className="poster-heading mt-4 max-w-[14ch]">{dict.home.upcomingShows}</h2>
           </div>
           <Link className="kicker text-muted hover:text-ice" href={localizedHref(locale, "/live")}>{dict.home.allDates} →</Link>
         </div>

@@ -72,8 +72,8 @@ export function ReleaseExplorer({ releases, locale, labels }: { releases: Releas
   return (
     <section className="section-frame paper-grit text-background">
       <div className="site-container">
-        <div className="grid gap-7 border-b border-background/20 pb-5 lg:grid-cols-[1fr_22rem] lg:items-end">
-          <h2 className="font-display text-3xl uppercase md:text-4xl">{labels.explore}</h2>
+        <div className="grid gap-7 border-b-2 border-background pb-6 lg:grid-cols-[1fr_22rem] lg:items-end">
+          <h2 className="archive-heading">{labels.explore}</h2>
 
           <div ref={sortRef} className="relative">
             <button
@@ -99,7 +99,7 @@ export function ReleaseExplorer({ releases, locale, labels }: { releases: Releas
               <div
                 role="listbox"
                 aria-label={labels.sortBy}
-                className="absolute inset-x-0 top-[calc(100%+0.35rem)] z-20 border border-background/25 bg-paper p-1 shadow-[0_18px_45px_rgba(5,6,11,0.22)]"
+                className="absolute inset-x-0 top-[calc(100%+0.35rem)] z-20 border border-background/25 bg-paper p-1 shadow-[4px_4px_0_#05060b]"
               >
                 {sortOptions.map((item) => {
                   const active = item.key === sort;
@@ -125,7 +125,7 @@ export function ReleaseExplorer({ releases, locale, labels }: { releases: Releas
           </div>
         </div>
 
-        <div className="flex gap-7 overflow-x-auto border-b border-background/20 py-5">
+        <div className="flex gap-7 overflow-x-auto border-b-2 border-background/30 py-5">
           {filters.map((item) => (
             <button
               key={item.key}
@@ -139,14 +139,18 @@ export function ReleaseExplorer({ releases, locale, labels }: { releases: Releas
         </div>
 
         <div className="grid gap-x-4 gap-y-10 py-10 sm:grid-cols-2 lg:grid-cols-4">
-          {visible.map((release) => {
+          {visible.map((release, index) => {
             const featured = release.featured && filter === "all";
             return (
               <Link
                 key={release.slug}
                 href={localizedHref(locale, `/music/${release.slug}`)}
-                className={`group block ${featured ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""}`}
+                className={`group min-w-0 block border-t-2 border-background pt-3 ${featured ? "sm:col-span-2 lg:col-span-2 lg:row-span-2" : ""}`}
               >
+                <div className="mb-3 flex items-center justify-between">
+                  <span className="kicker text-background/65">{String(index + 1).padStart(2, "0")} / SKY HOOK</span>
+                  <span className="text-xl" aria-hidden="true">↗</span>
+                </div>
                 <ArtworkFrame artwork={release.artwork} title={release.title} placeholderLabel={labels.artworkTbd} />
                 <div className="flex items-start justify-between gap-4 pt-3">
                   <div>

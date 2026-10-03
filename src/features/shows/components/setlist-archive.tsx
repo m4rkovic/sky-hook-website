@@ -81,7 +81,7 @@ export function SetlistArchive({ locale, labels }: { locale: Locale; labels: Lab
       {state.stats ? (
         <section className="mb-14">
           <p className="kicker mb-5 text-ice">{labels.statsTitle}</p>
-          <div className="border-y border-line">
+          <div className="border-y-2 border-paper/40">
           <div className="grid grid-cols-2 md:grid-cols-4">
             {[
               [labels.shows, state.stats.totalShows],
@@ -90,7 +90,7 @@ export function SetlistArchive({ locale, labels }: { locale: Locale; labels: Lab
               [labels.uniqueSongs, state.stats.uniqueSongs],
             ].map(([label, value], index) => (
               <div key={String(label)} className={`px-4 py-5 ${index % 2 === 0 ? "border-r border-line" : ""} ${index < 2 ? "border-b border-line" : ""} md:border-b-0 ${index < 3 ? "md:border-r" : ""}`}>
-                <div className="font-display text-4xl text-ice md:text-5xl">{value}</div>
+                <div className="font-display text-6xl text-paper md:text-8xl">{value}</div>
                 <div className="kicker mt-2 text-muted">{label}</div>
               </div>
             ))}
@@ -127,8 +127,8 @@ export function SetlistArchive({ locale, labels }: { locale: Locale; labels: Lab
         {visible.map((show) => {
           const count = songCount(show);
           return (
-            <details key={show.id} className="group border-b border-line">
-              <summary className="grid cursor-pointer list-none gap-2 py-5 sm:grid-cols-[8rem_1fr_auto] sm:items-center md:grid-cols-[8rem_1fr_1fr_auto]">
+            <details key={show.id} className="group border-b border-paper/25">
+              <summary className="grid cursor-pointer list-none gap-3 py-7 sm:grid-cols-[8rem_1fr_auto] sm:items-center md:grid-cols-[8rem_1fr_1fr_auto]">
                 <span className="kicker text-ice">{formatDate(show.date, locale)}</span>
                 <span className="font-display text-xl uppercase md:text-2xl">{show.venue}</span>
                 <span className="text-sm text-muted sm:col-start-2 md:col-start-auto">{[show.city, show.region, show.country].filter(Boolean).join(", ")}</span>

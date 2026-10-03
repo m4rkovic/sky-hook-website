@@ -20,7 +20,7 @@ export function LatestNewsBlock({ locale, limit }: { locale: Locale; limit: numb
         <div className="mb-8 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <p className="kicker text-ice">04 / {labels.eyebrow}</p>
-            <h2 className="mt-3 font-display text-4xl uppercase md:text-7xl">{labels.title}</h2>
+            <h2 className="poster-heading mt-4">{labels.title}</h2>
           </div>
           <Link href={localizedHref(locale, "/news")} className="kicker text-muted hover:text-ice">{labels.all} →</Link>
         </div>

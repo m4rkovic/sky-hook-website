@@ -34,8 +34,8 @@ export function HeroBlock({
       <div className="site-container relative z-10 flex min-h-[calc(82svh-var(--sh-header-h))] items-end py-8 md:min-h-[calc(92svh-var(--sh-header-h))] md:py-12">
         <div className="w-full">
           <div className="max-w-4xl">
-            <p className="kicker text-ice">{campaign.eyebrow[locale]}</p>
-            <h1 className="mt-4 max-w-[13ch] font-display text-[clamp(3.8rem,9vw,8.75rem)] uppercase leading-[0.9] tracking-[-0.018em] text-paper">
+            <p className="editorial-stamp border-paper bg-paper text-background">{campaign.eyebrow[locale]}</p>
+            <h1 className="mt-4 max-w-[12ch] font-display text-[clamp(3.5rem,10vw,10rem)] uppercase leading-[0.88] tracking-[-0.045em] text-paper">
               {campaign.title[locale]}
             </h1>
             <p className="mt-7 max-w-xl text-base leading-7 text-paper/72 md:text-lg md:leading-8">
@@ -46,15 +46,15 @@ export function HeroBlock({
                 {campaign.primary.label[locale]}
               </Link>
               {campaign.secondary ? (
-                <Link className="brutal-button border-white/35 bg-background/20 backdrop-blur-sm" href={localizedHref(locale, campaign.secondary.href)}>
+                <Link className="brutal-button border-paper bg-background/70" href={localizedHref(locale, campaign.secondary.href)}>
                   {campaign.secondary.label[locale]}
                 </Link>
               ) : null}
             </div>
           </div>
 
-          <div className="mt-10 flex items-center justify-between border-t border-white/25 pt-4">
-            <span className="kicker">Sky Hook</span>
+          <div className="mt-10 flex items-center justify-between border-t-2 border-paper/60 pt-4">
+            <span className="kicker">Sky Hook / Niš</span>
             <span className="kicker text-white/55">2025 / 2026</span>
           </div>
         </div>

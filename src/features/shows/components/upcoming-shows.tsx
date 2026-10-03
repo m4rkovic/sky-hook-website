@@ -31,13 +31,13 @@ function ShowRow({ show, locale, labels }: { show: Show; locale: Locale; labels:
   const detailsUrl = show.ticketUrl ?? show.eventUrl;
 
   return (
-    <article className="grid grid-cols-[4rem_1fr] gap-x-4 gap-y-4 border-t border-line py-5 sm:grid-cols-[4.5rem_1fr_auto] sm:items-center md:grid-cols-[7rem_1fr_1fr_auto]">
-      <div className="font-display uppercase leading-none">
-        <div className="text-3xl text-ice">{date.day}</div>
-        <div className="text-xs font-bold tracking-[0.14em] text-muted">{date.month} {date.year}</div>
+    <article className="grid grid-cols-[5rem_minmax(0,1fr)] gap-x-5 gap-y-4 border-t-2 border-line py-6 sm:grid-cols-[6rem_minmax(0,1fr)_auto] sm:items-center md:grid-cols-[7rem_minmax(0,1fr)_minmax(0,0.7fr)_auto]">
+      <div className="border-2 border-paper bg-paper px-2 py-3 font-display uppercase leading-none text-background">
+        <div className="text-5xl md:text-6xl">{date.day}</div>
+        <div className="mt-2 text-[0.6rem] font-bold tracking-[0.08em]">{date.month} {date.year}</div>
       </div>
       <div>
-        <h3 className="font-display text-xl uppercase md:text-2xl">{show.venue}</h3>
+        <h3 className="font-display text-2xl uppercase md:text-3xl">{show.venue}</h3>
         <p className="mt-1 text-sm text-muted md:hidden">{show.city}</p>
       </div>
       <div className="hidden text-sm text-muted md:block">{[show.city, show.region, show.country].filter(Boolean).join(", ")}</div>
@@ -54,7 +54,7 @@ export function UpcomingShows({ limit, locale, labels }: { limit?: number; local
   if (loading) return <div className="border-t border-line py-8 text-sm uppercase tracking-[0.14em] text-muted">{labels.loading}</div>;
   if (visibleShows.length === 0) {
     return (
-      <div className="border-y border-line py-8">
+      <div className="border-y-2 border-line py-10">
         <p className="font-display text-2xl uppercase">{labels.empty}</p>
         <p className="mt-3 max-w-xl text-sm leading-6 text-muted">{labels.emptyHint}</p>
         {siteConfig.socials.instagram ? (

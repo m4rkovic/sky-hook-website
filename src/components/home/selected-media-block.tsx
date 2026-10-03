@@ -18,20 +18,20 @@ export function SelectedMediaBlock({ videoIds, locale }: { videoIds: string[]; l
         <div className="mb-8 grid gap-5 md:grid-cols-[1fr_auto] md:items-end">
           <div>
             <p className="kicker text-ice">03 / {labels.eyebrow}</p>
-            <h2 className="mt-3 font-display text-4xl uppercase md:text-7xl">{labels.title}</h2>
+            <h2 className="poster-heading mt-4">{labels.title}</h2>
           </div>
           <Link href={localizedHref(locale, "/media")} className="kicker text-muted hover:text-ice">{labels.all} →</Link>
         </div>
 
         <div className="grid gap-4 lg:grid-cols-2">
           {videos.map((video) => video ? (
-            <a key={video.id} href={youtubeWatchUrl(video.youtubeId)} target="_blank" rel="noreferrer" className="group border border-line bg-background">
+            <a key={video.id} href={youtubeWatchUrl(video.youtubeId)} target="_blank" rel="noreferrer" className="group border-b-2 border-paper/40 bg-transparent">
               <div className="relative aspect-video overflow-hidden">
                 <img src={youtubeThumbnailUrl(video.youtubeId)} alt="" loading="lazy" decoding="async" referrerPolicy="no-referrer" className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]" />
                 <div className="absolute inset-0 bg-black/20 transition-colors group-hover:bg-black/5" />
-                <span className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center rounded-full border border-white/60 bg-black/35">▶</span>
+                <span className="absolute bottom-4 right-4 flex h-12 w-12 items-center justify-center border-2 border-paper bg-paper text-background">▶</span>
               </div>
-              <div className="flex items-end justify-between gap-4 p-4">
+              <div className="flex items-end justify-between gap-4 py-5">
                 <h3 className="font-display text-2xl uppercase">{video.title[locale]}</h3>
                 <span className="kicker text-muted">{labels.watch} ↗</span>
               </div>

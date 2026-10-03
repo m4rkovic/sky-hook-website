@@ -4,8 +4,10 @@ export function PageShell({ eyebrow, title, children }: { eyebrow: string; title
   return (
     <main className="pt-[calc(var(--sh-header-h)+1.5rem)]">
       <section className="site-container pb-10 pt-10 md:pb-16 md:pt-16">
-        <p className="kicker text-ice">{eyebrow}</p>
-        <h1 className="display-title mt-5 max-w-5xl">{title}</h1>
+        <div className="page-masthead">
+          <p className="editorial-stamp text-ice">{eyebrow}</p>
+          <h1 className="display-title mt-6 max-w-6xl">{title}</h1>
+        </div>
       </section>
       {children}
     </main>
