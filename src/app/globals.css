@@ -8,7 +8,7 @@
   --sh-ice-light: #d8e4ff;
   --sh-paper: #f2f1ed;
   --sh-muted: #8a91a3;
-  --sh-border: #242938;
+  --sh-border: #171c2a;
   --sh-electric: #6287ff;
 
   --sh-header-h: 4.75rem;
@@ -80,7 +80,6 @@ a {
 }
 
 .section-frame {
-  border-top: 1px solid var(--sh-border);
   padding-block: var(--sh-section-y);
 }
 
@@ -158,6 +157,43 @@ a {
   background-image: radial-gradient(circle at 20% 10%, white 0 0.6px, transparent 0.7px);
   background-size: 8px 8px;
   mix-blend-mode: soft-light;
+}
+
+.paper-grit {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background-color: var(--sh-paper);
+}
+
+.paper-grit::before {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.18;
+  background-image: url("/media/textures/paper-grit.svg");
+  background-size: 320px 320px;
+  background-repeat: repeat;
+  mix-blend-mode: multiply;
+}
+
+.paper-grit::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background:
+    radial-gradient(ellipse at 18% 22%, rgba(18, 20, 25, 0.045), transparent 24%),
+    radial-gradient(ellipse at 76% 68%, rgba(18, 20, 25, 0.04), transparent 28%),
+    linear-gradient(115deg, transparent 18%, rgba(18, 20, 25, 0.018) 46%, transparent 68%);
+}
+
+.paper-grit > * {
+  position: relative;
+  z-index: 1;
 }
 
 @media (max-width: 768px) {
