@@ -32,9 +32,9 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
 
   return (
     <PageShell eyebrow={dict.news.eyebrow} title={dict.news.title}>
-      <section className="section-frame">
+      <section className="pb-[var(--sh-section-y)]">
         <div className="site-container">
-          <p className="mb-10 max-w-3xl text-lg leading-8 text-muted">{dict.news.body}</p>
+          <p className="mb-10 max-w-2xl text-base leading-8 md:mb-14 text-muted">{dict.news.body}</p>
           <NewsExplorer
             items={newsItems}
             locale={locale}

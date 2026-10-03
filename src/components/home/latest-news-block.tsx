@@ -1,7 +1,6 @@
-import Image from "next/image";
 import Link from "next/link";
 import { newsItems, newsCategoryLabel } from "@/content/news";
-import { mediaItems } from "@/content/media";
+import { NewsImage } from "@/components/news/news-image";
 import { localizedHref, intlLocale, type Locale } from "@/i18n/config";
 import { SectionTransition } from "@/components/layout/section-transition";
 
@@ -26,9 +25,8 @@ export function LatestNewsBlock({ locale, limit }: { locale: Locale; limit: numb
           <Link href={localizedHref(locale, "/news")} className="kicker text-muted hover:text-ice">{labels.all} →</Link>
         </div>
 
-        <div className="grid gap-6 lg:grid-cols-3">
+        <div className="grid gap-x-10 gap-y-10 lg:grid-cols-3">
           {items.map((item) => {
-            const image = item.imageId ? mediaItems.find((media) => media.id === item.imageId) : undefined;
             const date = new Intl.DateTimeFormat(intlLocale(locale), {
               day: "2-digit",
               month: "short",
@@ -37,36 +35,15 @@ export function LatestNewsBlock({ locale, limit }: { locale: Locale; limit: numb
             }).format(new Date(`${item.publishedAt}T00:00:00Z`));
 
             return (
-              <a key={item.id} href={item.url} target="_blank" rel="noreferrer" className="group overflow-hidden bg-surface/55 transition-colors duration-200 hover:bg-surface">
-                {item.imageUrl || image ? (
-                  <div className="relative aspect-[4/3] overflow-hidden">
-                    {image ? (
-                      <Image
-                        src={image.src}
-                        alt={item.imageUrl ? "" : image.alt}
-                        fill
-                        sizes="(max-width: 1024px) 100vw, 33vw"
-                        className="media-cover transition-transform duration-300 group-hover:scale-[1.015]"
-                        style={{ objectPosition: image.focalPoint }}
-                      />
-                    ) : null}
-                    {item.imageUrl ? (
-                      <img
-                        src={item.imageUrl}
-                        alt=""
-                        loading="lazy"
-                        decoding="async"
-                        referrerPolicy="no-referrer"
-                        className="absolute inset-0 h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.015]"
-                      />
-                    ) : null}
-                  </div>
-                ) : null}
-                <div className="p-5">
+              <a key={item.id} href={item.url} target="_blank" rel="noreferrer" className="group min-w-0 border-t border-paper/15 pt-5">
+                <div className="relative aspect-[3/2] overflow-hidden bg-surface">
+                  <NewsImage item={item} sizes="(max-width: 1024px) 100vw, 33vw" />
+                </div>
+                <div className="pt-5">
                   <p className="kicker text-muted">{newsCategoryLabel(item.category, locale)} / {date}</p>
-                  <h3 className="mt-4 font-display text-2xl uppercase leading-[1.08]">{item.title}</h3>
+                  <h3 className="mt-3 text-pretty font-display text-2xl leading-[1.18] transition-colors group-hover:text-ice">{item.title}</h3>
                   <p className="mt-4 text-sm leading-6 text-muted">{item.summary[locale]}</p>
-                  <span className="kicker mt-6 inline-block text-ice">{item.source} / {labels.read} ↗</span>
+                  <span className="kicker mt-5 inline-block text-ice">{item.source} / {labels.read} ↗</span>
                 </div>
               </a>
             );
