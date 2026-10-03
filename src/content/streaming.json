@@ -1,0 +1,131 @@
+{
+  "album": {
+    "youtube": "https://www.youtube.com/watch?v=_UFk_n6rBOE&list=PLxDZmm8oF9f9AchKjFL9pGWJgLlb0R_v-",
+    "spotify": "https://open.spotify.com/album/3xXuqUWaG0I2A5CjA1P9ep",
+    "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996",
+    "deezer": "https://www.deezer.com/us/album/731979501",
+    "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ",
+    "anghami": "https://play.anghami.com/album/1066421805?refer=linktree",
+    "tidal": "https://tidal.com/album/425894161",
+    "bandcamp": "https://skyhooknis.bandcamp.com/album/gde-ptice-lete"
+  },
+  "songs": {
+    "savana": {
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29KS15Z",
+      "youtube": "https://www.youtube.com/watch?v=1-HAMd2Rafs",
+      "spotify": "https://open.spotify.com/track/7dLBu3rLGCeo0vcJWN531A",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066002",
+      "tidal": "https://tidal.com/track/425894167",
+      "deezer": "https://www.deezer.com/track/3292284861",
+      "anghami": "https://play.anghami.com/song/1205141933"
+    },
+    "jos-samo-ovaj-put": {
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29PYDWX",
+      "youtube": "https://www.youtube.com/watch?v=dhmsPChvcdc",
+      "spotify": "https://open.spotify.com/track/5l0Z9WUGeQ95QhQR4Ky0MT",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066008",
+      "tidal": "https://tidal.com/track/425894168",
+      "deezer": "https://www.deezer.com/track/3292284871",
+      "anghami": "https://play.anghami.com/song/1205141934"
+    },
+    "boje": {
+      "deezer": "https://www.deezer.com/track/3292284881",
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29L41GS",
+      "youtube": "https://www.youtube.com/watch?v=jOlCKZYD9lA",
+      "spotify": "https://open.spotify.com/track/3lv0MFOG2E03SvJSdA2lSI",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066285",
+      "tidal": "https://tidal.com/track/425894169",
+      "anghami": "https://play.anghami.com/song/1205141935"
+    },
+    "ostajem": {
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29MHDJ3",
+      "youtube": "https://www.youtube.com/watch?v=TjpLJYjZZ9k",
+      "spotify": "https://open.spotify.com/track/2vXLfPspeycUWydHp6x2Pt",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066293",
+      "tidal": "https://tidal.com/track/425894171",
+      "deezer": "https://www.deezer.com/track/3292284891",
+      "anghami": "https://play.anghami.com/song/1205141936"
+    },
+    "odvedi-me": {
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29MNWSS",
+      "youtube": "https://www.youtube.com/watch?v=Eo3JZQ9RoCM",
+      "spotify": "https://open.spotify.com/track/27hAJUezrF3pAqKvPRoCS8",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066309",
+      "tidal": "https://tidal.com/track/425894173",
+      "deezer": "https://www.deezer.com/track/3292284911",
+      "anghami": "https://play.anghami.com/song/1205141937"
+    },
+    "tonemo": {
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29MT149",
+      "youtube": "https://www.youtube.com/watch?v=MVYQxaZibik",
+      "spotify": "https://open.spotify.com/track/3jCCuY9QTCcU0qoUl7foU7",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066404",
+      "tidal": "https://tidal.com/track/425894174",
+      "deezer": "https://www.deezer.com/track/3292284931",
+      "anghami": "https://play.anghami.com/song/1205141938"
+    },
+    "surf": {
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29MS2GQ",
+      "youtube": "https://www.youtube.com/watch?v=_nB2FcyzIkc",
+      "spotify": "https://open.spotify.com/track/6VzAgnTCC7hcpU4Vj1mcAU",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066412",
+      "tidal": "https://tidal.com/track/425894175",
+      "deezer": "https://www.deezer.com/track/3292284941",
+      "anghami": "https://play.anghami.com/song/1205141939"
+    },
+    "iza-ogledala": {
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29N45PX",
+      "youtube": "https://www.youtube.com/watch?v=5MPNqG6oOcg",
+      "spotify": "https://open.spotify.com/track/5DAfybV5KWDHhEcp0ipoLM",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066416",
+      "tidal": "https://tidal.com/track/425894177",
+      "deezer": "https://www.deezer.com/track/3292284951",
+      "anghami": "https://play.anghami.com/song/1205141940"
+    },
+    "astra": {
+      "deezer": "https://www.deezer.com/track/3292284961",
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29MNK4V",
+      "anghami": "https://play.anghami.com/song/1205141941",
+      "youtube": "https://www.youtube.com/watch?v=fFRsVMrO6RQ",
+      "spotify": "https://open.spotify.com/track/6mJ3fTEpWvTlC9NIvqV9Kq",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066426",
+      "tidal": "https://tidal.com/track/425894178"
+    },
+    "na-talasima-secanja": {
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29L4KBQ",
+      "youtube": "https://www.youtube.com/watch?v=WCZMOZHRevw",
+      "spotify": "https://open.spotify.com/track/0vdNOJCx5lyEGcisd2pMtu",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066429",
+      "tidal": "https://tidal.com/track/425894179",
+      "deezer": "https://www.deezer.com/track/3292284971",
+      "anghami": "https://play.anghami.com/song/1205141942"
+    },
+    "dolazim-ponovo": {
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29NKFHL",
+      "youtube": "https://www.youtube.com/watch?v=ScHsAH7MKRs",
+      "spotify": "https://open.spotify.com/track/1jJbpReM43WXveztxldlw8",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066612",
+      "tidal": "https://tidal.com/track/425894180",
+      "deezer": "https://www.deezer.com/track/3292284981",
+      "anghami": "https://play.anghami.com/song/1205141943"
+    },
+    "gde-ptice-lete": {
+      "youtube": "https://www.youtube.com/watch?v=D43CbFQG05g",
+      "spotify": "https://open.spotify.com/track/7wPUtWovBE1AWN1ZRu82HT",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066614",
+      "tidal": "https://tidal.com/track/425894182",
+      "deezer": "https://www.deezer.com/track/3292284991",
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29MTS8X",
+      "anghami": "https://play.anghami.com/song/1205141944"
+    },
+    "melburn": {
+      "deezer": "https://www.deezer.com/track/3292285001",
+      "amazonMusic": "https://music.amazon.com/albums/B0F29KYLVZ?trackAsin=B0F29NF37X",
+      "anghami": "https://play.anghami.com/song/1205141945",
+      "youtube": "https://www.youtube.com/watch?v=_UFk_n6rBOE",
+      "spotify": "https://open.spotify.com/track/1LnYvIsxOxn2rF7zJ2GdBI",
+      "appleMusic": "https://music.apple.com/rs/album/gde-ptice-lete/1804065996?i=1804066617",
+      "tidal": "https://tidal.com/track/425894183"
+    }
+  }
+}

@@ -1,5 +1,6 @@
 import songData from "./songs.json";
 import { z } from "zod";
+import { songStreaming } from "./streaming";
 
 // Original Serbian lyrics are shared across both interface languages.
 export const songs = z.array(z.object({
@@ -8,7 +9,7 @@ export const songs = z.array(z.object({
   duration: z.string(),
   lyrics: z.string().min(1),
   credits: z.array(z.object({ role: z.string(), name: z.string() })),
-})).parse(songData);
+})).parse(songData).map((song) => ({ ...song, streaming: songStreaming[song.slug] ?? {} }));
 
 export function getSong(slug: string) {
   return songs.find((song) => song.slug === slug);

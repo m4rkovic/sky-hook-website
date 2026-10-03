@@ -12,7 +12,7 @@ const localizedTextSchema = z.object({
   sr: z.string(),
 });
 
-const streamingLinksSchema = z.object({
+export const streamingLinksSchema = z.object({
   spotify: z.string().url().optional(),
   appleMusic: z.string().url().optional(),
   youtube: z.string().url().optional(),
@@ -20,6 +20,8 @@ const streamingLinksSchema = z.object({
   tidal: z.string().url().optional(),
   deezer: z.string().url().optional(),
   bandcamp: z.string().url().optional(),
+  amazonMusic: z.string().url().optional(),
+  anghami: z.string().url().optional(),
 });
 
 const trackSchema = z.object({
@@ -29,6 +31,7 @@ const trackSchema = z.object({
   duration: z.string().optional(),
   audioUrl: z.string().url().optional(),
   videoUrl: z.string().url().optional(),
+  streaming: streamingLinksSchema.optional(),
   lyrics: localizedTextSchema.optional(),
 });
 
@@ -117,3 +120,5 @@ export type MediaItem = z.infer<typeof mediaItemSchema>;
 export type Show = z.infer<typeof showSchema>;
 export type ArchiveShow = z.infer<typeof archiveShowSchema>;
 export type LiveStats = z.infer<typeof liveStatsSchema>;
+
+export type StreamingLinks = z.infer<typeof streamingLinksSchema>;

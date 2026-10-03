@@ -1,4 +1,4 @@
-import type { Release } from "@/content/schemas";
+import type { StreamingLinks } from "@/content/schemas";
 
 const services = [
   { key: "spotify", label: "Spotify", action: "play" },
@@ -7,13 +7,17 @@ const services = [
   { key: "youtubeMusic", label: "YouTube Music", action: "play" },
   { key: "tidal", label: "TIDAL", action: "play" },
   { key: "deezer", label: "Deezer", action: "play" },
+  { key: "amazonMusic", label: "Amazon Music", action: "play" },
+  { key: "anghami", label: "Anghami", action: "play" },
   { key: "bandcamp", label: "Bandcamp", action: "open" },
 ] as const;
 
 type Labels = { play: string; watch: string; open: string; noLinks: string };
 
-export function ListenLinks({ release, labels }: { release: Release; labels: Labels }) {
-  const configured = services.filter((service) => Boolean(release.streaming[service.key]));
+export function ListenLinks({ streaming, labels, compact = false }: { streaming: StreamingLinks; labels: Labels; compact?: boolean }) {
+  const configured = services.filter((service) => Boolean(streaming[service.key]));
+
+  if (compact && configured.length === 0) return null;
 
   if (configured.length === 0) {
     return (
@@ -23,10 +27,22 @@ export function ListenLinks({ release, labels }: { release: Release; labels: Lab
     );
   }
 
+  if (compact) {
+    return (
+      <div className="flex flex-wrap gap-3">
+        {configured.map((service) => (
+          <a key={service.key} className="kicker border border-current px-3 py-2 transition-colors hover:bg-ice hover:text-background" href={streaming[service.key]} target="_blank" rel="noreferrer">
+            {service.label} <span aria-hidden="true">↗</span>
+          </a>
+        ))}
+      </div>
+    );
+  }
+
   return (
     <div className="border border-line bg-paper text-background">
       {configured.map((service) => {
-        const href = release.streaming[service.key];
+        const href = streaming[service.key];
         const action = service.action === "watch" ? labels.watch : service.action === "open" ? labels.open : labels.play;
 
         return (

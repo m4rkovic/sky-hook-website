@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { ListenLinks } from "@/components/music/listen-links";
 import { ArtworkFrame } from "@/components/music/artwork-frame";
 import { getRelease, releases } from "@/content/releases";
 import { getSong } from "@/content/songs";
@@ -204,6 +205,10 @@ export default async function ReleasePage({ params }: { params: Promise<{ locale
                         {row}
                       </summary>
                       <div className="border-t border-line bg-surface px-4 py-7 sm:px-8">
+                        <div className="mb-8">
+                          <p className="kicker mb-4 text-ice">{dict.common.listen}</p>
+                          <ListenLinks compact streaming={song.streaming} labels={{ play: dict.music.play, watch: dict.music.watch, open: dict.music.open, noLinks: dict.music.noLinks }} />
+                        </div>
                         <p className="kicker mb-5 text-ice">{dict.music.lyrics}</p>
                         <div lang="sr" className="whitespace-pre-line break-words text-base leading-8 text-paper/85">{song.lyrics}</div>
                       </div>
