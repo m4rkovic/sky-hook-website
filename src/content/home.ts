@@ -19,7 +19,7 @@ export type HomeBlock =
 export const homeBlocks: HomeBlock[] = [
   {
     type: "hero",
-    imageId: "live-02",
+    imageId: "press-rehearsal",
     campaign: {
       eyebrow: { en: "Sky Hook / Official", sr: "Sky Hook / Zvanično" },
       title: { en: "Gde ptice lete", sr: "Gde ptice lete" },
@@ -35,5 +35,5 @@ export const homeBlocks: HomeBlock[] = [
   { type: "upcoming-shows", limit: 4 },
   { type: "selected-media", videoIds: ["live-cx2pbneaco4", "video-qvrkpd4gkk"] },
   { type: "latest-news", limit: 3 },
-  { type: "split-media", imageId: "press-rehearsal", href: "/band" },
+  { type: "split-media", imageId: "live-wide", href: "/band" },
 ];

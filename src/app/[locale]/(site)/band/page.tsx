@@ -32,7 +32,7 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
   const locale = rawLocale as Locale;
   const dict = getDictionary(locale);
   const copy = bandCopy[locale];
-  const primaryImage = mediaItems.find((item) => item.id === "press-rooftop") ?? mediaItems[0];
+  const primaryImage = mediaItems.find((item) => item.id === "live-02") ?? mediaItems[0];
   const secondaryImage = mediaItems.find((item) => item.id === "press-rehearsal") ?? mediaItems[1] ?? mediaItems[0];
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
