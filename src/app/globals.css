@@ -251,3 +251,29 @@ select option {
 summary::-webkit-details-marker {
   display: none;
 }
+
+.site-intro {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  place-items: center;
+  background: var(--sh-bg);
+  pointer-events: none;
+}
+
+html[data-sh-intro="show"] .site-intro {
+  display: grid;
+  animation: sh-intro-reveal 720ms ease-in-out both;
+}
+
+@keyframes sh-intro-reveal {
+  0%, 45% { opacity: 1; visibility: visible; }
+  100% { opacity: 0; visibility: hidden; }
+}
+
+@media (prefers-reduced-motion: reduce), print {
+  html[data-sh-intro="show"] .site-intro {
+    display: none;
+  }
+}
