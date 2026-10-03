@@ -32,8 +32,8 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
   const locale = rawLocale as Locale;
   const dict = getDictionary(locale);
   const copy = bandCopy[locale];
-  const primaryImage = mediaItems.find((item) => item.id === "live-01") ?? mediaItems[0];
-  const secondaryImage = mediaItems.find((item) => item.id === "live-02") ?? mediaItems[1] ?? mediaItems[0];
+  const primaryImage = mediaItems.find((item) => item.id === "press-rooftop") ?? mediaItems[0];
+  const secondaryImage = mediaItems.find((item) => item.id === "press-rehearsal") ?? mediaItems[1] ?? mediaItems[0];
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
   const jsonLd = {
@@ -57,6 +57,7 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
               src={primaryImage.src}
               alt={primaryImage.alt}
               fill
+              sizes="(min-width: 1024px) 55vw, 100vw"
               priority
               className="media-cover"
               style={{ objectPosition: primaryImage.focalPoint }}
@@ -162,6 +163,7 @@ export default async function BandPage({ params }: { params: Promise<{ locale: s
               src={secondaryImage.src}
               alt={secondaryImage.alt}
               fill
+              sizes="(min-width: 1024px) 55vw, 100vw"
               className="media-cover"
               style={{ objectPosition: secondaryImage.focalPoint }}
             />

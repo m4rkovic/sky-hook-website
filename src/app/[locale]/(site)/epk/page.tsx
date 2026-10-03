@@ -55,7 +55,7 @@ export default async function EpkPage({ params }: { params: Promise<{ locale: st
   if (!hasLocale(rawLocale)) notFound();
   const locale = rawLocale as Locale;
   const t = copy[locale];
-  const heroImage = mediaItems.find((item) => item.id === "live-02");
+  const heroImage = mediaItems.find((item) => item.id === "press-rehearsal");
   const bookingEmail = siteConfig.contact.bookingEmail;
   const featuredLive = mediaVideos.find((video) => video.category === "live");
 

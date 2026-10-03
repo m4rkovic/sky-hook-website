@@ -1,4 +1,5 @@
 import { releaseSchema } from "./schemas";
+import { songs } from "./songs";
 
 export const releases = releaseSchema.array().parse([
   {
@@ -8,6 +9,10 @@ export const releases = releaseSchema.array().parse([
     year: 2025,
     artwork: "/media/releases/gde-ptice-lete-album.webp",
     featured: true,
+    releaseDate: "2025-04-04",
+    label: "Pop Depresija / Zeleni Kačket",
+    streaming: { bandcamp: "https://skyhooknis.bandcamp.com/album/gde-ptice-lete" },
+    tracks: songs.map((song, index) => ({ number: index + 1, songSlug: song.slug, title: song.title, duration: song.duration })),
   },
   {
     slug: "gde-ptice-lete-single",
@@ -34,7 +39,11 @@ export const releases = releaseSchema.array().parse([
   },
   { slug: "ostajem", title: "Ostajem", type: "single", year: 2025, artwork: "/media/releases/ostajem.webp" },
   { slug: "astra", title: "Astra", type: "single", year: 2025, artwork: "/media/releases/astra.webp" },
-]);
+].map((release) => {
+  if (release.type !== "single") return release;
+  const song = songs.find((item) => item.slug === (release.slug === "gde-ptice-lete-single" ? "gde-ptice-lete" : release.slug));
+  return { ...release, tracks: song ? [{ number: 1, songSlug: song.slug, title: song.title, duration: song.duration }] : [], credits: song?.credits ?? [] };
+}));
 
 export const featuredRelease = releases.find((release) => release.featured) ?? releases[0];
 

@@ -35,5 +35,5 @@ export const homeBlocks: HomeBlock[] = [
   { type: "upcoming-shows", limit: 4 },
   { type: "selected-media", videoIds: ["live-cx2pbneaco4", "video-qvrkpd4gkk"] },
   { type: "latest-news", limit: 3 },
-  { type: "split-media", imageId: "live-01", href: "/band" },
+  { type: "split-media", imageId: "press-rehearsal", href: "/band" },
 ];

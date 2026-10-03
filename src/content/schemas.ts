@@ -23,6 +23,7 @@ const streamingLinksSchema = z.object({
 });
 
 const trackSchema = z.object({
+  songSlug: z.string().optional(),
   number: z.number().int().positive(),
   title: z.string().min(1),
   duration: z.string().optional(),

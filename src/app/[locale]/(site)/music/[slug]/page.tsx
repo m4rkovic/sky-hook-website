@@ -3,6 +3,8 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArtworkFrame } from "@/components/music/artwork-frame";
 import { getRelease, releases } from "@/content/releases";
+import { getSong } from "@/content/songs";
+import type { Release } from "@/content/schemas";
 import { siteConfig } from "@/content/site";
 import { getDictionary } from "@/i18n/get-dictionary";
 import { hasLocale, intlLocale, localizedHref, locales, type Locale } from "@/i18n/config";
@@ -69,7 +71,7 @@ export default async function ReleasePage({ params }: { params: Promise<{ locale
   const dict = getDictionary(locale);
   const description = release.description?.[locale] ?? dict.music.descriptionPlaceholder;
   const releaseDate = formatReleaseDate(release.releaseDate, release.year, locale);
-  const displayTracks =
+  const displayTracks: Release["tracks"] =
     release.tracks.length > 0
       ? release.tracks
       : release.type === "single"
@@ -80,7 +82,7 @@ export default async function ReleasePage({ params }: { params: Promise<{ locale
 
   const primaryLyrics =
     release.type === "single"
-      ? release.tracks.find((track) => track.lyrics?.[locale])?.lyrics?.[locale]
+      ? getSong(release.tracks[0]?.songSlug ?? "")?.lyrics ?? release.tracks.find((track) => track.lyrics?.[locale])?.lyrics?.[locale]
       : undefined;
 
   const facts = [
@@ -184,18 +186,32 @@ export default async function ReleasePage({ params }: { params: Promise<{ locale
             <p className="kicker text-ice">02 / {dict.music.tracklist}</p>
             <div className="mt-5 border-t border-line">
               {displayTracks.length ? (
-                displayTracks.map((track) => (
-                  <div
-                    key={track.number}
-                    className="grid grid-cols-[3rem_1fr_auto] items-center gap-4 border-b border-line py-5"
-                  >
-                    <span className="kicker text-muted">{String(track.number).padStart(2, "0")}</span>
-                    <span className="font-display text-2xl uppercase">
-                      {track.title}
-                    </span>
-                    {track.duration ? <span className="text-sm text-muted">{track.duration}</span> : <span aria-hidden="true" />}
-                  </div>
-                ))
+                displayTracks.map((track) => {
+                  const song = getSong(track.songSlug ?? "");
+                  const row = (
+                    <>
+                      <span className="kicker text-muted">{String(track.number).padStart(2, "0")}</span>
+                      <span className="min-w-0 font-display text-2xl uppercase">{track.title}</span>
+                      <span className="flex items-center gap-3 text-sm text-muted">
+                        {track.duration}
+                        {song && release.type !== "single" ? <span className="text-ice" aria-hidden="true">＋</span> : null}
+                      </span>
+                    </>
+                  );
+                  return song && release.type !== "single" ? (
+                    <details key={track.number} id={`lyrics-${song.slug}`} className="group border-b border-line">
+                      <summary className="grid cursor-pointer list-none grid-cols-[2rem_1fr_auto] items-center gap-3 py-5 transition-colors hover:text-ice focus-visible:outline-2 focus-visible:outline-ice [&::-webkit-details-marker]:hidden" aria-label={`${track.title} — ${dict.music.lyrics}`}>
+                        {row}
+                      </summary>
+                      <div className="border-t border-line bg-surface px-4 py-7 sm:px-8">
+                        <p className="kicker mb-5 text-ice">{dict.music.lyrics}</p>
+                        <div lang="sr" className="whitespace-pre-line break-words text-base leading-8 text-paper/85">{song.lyrics}</div>
+                      </div>
+                    </details>
+                  ) : (
+                    <div key={track.number} className="grid grid-cols-[2rem_1fr_auto] items-center gap-3 border-b border-line py-5">{row}</div>
+                  );
+                })
               ) : (
                 <div className="border-b border-line py-6">
                   <p className="text-sm leading-7 text-muted">{dict.music.noTracklist}</p>
@@ -238,14 +254,14 @@ export default async function ReleasePage({ params }: { params: Promise<{ locale
         <section className="border-t border-line bg-paper text-background">
           <div className="site-container section-grid py-[var(--sh-section-y)]">
             <div className="col-span-12 lg:col-span-4">
-              <p className="kicker text-background/45">04 / LYRICS</p>
+              <p className="kicker text-background/45">04 / {dict.music.lyrics}</p>
               <h2 className="mt-4 font-display text-5xl uppercase md:text-7xl">
                 {dict.music.lyrics}
               </h2>
             </div>
 
             <div className="col-span-12 lg:col-span-6 lg:col-start-7">
-              <div className="whitespace-pre-line text-lg leading-9 text-background/80">{primaryLyrics}</div>
+              <div lang="sr" className="whitespace-pre-line break-words text-lg leading-9 text-background/80">{primaryLyrics}</div>
             </div>
           </div>
         </section>

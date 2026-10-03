@@ -54,7 +54,7 @@ Important: setlist.fm states that free API use is for non-commercial projects. B
 
 ## Releases
 
-Edit `src/content/releases.ts`. Artwork is optional and intentionally blank until supplied.
+Edit `src/content/releases.ts`. Artwork is stored as optimized WebP files in `public/media/releases`.
 
 Each release automatically participates in:
 
@@ -83,3 +83,21 @@ Do not duplicate page components for each language.
 Photo credits are omitted until confirmed rather than shown as placeholders.
 
 See `ARCHITECTURE.md` before adding major features.
+
+## Songs and lyrics
+
+`src/content/songs.json` is the shared source for all 13 songs: stable slug, title,
+duration, original Serbian lyrics and recording credits. Import `songs` or
+`getSong(slug)` from `src/content/songs.ts` to reuse this content. Track order and
+durations follow the official Bandcamp album. Lyrics and credits come from the
+supplied text files; lyrics retain their original wording and stanza breaks.
+
+Releases refer to songs via `tracks[].songSlug`. Singles render the lyrics below
+the release details. On the album, click a track to open its lyrics inline;
+keyboard users can use Tab and Enter/Space. Both interface languages display the
+original Serbian lyrics, with `lang="sr"` set on the text.
+
+Photos and artwork are registered in `src/content/media.ts` and available in the
+media archive filters. Supplied historical portraits remain archival photos;
+they are not used to infer the current lineup. Full-size uploaded originals are
+not needed in the repository.
