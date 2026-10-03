@@ -1,104 +1,77 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/page-shell";
+import { SectionTransition } from "@/components/layout/section-transition";
 import { SocialIcon } from "@/components/social/social-icon";
+import { bookingHref, pressCopy, pressKitUrl } from "@/content/press";
 import { siteConfig } from "@/content/site";
 import { getDictionary } from "@/i18n/get-dictionary";
-import { hasLocale, localizedHref, type Locale } from "@/i18n/config";
+import { hasLocale, localizedHref } from "@/i18n/config";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const { locale: rawLocale } = await params;
-  if (!hasLocale(rawLocale)) return { title: "Contact" };
-  const locale = rawLocale as Locale;
-  const description = locale === "sr"
-    ? "Sky Hook booking, press kontakt i zvanični profili."
-    : "Sky Hook booking, press contact and official profiles.";
+  const { locale } = await params;
+  if (!hasLocale(locale)) return { title: "Contact" };
   return {
-    title: "Contact",
-    description,
-    alternates: {
-      canonical: `/${locale}/contact`,
-      languages: { en: "/en/contact", sr: "/sr/contact", "x-default": "/en/contact" },
-    },
+    title: getDictionary(locale).contact.title,
+    description: pressCopy[locale].bookingBody,
+    alternates: { canonical: `/${locale}/contact`, languages: { en: "/en/contact", sr: "/sr/contact", "x-default": "/en/contact" } },
   };
 }
 
-const socialOrder = ["instagram", "facebook", "youtube", "spotify"] as const;
-
-const socialLabels: Record<(typeof socialOrder)[number], string> = {
-  instagram: "Instagram",
-  facebook: "Facebook",
-  youtube: "YouTube",
-  spotify: "Spotify",
-};
+const socials = ["instagram", "facebook", "youtube", "spotify"] as const;
+const socialLabels = { instagram: "Instagram", facebook: "Facebook", youtube: "YouTube", spotify: "Spotify" };
 
 export default async function ContactPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale: rawLocale } = await params;
-  if (!hasLocale(rawLocale)) notFound();
-
-  const locale = rawLocale as Locale;
+  const { locale } = await params;
+  if (!hasLocale(locale)) notFound();
+  const t = pressCopy[locale];
   const dict = getDictionary(locale);
-  const bookingEmail = siteConfig.contact.bookingEmail;
-
   return (
-    <PageShell eyebrow={dict.contact.eyebrow} title={dict.contact.title}>
-      <section className="section-frame">
-        <div className="site-container section-grid items-start">
-          <div className="col-span-12 md:col-span-5">
-            <p className="max-w-xl text-lg leading-8 text-ice-light/80">{dict.contact.body}</p>
-          </div>
-
-          <div className="col-span-12 md:col-span-6 md:col-start-7">
-            <div className="border-y border-line py-6">
-              <p className="kicker text-ice">{dict.contact.bookingLabel}</p>
-              {bookingEmail ? (
-                <a
-                  href={`mailto:${bookingEmail}`}
-                  className="mt-4 block break-all font-display text-2xl uppercase transition-colors md:text-4xl hover:text-ice "
-                >
-                  {bookingEmail}
-                </a>
-              ) : (
-                <span className="kicker mt-4 block text-muted">{dict.contact.missingEmail}</span>
-              )}
-              <p className="mt-4 max-w-lg text-sm leading-6 text-muted">{dict.contact.bookingNote}</p>
-              <div className="mt-7 flex flex-wrap gap-3">
-                {bookingEmail ? (
-                  <a className="brutal-button" href={`mailto:${bookingEmail}`}>
-                    {dict.contact.emailBooking}
-                  </a>
-                ) : null}
-                <Link className="brutal-button" href={localizedHref(locale, "/epk")}>
-                  EPK →
-                </Link>
-              </div>
-            </div>
+    <PageShell eyebrow={t.eyebrow} title={dict.contact.title}>
+      <section className="pb-[var(--sh-section-y)]">
+        <div className="site-container grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-20">
+          <div><h2 className="poster-heading max-w-[13ch]">{t.contactTitle}</h2><p className="mt-7 max-w-xl text-lg leading-9 text-paper/75">{t.contactIntro}</p><p className="editorial-stamp mt-7 text-ice">Niš / Serbia / Sky Hook</p></div>
+          <div className="border-y-2 border-paper/40 py-7">
+            <p className="kicker text-ice">Booking / Press</p>
+            <a href={`mailto:${siteConfig.contact.bookingEmail}`} className="mt-5 block break-all text-[clamp(1.2rem,2.4vw,2rem)] font-bold leading-tight hover:text-ice">{siteConfig.contact.bookingEmail}</a>
+            <div className="mt-8 flex flex-wrap gap-5"><a href={bookingHref(locale)} className="brutal-button brutal-button-primary">{t.email} ↗</a><a href={bookingHref(locale, "press")} className="brutal-button">{t.pressEmail} ↗</a></div>
+            <p className="mt-6 text-sm leading-7 text-muted">{t.checklistNote}</p>
           </div>
         </div>
       </section>
 
-      <section className="bg-surface">
-        <div className="site-container py-[var(--sh-section-y)]">
-          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-10 md:gap-x-20 lg:gap-x-28">
-            {socialOrder.map((key) => {
-              const url = siteConfig.socials[key];
-              return (
-                <a
-                  key={key}
-                  href={url}
-                  target="_blank"
-                  rel="noreferrer"
-                  aria-label={socialLabels[key]}
-                  className="group flex h-24 w-24 items-center justify-center transition-transform duration-200 hover:-translate-y-1 md:h-28 md:w-28"
-                >
-                  <SocialIcon
-                    name={key}
-                    className="h-16 w-16 text-ice transition-[transform,color,opacity] duration-200 group-hover:scale-110 group-hover:text-paper md:h-20 md:w-20"
-                  />
-                </a>
-              );
-            })}
+      <section className="section-frame relative bg-paper text-background">
+        <SectionTransition tone="paper" direction="left" />
+        <div className="site-container relative z-10 grid gap-10 md:grid-cols-[1fr_1fr] md:gap-20">
+          <div><p className="kicker">01 / BOOKING</p><h2 className="archive-heading mt-5 max-w-[14ch]">{t.checklistTitle}</h2></div>
+          <ol className="border-t-2 border-background">
+            {t.checklist.map((item, index) => <li key={item} className="grid grid-cols-[2rem_1fr] gap-4 border-b border-background/30 py-5"><span className="kicker pt-1 text-background/55">0{index + 1}</span><span className="text-lg leading-7">{item}</span></li>)}
+          </ol>
+        </div>
+      </section>
+
+      <section className="section-frame">
+        <div className="site-container grid items-center gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:gap-16">
+          <div className="relative aspect-[3/2] overflow-hidden"><Image src="/media/photos/skyhook-live-02.jpg" alt="Sky Hook live" fill sizes="(min-width: 1024px) 45vw, 92vw" className="object-cover" /></div>
+          <div><p className="kicker text-ice">02 / PRESS KIT</p><h2 className="archive-heading mt-5 max-w-[17ch]">{t.materialsTitle}</h2><p className="mt-6 max-w-xl text-base leading-8 text-muted">{t.materialsBody}</p><div className="mt-7 flex flex-wrap gap-5"><Link href={localizedHref(locale, "/epk")} className="brutal-button">{t.openKit} ↗</Link><a href={pressKitUrl} download className="brutal-button">{t.downloadKit} ↓</a></div></div>
+        </div>
+      </section>
+
+      <section className="section-frame relative bg-surface">
+        <SectionTransition tone="surface" direction="right" />
+        <div className="site-container relative z-10 grid gap-10 md:grid-cols-2 md:gap-16">
+          <div><p className="kicker text-ice">03 / LIVE</p><h2 className="archive-heading mt-5">{t.technicalTitle}</h2></div>
+          <div><p className="max-w-xl text-lg leading-8 text-paper/75">{t.technicalBody}</p><a href={bookingHref(locale, "technical")} className="brutal-button mt-7">{t.technicalEmail} ↗</a></div>
+        </div>
+      </section>
+
+      <section className="section-frame">
+        <div className="site-container">
+          <h2 className="kicker mb-8 text-ice">04 / {t.official}</h2>
+          <div className="grid grid-cols-2 gap-5 lg:grid-cols-4">
+            {socials.map((key) => <a key={key} href={siteConfig.socials[key]} target="_blank" rel="noreferrer" className="group flex min-h-24 items-center gap-4 border-y border-line py-5 transition-colors hover:text-ice"><SocialIcon name={key} className="h-8 w-8 shrink-0 text-ice" /><span className="kicker">{socialLabels[key]} <span aria-hidden="true">↗</span></span></a>)}
           </div>
         </div>
       </section>
