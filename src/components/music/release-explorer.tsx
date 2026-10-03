@@ -70,7 +70,7 @@ export function ReleaseExplorer({ releases, locale, labels }: { releases: Releas
   const selectedSort = sortOptions.find((item) => item.key === sort) ?? sortOptions[0];
 
   return (
-    <section className="section-frame bg-paper text-background">
+    <section className="section-frame paper-grit text-background">
       <div className="site-container">
         <div className="grid gap-7 border-b border-background/20 pb-5 lg:grid-cols-[1fr_22rem] lg:items-end">
           <h2 className="font-display text-3xl uppercase md:text-4xl">{labels.explore}</h2>

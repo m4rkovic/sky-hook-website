@@ -78,20 +78,10 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
         </div>
       </section>
 
-      <section className="border-t border-line bg-surface">
+      <section className="bg-surface">
         <div className="site-container py-[var(--sh-section-y)]">
-          <div className="mb-10 grid gap-6 md:grid-cols-[1fr_1fr] md:items-end">
-            <div>
-              <p className="kicker text-ice">SOCIAL / LINKS</p>
-              <h2 className="mt-4 font-display text-4xl uppercase md:text-7xl">
-                {dict.contact.socialsTitle}
-              </h2>
-            </div>
-            <p className="max-w-xl text-base leading-7 text-muted md:justify-self-end">{dict.contact.socialsBody}</p>
-          </div>
-
-          <div className="grid border-l border-t border-line sm:grid-cols-2 lg:grid-cols-4">
-            {socialOrder.map((key, index) => {
+          <div className="flex flex-wrap items-center justify-center gap-x-12 gap-y-10 md:gap-x-20 lg:gap-x-28">
+            {socialOrder.map((key) => {
               const url = siteConfig.socials[key];
               return (
                 <a
@@ -99,26 +89,13 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
                   href={url}
                   target="_blank"
                   rel="noreferrer"
-                  className="group relative min-h-[18rem] overflow-hidden border-b border-r border-line p-5 transition-colors duration-200 hover:bg-surface-strong"
+                  aria-label={socialLabels[key]}
+                  className="group flex h-24 w-24 items-center justify-center transition-transform duration-200 hover:-translate-y-1 md:h-28 md:w-28"
                 >
-                  <div className="flex items-start justify-between gap-4">
-                    <span className="kicker text-muted">0{index + 1}</span>
-                    <span className="text-xl text-ice transition-transform duration-200 group-hover:translate-x-1 group-hover:-translate-y-1">↗</span>
-                  </div>
-
-                  <div className="mt-8 flex min-h-[7.5rem] items-center">
-                    <SocialIcon
-                      name={key}
-                      className="h-20 w-20 text-ice transition-[transform,color] duration-300 group-hover:scale-110 group-hover:text-paper md:h-24 md:w-24"
-                    />
-                  </div>
-
-                  <div className="absolute inset-x-5 bottom-5">
-                    <div className="font-display text-3xl uppercase">
-                      {socialLabels[key]}
-                    </div>
-                    <div className="mt-2 h-px w-0 bg-ice transition-[width] duration-300 group-hover:w-full" />
-                  </div>
+                  <SocialIcon
+                    name={key}
+                    className="h-16 w-16 text-ice transition-[transform,color,opacity] duration-200 group-hover:scale-110 group-hover:text-paper md:h-20 md:w-20"
+                  />
                 </a>
               );
             })}

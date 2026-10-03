@@ -19,7 +19,7 @@ export function HeroBlock({
   if (!image) return null;
 
   return (
-    <section className="poster-noise relative min-h-[82svh] overflow-hidden border-b border-line pt-[var(--sh-header-h)] md:min-h-[92svh]">
+    <section className="poster-noise relative min-h-[82svh] overflow-hidden pt-[var(--sh-header-h)] md:min-h-[92svh]">
       <Image
         src={image.src}
         alt={image.alt}
