@@ -4,7 +4,7 @@ export function ArtworkFrame({ artwork, title, placeholderLabel, priority = fals
   return (
     <div className="group/art relative aspect-square overflow-hidden border border-line bg-surface-strong">
       {artwork ? (
-        <Image src={artwork} alt={`${title} artwork`} fill sizes="(min-width:1024px) 25vw, (min-width:640px) 50vw, 100vw" className="object-cover" priority={priority} />
+        <Image src={artwork} alt={`${title} artwork`} fill unoptimized sizes="(min-width:1024px) 25vw, (min-width:640px) 50vw, 100vw" className="object-cover" priority={priority} />
       ) : (
         <>
           <div className="absolute inset-0 bg-[radial-gradient(circle_at_75%_20%,rgba(175,199,255,.18),transparent_34%),linear-gradient(145deg,#111a3d,#05060b_70%)]" />

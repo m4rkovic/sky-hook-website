@@ -138,6 +138,7 @@ export function MediaExplorer({ locale }: { locale: Locale }) {
                 <div className={`relative ${index % 3 === 0 ? "aspect-[3/4]" : "aspect-[3/2]"}`}>
                   <Image
                     src={item.src}
+                    unoptimized={item.category === "artwork"}
                     alt={item.alt}
                     fill
                     sizes="(max-width: 768px) 100vw, (max-width: 1280px) 50vw, 33vw"
@@ -187,7 +188,7 @@ export function MediaExplorer({ locale }: { locale: Locale }) {
             </>
           ) : null}
           <div className="relative h-[78vh] w-full max-w-6xl" onClick={(event) => event.stopPropagation()}>
-            <Image src={activePhotoItem.src} alt={activePhotoItem.alt} fill sizes="100vw" className="object-contain" />
+            <Image src={activePhotoItem.src} alt={activePhotoItem.alt} fill unoptimized={activePhotoItem.category === "artwork"} sizes="100vw" className="object-contain" />
           </div>
         </div>
       ) : null}

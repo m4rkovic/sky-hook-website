@@ -7,7 +7,7 @@ export const releases = releaseSchema.array().parse([
     title: "Gde ptice lete",
     type: "album",
     year: 2025,
-    artwork: "/media/releases/gde-ptice-lete-album.webp",
+    artwork: "/media/releases/gde-ptice-lete-album-7a36a4ff11.jpg",
     featured: true,
     releaseDate: "2025-04-04",
     label: "Pop Depresija / Zeleni Kačket",
@@ -19,14 +19,14 @@ export const releases = releaseSchema.array().parse([
     title: "Gde ptice lete",
     type: "single",
     year: 2025,
-    artwork: "/media/releases/gde-ptice-lete-single.webp",
+    artwork: "/media/releases/gde-ptice-lete-single-16c50684ac.jpg",
   },
   {
     slug: "melburn",
     title: "Melburn",
     type: "single",
     year: 2025,
-    artwork: "/media/releases/melburn.webp",
+    artwork: "/media/releases/melburn-5cffde8752.jpg",
     streaming: { youtube: "https://www.youtube.com/watch?v=_UFk_n6rBOE" },
   },
   {
@@ -34,11 +34,11 @@ export const releases = releaseSchema.array().parse([
     title: "Surf",
     type: "single",
     year: 2025,
-    artwork: "/media/releases/surf.webp",
+    artwork: "/media/releases/surf-977dd8d246.jpg",
     streaming: { youtube: "https://www.youtube.com/watch?v=QvRKPd4Gk-k" },
   },
-  { slug: "ostajem", title: "Ostajem", type: "single", year: 2025, artwork: "/media/releases/ostajem.webp" },
-  { slug: "astra", title: "Astra", type: "single", year: 2025, artwork: "/media/releases/astra.webp" },
+  { slug: "ostajem", title: "Ostajem", type: "single", year: 2025, artwork: "/media/releases/ostajem-03397bfd4b.jpg" },
+  { slug: "astra", title: "Astra", type: "single", year: 2025, artwork: "/media/releases/astra-c5d8ff9432.jpg" },
 ].map((release) => {
   if (release.type !== "single") return release;
   const song = songs.find((item) => item.slug === (release.slug === "gde-ptice-lete-single" ? "gde-ptice-lete" : release.slug));
