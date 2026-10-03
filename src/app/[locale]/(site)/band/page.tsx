@@ -1,173 +1,191 @@
 import type { Metadata } from "next";
 import Image from "next/image";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PageShell } from "@/components/layout/page-shell";
+import { SectionTransition } from "@/components/layout/section-transition";
+import { ArtworkFrame } from "@/components/music/artwork-frame";
 import { bandCopy } from "@/content/band";
 import { mediaItems } from "@/content/media";
+import { featuredRelease } from "@/content/releases";
 import { siteConfig } from "@/content/site";
 import { getDictionary } from "@/i18n/get-dictionary";
-import { hasLocale, type Locale } from "@/i18n/config";
+import { hasLocale, localizedHref } from "@/i18n/config";
 
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
-  const { locale: rawLocale } = await params;
-  if (!hasLocale(rawLocale)) return { title: "Band" };
-  const locale = rawLocale as Locale;
-  const copy = bandCopy[locale];
-  const description = copy.intro;
-
+  const { locale } = await params;
+  if (!hasLocale(locale)) return { title: "Band" };
   return {
-    title: "Band",
-    description,
+    title: getDictionary(locale).band.title,
+    description: bandCopy[locale].intro,
     alternates: {
       canonical: `/${locale}/band`,
       languages: { en: "/en/band", sr: "/sr/band", "x-default": "/en/band" },
+    },
+    openGraph: {
+      title: `Sky Hook / ${getDictionary(locale).band.title}`,
+      description: bandCopy[locale].intro,
+      images: [{ url: "/media/photos/skyhook-live-02.jpg", width: 1200, height: 800 }],
     },
   };
 }
 
 export default async function BandPage({ params }: { params: Promise<{ locale: string }> }) {
-  const { locale: rawLocale } = await params;
-  if (!hasLocale(rawLocale)) notFound();
-
-  const locale = rawLocale as Locale;
+  const { locale } = await params;
+  if (!hasLocale(locale)) notFound();
   const dict = getDictionary(locale);
   const copy = bandCopy[locale];
-  const primaryImage = mediaItems.find((item) => item.id === "live-02") ?? mediaItems[0];
-  const secondaryImage = mediaItems.find((item) => item.id === "press-rehearsal") ?? mediaItems[1] ?? mediaItems[0];
-
+  const primaryImage = mediaItems.find((item) => item.id === "live-02")!;
+  const portrait = mediaItems.find((item) => item.id === "press-rehearsal")!;
+  const livePhotos = ["live-guitar", "live-vocals"].map((id) => mediaItems.find((item) => item.id === id)!);
+  const album = featuredRelease;
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL?.replace(/\/$/, "");
   const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "MusicGroup",
-    name: "Sky Hook",
-    foundingLocation: { "@type": "Place", name: "Niš, Serbia" },
-    foundingDate: "2023",
+    "@context": "https://schema.org", "@type": "MusicGroup", name: "Sky Hook",
+    foundingLocation: { "@type": "Place", name: "Niš, Serbia" }, foundingDate: "2023",
     genre: ["Alternative rock", "Post-punk"],
     ...(siteUrl ? { url: `${siteUrl}/${locale}/band` } : {}),
     sameAs: Object.values(siteConfig.socials).filter(Boolean),
   };
+  const facts = [
+    ["2023", copy.facts.formed],
+    [String(album?.tracks.length ?? 13), copy.facts.tracks],
+    [String(album?.year ?? 2025), copy.facts.debut],
+  ];
 
   return (
     <PageShell eyebrow={dict.band.eyebrow} title={dict.band.title}>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
-      <section className="border-t border-line">
-        <div className="grid lg:grid-cols-[1.15fr_0.85fr]">
-          <div className="relative min-h-[34rem] border-b border-line lg:min-h-[44rem] lg:border-b-0 lg:border-r">
-            <Image
-              src={primaryImage.src}
-              alt={primaryImage.alt}
-              fill
-              sizes="(min-width: 1024px) 55vw, 100vw"
-              priority
-              className="media-cover"
-              style={{ objectPosition: primaryImage.focalPoint }}
-            />
-            <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-background/70 to-transparent" />
-            <span className="absolute bottom-5 left-5 kicker text-paper/70">2023 → NOW</span>
-          </div>
-
-          <div className="flex flex-col justify-between p-[var(--sh-gutter)] py-[var(--sh-section-y)]">
-            <div>
-              <p className="max-w-xl text-xl leading-9 text-ice-light/90 md:text-2xl md:leading-10">
-                {copy.intro}
-              </p>
-              <p className="mt-8 max-w-xl text-base leading-8 text-muted">
-                {copy.secondary}
-              </p>
-            </div>
-
-            <div className="mt-12 grid grid-cols-3 border-y border-line md:mt-16">
-              <div className="py-5 pr-4">
-                <div className="font-display text-4xl text-ice">2023</div>
-                <div className="kicker mt-1 text-muted">formed</div>
-              </div>
-              <div className="border-x border-line px-4 py-5">
-                <div className="font-display text-4xl text-ice">13</div>
-                <div className="kicker mt-1 text-muted">album tracks</div>
-              </div>
-              <div className="py-5 pl-4">
-                <div className="font-display text-4xl text-ice">2025</div>
-                <div className="kicker mt-1 text-muted">debut LP</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-frame bg-surface">
-        <div className="site-container section-grid items-start">
-          <div className="col-span-12 md:col-span-4">
-            <p className="kicker text-ice">01 / SOUND</p>
-            <h2 className="mt-4 font-display text-4xl uppercase md:text-7xl">
-              {copy.soundTitle}
-            </h2>
-          </div>
-          <div className="col-span-12 md:col-span-7 md:col-start-6">
-            <p className="max-w-3xl text-lg leading-9 text-ice-light/80">{copy.soundBody}</p>
-          </div>
-        </div>
-      </section>
-
-      <section className="section-frame overflow-hidden">
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+      <section id="band-story" className="scroll-mt-28 pb-[var(--sh-section-y)]">
         <div className="site-container">
-          <div className="mb-10 grid gap-4 md:mb-14 md:grid-cols-[1fr_auto] md:items-end">
-            <div>
-              <p className="kicker text-ice">02 / TIMELINE</p>
-              <h2 className="mt-4 font-display text-4xl uppercase md:text-7xl">
-                {copy.timelineTitle}
-              </h2>
+          <nav aria-label={dict.band.title} className="mb-8 flex flex-wrap gap-x-6 gap-y-3 border-b border-line pb-5">
+            {Object.entries(copy.navigation).map(([key, label], index) => (
+              <a key={key} href={`#band-${key}`} className="kicker text-muted transition-colors hover:text-ice">
+                <span className="mr-2 text-ice">0{index + 1}</span>{label} ↓
+              </a>
+            ))}
+          </nav>
+          <div className="grid items-end gap-6 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+            <h2 className="poster-heading max-w-[12ch]">{copy.headline}</h2>
+            <div className="lg:pb-2">
+              <p className="editorial-stamp text-ice">{copy.location}</p>
+              <p className="mt-5 max-w-xl text-lg leading-8 text-paper/80">{copy.intro}</p>
             </div>
-            <span className="kicker text-muted">2022 → 2026</span>
           </div>
-
-          <div className="relative">
-            <div className="absolute bottom-0 left-[1.55rem] top-0 w-px bg-line md:left-1/2" aria-hidden="true" />
-
-            <div className="space-y-10 md:space-y-0">
-              {copy.timeline.map((item, index) => {
-                const left = index % 2 === 0;
-                return (
-                  <article
-                    key={item.year}
-                    className="relative grid grid-cols-[3.1rem_1fr] gap-5 md:grid-cols-2 md:gap-16 md:py-12"
-                  >
-                    <div className="absolute left-[1.15rem] top-2 h-3 w-3 rounded-full border border-ice bg-background md:left-1/2 md:-translate-x-1/2 md:top-[3.4rem]" />
-
-                    <div className={left ? "md:pr-12 md:text-right" : "md:col-start-2 md:pl-12"}>
-                      <div className="font-display text-4xl text-ice md:text-5xl">{item.year}</div>
-                      <h3 className="mt-2 font-display text-2xl uppercase md:text-3xl">{item.title}</h3>
-                      <p className="mt-4 max-w-xl text-base leading-8 text-muted md:ml-auto">{item.body}</p>
-                    </div>
-
-                    <div className="hidden md:block" />
-                  </article>
-                );
-              })}
+          <figure className="mt-10 md:mt-14">
+            <div className="relative aspect-[3/2] overflow-hidden border-t-2 border-paper/50">
+              <Image src={primaryImage.src} alt={primaryImage.alt} fill priority sizes="(min-width: 1440px) 1352px, 94vw" className="object-cover" style={{ objectPosition: primaryImage.focalPoint }} />
             </div>
+            <figcaption className="flex flex-wrap justify-between gap-3 border-b border-line py-4">
+              <span className="kicker text-muted">{copy.photoCaption}</span>
+              <span className="kicker text-ice">Niš / Sky Hook</span>
+            </figcaption>
+          </figure>
+          <dl className="grid grid-cols-3 border-b-2 border-paper/40">
+            {facts.map(([value, label], index) => (
+              <div key={label} className={`min-w-0 py-6 sm:py-8 ${index ? "border-l border-line pl-4 sm:pl-8" : "pr-4"}`}>
+                <dt className="kicker text-muted">{label}</dt>
+                <dd className="mt-3 font-display text-[clamp(2.6rem,7vw,6rem)] leading-none text-paper">{value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section id="band-sound" className="section-frame relative scroll-mt-28 bg-paper text-background">
+        <SectionTransition tone="paper" direction="left" />
+        <div className="site-container relative z-10">
+          <div className="grid gap-8 lg:grid-cols-[1fr_1fr] lg:gap-20">
+            <div><p className="kicker">02 / {copy.navigation.sound}</p><h2 className="poster-heading mt-5 max-w-[13ch]">{copy.soundTitle}</h2></div>
+            <div className="lg:pt-9"><p className="text-xl leading-9">{copy.secondary}</p><p className="mt-6 text-base leading-8 text-background/65">{copy.soundBody}</p></div>
+          </div>
+          <div className="mt-12 grid gap-8 md:mt-16 md:grid-cols-3">
+            {copy.soundNotes.map((note, index) => (
+              <article key={note.title} className="border-t-2 border-background pt-4">
+                <p className="kicker text-background/55">0{index + 1} / SH</p>
+                <h3 className="mt-5 font-display text-3xl uppercase">{note.title}</h3>
+                <p className="mt-4 max-w-md text-base leading-7 text-background/70">{note.body}</p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      <section className="border-t border-line">
-        <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="p-[var(--sh-gutter)] py-[var(--sh-section-y)]">
-            <p className="kicker text-ice">03 / NOW</p>
-            <h2 className="mt-4 font-display text-4xl uppercase md:text-7xl">
-              {copy.nowTitle}
-            </h2>
-            <p className="mt-8 max-w-xl text-lg leading-9 text-ice-light/80">{copy.nowBody}</p>
+      {album ? (
+        <section className="section-frame relative bg-surface">
+          <SectionTransition tone="surface" direction="right" />
+          <div className="site-container relative z-10 grid items-center gap-10 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
+            <Link href={localizedHref(locale, `/music/${album.slug}`)} aria-label={`${dict.common.openRelease}: ${album.title}`} className="block w-full max-w-lg border-2 border-paper/50 shadow-[8px_8px_0_var(--sh-ice)]">
+              <ArtworkFrame artwork={album.artwork} title={album.title} placeholderLabel={dict.music.artworkTbd} />
+            </Link>
+            <div>
+              <p className="kicker text-ice">{dict.music.album} / {album.year}</p>
+              <h2 className="poster-heading mt-5 max-w-[13ch]">{copy.albumTitle}</h2>
+              <p className="mt-7 max-w-xl text-lg leading-9 text-paper/80">{copy.albumBody}</p>
+              <p className="kicker mt-7 border-t border-line pt-5 text-muted">{album.title} / {album.label}</p>
+              <Link className="brutal-button mt-7" href={localizedHref(locale, `/music/${album.slug}`)}>{dict.common.openRelease} ↗</Link>
+            </div>
           </div>
+        </section>
+      ) : null}
 
-          <div className="relative min-h-[30rem] border-t border-line lg:min-h-[40rem] lg:border-l lg:border-t-0">
-            <Image
-              src={secondaryImage.src}
-              alt={secondaryImage.alt}
-              fill
-              sizes="(min-width: 1024px) 55vw, 100vw"
-              className="media-cover"
-              style={{ objectPosition: secondaryImage.focalPoint }}
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-surface-strong/30 via-transparent to-transparent" />
+      <section id="band-history" className="section-frame scroll-mt-28">
+        <div className="site-container">
+          <div className="mb-10 flex flex-wrap items-end justify-between gap-6">
+            <div><p className="kicker text-ice">03 / {copy.navigation.history}</p><h2 className="poster-heading mt-5">{copy.timelineTitle}</h2></div>
+            <span className="editorial-stamp text-muted">{copy.timeline[0].year} → {copy.timeline.at(-1)?.year}</span>
+          </div>
+          <ol className="border-t-2 border-paper/50">
+            {copy.timeline.map((item) => (
+              <li key={item.year} className="grid gap-4 border-b border-line py-8 md:grid-cols-[0.6fr_1fr_1.3fr] md:gap-8 md:py-10">
+                <span className="font-display text-5xl leading-none text-ice md:text-6xl">{item.year}</span>
+                <h3 className="max-w-md font-display text-2xl uppercase leading-tight md:text-3xl">{item.title}</h3>
+                <p className="max-w-xl text-base leading-8 text-muted">{item.body}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+
+      <section id="band-live" className="section-frame relative scroll-mt-28 bg-surface-strong">
+        <SectionTransition tone="surface-strong" direction="left" />
+        <div className="site-container relative z-10">
+          <div className="grid gap-8 md:grid-cols-[1.1fr_0.9fr] md:gap-16">
+            <div><p className="kicker text-ice">04 / {copy.navigation.live}</p><h2 className="poster-heading mt-5 max-w-[14ch]">{copy.liveTitle}</h2></div>
+            <div className="md:pt-9"><p className="text-lg leading-9 text-paper/80">{copy.liveBody}</p><Link className="brutal-button mt-7" href={localizedHref(locale, "/live")}>{dict.nav.live} ↗</Link></div>
+          </div>
+          <div className="mt-12 grid gap-5 sm:grid-cols-2">
+            {livePhotos.map((photo, index) => (
+              <figure key={photo.id} className={index ? "sm:pt-16" : ""}>
+                <div className="relative aspect-[4/5] overflow-hidden">
+                  <Image src={photo.src} alt={photo.alt} fill sizes="(min-width: 1440px) 660px, (min-width: 640px) 46vw, 92vw" className="object-cover" style={{ objectPosition: photo.focalPoint }} />
+                </div>
+                <figcaption className="kicker border-b border-paper/30 py-4 text-paper/65">0{index + 1} / {copy.photoCaption}</figcaption>
+              </figure>
+            ))}
+          </div>
+          <Link href={localizedHref(locale, "/media")} className="kicker mt-8 inline-block border-b border-ice pb-2 text-ice">{copy.galleryLink} ↗</Link>
+        </div>
+      </section>
+
+      <section className="section-frame">
+        <div className="site-container grid items-center gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-16">
+          <figure>
+            <div className="relative aspect-[3/2] overflow-hidden"><Image src={portrait.src} alt={portrait.alt} fill sizes="(min-width: 1024px) 55vw, 92vw" className="object-cover" style={{ objectPosition: "50% 65%" }} /></div>
+            <figcaption className="kicker border-b border-line py-4 text-muted">{copy.portraitCaption}</figcaption>
+          </figure>
+          <div><p className="editorial-stamp text-ice">Sky Hook / {copy.nowTitle}</p><h2 className="archive-heading mt-5">{copy.nowTitle}</h2><p className="mt-6 text-lg leading-9 text-muted">{copy.nowBody}</p></div>
+        </div>
+      </section>
+
+      <section className="section-frame relative bg-paper text-background">
+        <SectionTransition tone="paper" direction="right" />
+        <div className="site-container relative z-10 grid gap-10 lg:grid-cols-[1.25fr_0.75fr] lg:gap-16">
+          <div><p className="kicker">Sky Hook / Booking</p><h2 className="poster-heading mt-5 max-w-[17ch]">{copy.bookingTitle}</h2></div>
+          <div className="lg:pt-8">
+            <p className="max-w-lg text-lg leading-8 text-background/70">{copy.bookingBody}</p>
+            <a href={`mailto:${siteConfig.contact.bookingEmail}`} className="mt-7 block break-all border-b-2 border-background pb-3 text-xl font-bold hover:underline">{siteConfig.contact.bookingEmail} ↗</a>
+            <div className="mt-8 flex flex-wrap gap-5"><Link className="brutal-button" href={localizedHref(locale, "/contact")}>{dict.nav.contact}</Link><Link className="brutal-button" href={localizedHref(locale, "/epk")}>{copy.pressLink} ↗</Link></div>
           </div>
         </div>
       </section>

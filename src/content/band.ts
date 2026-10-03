@@ -7,6 +7,21 @@ type TimelineItem = {
 };
 
 type BandCopy = {
+  headline: string;
+  location: string;
+  navigation: { story: string; sound: string; history: string; live: string };
+  facts: { formed: string; tracks: string; debut: string };
+  soundNotes: { title: string; body: string }[];
+  albumTitle: string;
+  albumBody: string;
+  liveTitle: string;
+  liveBody: string;
+  photoCaption: string;
+  portraitCaption: string;
+  bookingTitle: string;
+  bookingBody: string;
+  pressLink: string;
+  galleryLink: string;
   intro: string;
   secondary: string;
   soundTitle: string;
@@ -19,6 +34,26 @@ type BandCopy = {
 
 export const bandCopy: Record<Locale, BandCopy> = {
   en: {
+    headline: "From Niš. Turned up.",
+    location: "Niš, Serbia / Alternative rock",
+    navigation: { story: "The band", sound: "The sound", history: "The story", live: "On stage" },
+    facts: { formed: "Band formed", tracks: "Debut tracks", debut: "First album" },
+    soundNotes: [
+      { title: "Melody", body: "Vocal hooks and guitar lines give the songs a centre, even when the arrangements pull in different directions." },
+      { title: "Friction", body: "Post-punk tension, surf rhythms, noise and feedback keep the edges rough." },
+      { title: "Volume", body: "Two guitars, bass and drums. The live room is where the arrangements get tested." },
+    ],
+    albumTitle: "The first record.",
+    albumBody: "Gde ptice lete gathers those different directions into 13 songs. Released in April 2025 through Pop Depresija / Zeleni Kačket, it is the starting point for everything that follows.",
+    liveTitle: "The songs leave the room.",
+    liveBody: "From clubs in Niš and Belgrade to Skopje and festival stages, playing live brings the songs into focus. Guitar parts shift, dynamics open up, and the set keeps moving with the band.",
+    photoCaption: "Sky Hook / Live archive",
+    portraitCaption: "Sky Hook / Rehearsal room",
+    bookingTitle: "See you in front of the stage.",
+    bookingBody: "For concerts, festivals and collaborations, get in touch. Photos and band information are collected in the press kit.",
+    pressLink: "Press kit",
+    galleryLink: "More photos & videos",
+
     intro:
       "Sky Hook grew out of unfinished songs, rehearsal-room noise and the urge to make guitar music that could still surprise us. The band’s roots reach back to 2022, while the identity that people now know as Sky Hook took shape in Niš during 2023.",
     secondary:
@@ -64,6 +99,26 @@ export const bandCopy: Record<Locale, BandCopy> = {
       "Sky Hook is still treated as a project in motion. New songs, different arrangements, live recordings and future releases can all bend the visual and musical language without resetting the band back to zero.",
   },
   sr: {
+    headline: "Iz Niša. Pojačano.",
+    location: "Niš, Srbija / Alternativni rok",
+    navigation: { story: "O bendu", sound: "Zvuk", history: "Priča", live: "Na bini" },
+    facts: { formed: "Nastanak benda", tracks: "Pesama na debiju", debut: "Prvi album" },
+    soundNotes: [
+      { title: "Melodija", body: "Vokalni refreni i gitarske linije drže pesme na okupu, čak i kada aranžmani vuku na različite strane." },
+      { title: "Trenje", body: "Post-punk nerv, surf ritam, noise i feedback ostavljaju zvuku hrapave ivice." },
+      { title: "Glasnoća", body: "Dve gitare, bas i bubnjevi. Aranžmani prolaze pravi test tek kada ih odsviramo uživo." },
+    ],
+    albumTitle: "Prva ploča.",
+    albumBody: "Gde ptice lete skuplja te različite pravce u 13 pesama. Objavljen u aprilu 2025. za Pop Depresiju / Zeleni Kačket, album je polazna tačka za sve što dolazi posle njega.",
+    liveTitle: "Pesme izlaze iz sobe.",
+    liveBody: "Od klubova u Nišu i Beogradu do Skoplja i festivalskih bina, pesme dobijaju jasniji oblik uživo. Gitarske deonice se menjaju, dinamika se otvara, a set raste zajedno sa bendom.",
+    photoCaption: "Sky Hook / Arhiva nastupa",
+    portraitCaption: "Sky Hook / Prostorija za probe",
+    bookingTitle: "Vidimo se ispred bine.",
+    bookingBody: "Za koncerte, festivale i saradnje, pišite nam. Fotografije i informacije o bendu nalaze se u press kitu.",
+    pressLink: "Press kit",
+    galleryLink: "Još fotografija i videa",
+
     intro:
       "Sky Hook je izrastao iz nedovršenih pesama, buke iz prostorije za probe i potrebe da gitarska muzika i dalje ume da iznenadi i nas same. Koreni projekta sežu u 2022, dok identitet koji danas prepoznajemo kao Sky Hook dobija pravi oblik u Nišu tokom 2023. godine.",
     secondary:
